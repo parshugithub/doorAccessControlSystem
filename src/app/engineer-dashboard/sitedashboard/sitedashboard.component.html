@@ -1,0 +1,178 @@
+<div style="display: grid;
+grid-template-columns: 87% 13%;">
+  <div id="new_user">
+    <button (click)="addToSite()" class="btn btn-gradient-primary" style="padding: 1rem 1.6rem;">
+      Add New Site</button>
+  </div>
+  <div>
+      <button (click)="goReturn()"  class="btn btn-gradient-primary" style="background-color: #e06666ff !important; 
+      padding: 1rem 2.2rem;color: black;border: none;">Return</button>
+  </div>
+  
+</div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+
+        <th style="padding: 1rem;text-align: center;">No</th>
+        <th style="padding: 1rem;text-align: center;">Site Name</th>
+        <th style="padding: 1rem;text-align: center;">Device Id</th>
+        <th style="padding: 1rem;text-align: center;">Add Doors</th> 
+        <th style="padding: 1rem;text-align: center;">Share To Device</th> 
+        <th style="padding: 1rem;text-align: center;">Additional database</th>
+      </tr>
+    </thead>
+
+
+    <tbody>
+
+
+      <tr *ngFor="let engineerSitearray of engineerSitearray; let i=index">
+        <td><input type="text" hidden id=siteid [(ngModel)]=engineerSitearray.siteid/>
+          <span> {{i+1}}</span></td>
+        <!-- <td><span>{{user.user_id}}</span></td> -->
+        <td><span>{{engineerSitearray.siteName}}</span></td>
+        <td><span>{{engineerSitearray.deviceID}}</span></td>
+        
+
+
+        <td>
+          
+          <div class="form-group">
+            <!-- <label for="Doors" class="col-sm-3 control-label">Doors </label> -->
+            <div style="margin-left: 0rem;">
+                <button  Name="Add Door" value="Add Door"  class="btn btn-gradient-primary" style="margin-top: 1.3rem;"
+                data-id="engineerSitearray.siteid"(click)="getSiteId(engineerSitearray.siteid)" data-toggle="modal"
+                    data-target="#myModal" >Add Door</button>
+            </div>
+        </div>
+        
+        </td> 
+
+        <td>
+          
+          <div class="form-group">
+            <!-- <label for="Doors" class="col-sm-3 control-label">Doors </label> -->
+            <div style="margin-left: 0rem;">
+                <button type="button" Name="Add Door" value="Share Info"  class="btn btn-gradient-primary"
+                 (click)="shareSiteToDevice(engineerSitearray.siteid)" style="margin-top: 1.3rem;"
+                    >Share Info</button>
+            </div>
+        </div>
+        
+        </td> 
+        <td>
+
+          <!-- <div class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle"  style="background-color: cadetblue;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Additional database
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="poweronreset(engineerSitearray.siteid)" style="color: black;">Power On Reset</a>
+              <a class="dropdown-item" (click)="lockdown(engineerSitearray.siteid)" style="color: black;">Lock Down</a>
+              <a class="dropdown-item" (click)="lossofcan(engineerSitearray.siteid)" style="color: black;">Loss Of Can Bus</a>
+              <a class="dropdown-item" (click)="fireinput(engineerSitearray.siteid)"style="color: black;">Fire Input</a>
+            </div>
+          </div> -->
+
+
+          <div ngbDropdown>
+            <button class="btn btn-gradient-primary" type="button" id="dropdownMenuOutlineButton1" ngbDropdownToggle>
+              Additional database
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownMenuOutlineButton1">
+              <a class="dropdown-item" (click)="poweronreset(engineerSitearray.siteid)" style="color: rgb(201, 163, 163);">Power On Reset</a>
+              <a class="dropdown-item"(click)="lockdown(engineerSitearray.siteid)" style="color: rgb(201, 193, 193);">Lock Down</a>
+              <a class="dropdown-item" (click)="lossofcan(engineerSitearray.siteid)" style="color: rgb(201, 193, 193);">Loss Of Can Bus</a>
+              <a class="dropdown-item" (click)="fireinput(engineerSitearray.siteid)" style="color: rgb(201, 193, 193);">Fire Input</a>
+            </div>
+          </div>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Doors For Site</h3>
+                <button type="button" (click)="closewindow()" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+
+                            <th style="padding: 1rem;text-align: center;">No</th>
+                            <th style="padding: 1rem;text-align: center;">Door Name</th>
+                            <th style="padding: 1rem;text-align: center;">Door DeviceID</th>
+                            <th style="padding: 1rem;text-align: center;">Door Type</th>
+                            <th style="padding: 1rem;text-align: center;">Lock Time</th>
+                            <th style="padding: 1rem;text-align: center;">Add</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let door of doors;let i=index;">
+                            <td>
+
+                                <input type="text" hidden id=doorid class="form-control" />
+                                <span>{{i+1}}</span>
+
+
+                            </td>
+                            <td>
+                               
+                                    <input type="text" id="doorname{{i+1}}"  placeholder="Door Name"  
+                                     (keyup)="doorname($event,i,$event.target.value)"
+                                        class="form-control" />
+
+                               
+                            </td>
+                            <td>
+
+                                <input type="text" id="doorDeviceid{{i+1}}" placeholder="Device id" (keyup)="deviceid($event,i,$event.target.value)"
+                                    class="form-control" />
+                                <!-- <span>{{i+1}}</span> -->
+
+
+                            </td>
+                            <td>
+                                
+                                    <select class="form-control" id="doortype{{i+1}}" (change)="HR($event,i,$event.target.value)">
+                                        <!-- <option value="volvo">Volvo</option> -->
+                                        <option selected>Select </option>
+                                        <option value="HR">HR</option>
+                                        <option value="NR">NR</option>
+                                    </select>
+
+                            </td>
+
+                            <td>
+
+                                <input type="text" id=locktime{{i+1}} class="form-control" (keyup)="locktime($event,i,$event.target.value)" placeholder="lock time(s)"/>
+                                <!-- <span>{{i+1}}</span> -->
+                            </td>
+                            <td>
+
+                                <input type="button" id=addval{{i}}  class="btn btn-gradient-primary" value="Add" (click)="addDoor(i,siteid)" style="background-color: #93c47dff !important;padding-bottom: 1.5rem;"/>
+                                <!-- <span>{{i+1}}</span> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+  

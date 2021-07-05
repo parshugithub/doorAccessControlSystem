@@ -1,0 +1,38 @@
+.open_door{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.table-title{
+    display: flex;
+    justify-content: space-between;
+
+    input{
+      width: fit-content;
+      margin-right: 10px;
+    }
+    a{
+      margin-right: 10px;
+      padding: 9px;
+    }
+
+}
+.door_group_action{
+    display: flex;
+
+    button{
+      width: 30px;
+      height: 30px;
+    }
+}
+
+#return_back{
+  background: #2262c6ff !important;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.open_return{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

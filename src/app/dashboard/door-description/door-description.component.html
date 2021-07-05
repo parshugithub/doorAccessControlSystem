@@ -1,0 +1,112 @@
+<div class="col-lg-12 grid-margin stretch-card"  style="    margin: unset;padding: unset;">
+    <div class="card-body" style="padding: unset;">
+            <div style="text-align:right;display: flex;justify-content: space-between;margin:0.8rem">
+                <div>
+                    <h2>Door Settings</h2>
+                </div>
+    
+                <div>
+                    <button class="btn btn-gradient-primary mr-2" (click)="deleteAllDoorDescription()" title="Delete" style="background-color: #e06666ff !important;color: black;border-radius: .5rem">Delete</button>
+                    <button class="btn btn-gradient-primary mr-2" id="can" (click)="goBack()"
+                     style="background-color: #fff !important;color: black; border:1px solid #999; border-radius: .5rem; margin-left: 1.5rem;">Cancel</button>
+    
+                    <button (click)="saveAllDoorDesc()" class="btn btn-gradient-primary mr-2" id="btnSave"
+                     style="background-color: #93c47dff !important;color: black;border-radius: .5rem;margin-left: 1.5rem;">
+                        Save
+                    </button>
+                    <button class="btn btn-gradient-primary " id="can" (click)="goBackToCreateDoor()" 
+                    style="background-color: #fff !important;color: black; border:1px solid #999; border-radius: .5rem;margin-left: 1.5rem;">Return</button>
+
+                </div>
+    
+                <input type="text" id="txtSiteID" value="26" hidden="">
+            </div>
+       
+
+    <div class="card">
+        <div class="table-responsive">
+          <table class="table-bordered" style="padding:5px,5px,5px,5px">
+            <thead class="thead">
+              <tr>
+                     <th></th>
+                    <th style="text-align:center;">No</th>
+                    <th style="text-align:center; padding:10px;" >Description</th>
+                    <th style="text-align:center; padding:10px">Telephone Number</th>
+                    <th style="text-align:center; padding:10px" >SIP URL</th>
+                    <th style="text-align:center; padding:10px">DTMF to open Door</th>
+                    <th style="text-align:center; padding:10px"  hidden="">XML/JSON to open Door</th>
+                    <th style="text-align:center; padding:10px">Camera Stream String</th>
+                    <th style="text-align:center; padding:10px; display:none;" >Index</th>
+                    <th style="text-align:center" >Action</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of doors;let i=index">
+
+
+                     <td><input type="checkbox" style="border:none; padding-left:5px" #schedule id="selectschedule"
+                        id="scheduleval{{d.doorId}}" value={{d.doorId}}
+                        class="siteCheckBox"
+                        (change)="getScheduleForPerson(d.doorId,$event.target.checked)"
+                        [checked]="checkedSchedul(d.doorId)" /></td>
+
+                    <td  width="6%" style="padding: unset;">
+                        <input type="text" id="door_id{{d.doorName}}" disabled value="{{d?.doorName}}"  class="form-control"  required
+                        style="border: 0;
+                        color: #212529;
+                        background: transparent;"></td>
+                
+                    <td style="padding: 5px 10px" width="15%">
+                        <input type="text" name="doorvalue" id="doorvalue{{i}}"  class="form-control"  (keyup)="descKey($event,i)" value="">
+
+                    </td>
+                    <td style="padding: 5px 10px" width="15%">
+                        <input type="text" id="tele{{i}}" (keypress)="numbersOnly($event)" class="form-control" (keyup)="teleKey($event,i)"  value="">
+
+                    </td>
+                    <td style="padding: 5px 10px" width="15%">
+                        <input type="text" id="sip{{i}}" class="form-control" (keyup)="sipKey($event,i)"  value="">
+                    </td>
+                    <td style="padding: 5px 10px" width="15%">
+                        <input type="text" id="dtmf{{i}}" class="form-control" (keyup)="dtmfKey($event,i)"  value="">
+                    </td>
+
+                    <td style="padding: 5px 10px" width="15%" hidden="">
+                        <input type="text" style="border:none; outline:none;">
+                    </td>
+                    <td style="padding: 5px 10px" width="15%">
+                        <input type="text" id="cam{{i}}" class="form-control" (keyup)="camKey($event,i)"  value="">
+                    </td>
+
+                    <td style="padding: 5px 10px; display:none;" width="8%"><input type="text"
+                            style="border:none; outline:none; display:none;"></td>
+                    <td style="display: flex;justify-content: center;" >
+                            <button (click)="createDoorDesc(i)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                <i class="material-icons file_upload"></i>
+                              </button>
+                                     <button type="button" (click)="deleteDoorDesc(i)" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                        <i class="mdi mdi-delete"></i>
+                                      </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+
+
+
+
+
+
+
+

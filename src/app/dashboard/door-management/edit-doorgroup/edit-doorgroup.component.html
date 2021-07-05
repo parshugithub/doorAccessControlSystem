@@ -1,0 +1,88 @@
+<div class="container" style="margin-top: 1rem;">
+    <!-- <div class="panel-heading bg-primary" style="text-align: center;">
+        <span class="ng-tns-c3-0">Create DoorGroup</span>
+    </div> -->
+    <form #doorGroupCreate="ngForm" id="main_form" (submit)=" onSubmit()">
+  
+      <div id="create_person" class="form-group">
+        <div class="create_lable"><label for="firstName">DoorGroup Name:</label></div>
+        <div> <input type="text" class="form-control" [(ngModel)]="doorGroup.doorGroupName" placeholder="Enter doorGroup Name"
+            name="firstName"  required >
+        </div>
+      </div>
+      
+                                           
+      <div id="create_person" class="form-group">
+        <!-- <div *ngFor="let editdoor of selectedDoorsArray;let i=index;">
+          <span>{{editdoor.doorName}}</span>
+  
+        </div> -->
+        <div class="create_lable"><label for="mobileNumber">Door Numbers:</label>
+          <!-- <span>{{selected | json}}
+          </span> -->
+        </div>
+        
+        <div>
+  
+          <input type="text" id="add" readonly  value='{{doorArray | json}}' class="form-control" placeholder="select the doorNumber" name="doorNumber"
+             required 
+            > 
+          </div>                     
+        <div  class="from-group" id="adddoorcontents">
+          <div class="open_door">
+           
+            <tr *ngFor="let doors of totalDoors;let i=index;" >
+                <td style="border:none" align="left">
+             <div class="edit_door_inner">
+                <input type="checkbox" value={{doors.doorName}} style="width: 1.3rem;height: 1.3rem; background-color: #6a99e1ff;
+                border-radius: 4px;
+                border: 1px solid #D0D0D0;" class="largerCheckbox"
+                id="door{{i}}" 
+                 [checked]="checked(doors.doorName)" (change)="onChange($event.target.checked, doors.doorName)">
+                <span class="door_select">{{doors.doorName}}</span>   
+            </div>
+    
+                </td>
+            </tr>
+            <div   class="showmore">
+  
+              <!-- <span (click)="getDoorShowMoreData()" [disabled]="counter>=totalDoors.length">
+                Show more
+                </span> -->
+                </div>
+            </div>
+  
+        </div>
+      </div>
+  
+      <div id="create_person" class="form-group">
+        <div class="create_lable"><label for="address1">Expiry Date:</label></div>
+        <div><input type="datetime-local" id="dateExpiry"  class="form-control"
+            placeholder="Enter Expiry Date" [(ngModel)]="doorGroup.expiraydate" name="expiraydate">
+        </div>
+      </div>
+  
+      <!-- <div id="create_person" class="form-group">
+        <div class="create_lable"><label for="address1">Expiry Date:</label></div>
+        <div><input type="date" id="dateExpiry" [min]="personMinDate | date:'yyyy-MM-dd'" class="form-control"
+            placeholder="Enter Expiry Date" name="expiraydate" [(ngModel)]="person.expiraydate">
+        </div>
+      </div> -->
+  
+      <div class="text-center">
+  
+        <button class="btn btn-gradient-primary mr-2" [disabled]="doorGroupCreate.invalid" type="submit"
+         style="background-color: #93c47dff !important; border: none; color: #000;">Submit</button>
+  
+        <a class="btn btn-gradient-primary mr-2"   style="background-color: #e06666ff !important; border: none; color: #000;" (click)="goBack()">Cancel</a>
+  
+      </div>
+    </form>
+  
+  </div>
+  
+  
+  
+  
+  
+  

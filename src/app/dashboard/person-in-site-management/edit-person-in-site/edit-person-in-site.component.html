@@ -1,0 +1,290 @@
+<div class="">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title" id="editPerson">Edit Person</h4>
+  
+  
+        
+        <form  #personCreate="ngForm" id="main_form" (submit)="updatePerson()">
+  
+          <div class="form-group row">
+            <label for="firstName" class="col-sm-3 col-form-label">FirstName</label>
+  
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputUsername2" [(ngModel)]="person.firstName" placeholder="Enter firstName"
+              name="firstName" #firstName="ngModel" required [class.is-invalid]="firstName.invalid && firstName.touched">
+            <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">firstName is required</small>
+  
+            </div>
+          </div>
+  
+  
+          <div class="form-group row">
+            <label for="lastName" class="col-sm-3 col-form-label">LastName</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Enter lastName" name="lastName"
+              [(ngModel)]="person.lastName" required #lastName="ngModel"
+              [class.is-invalid]="lastName.invalid && lastName.touched">
+            <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">lastName is required</small>
+          </div>
+          </div>
+          <div class="form-group row">
+            <label for="custId" class="col-sm-3 col-form-label">Select site</label>
+            <div class="col-sm-6">
+              <select name="siteName"  class="browser-default custom-select"  (change)="getPersonToMap($event.target.value)">
+                <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+                <option *ngFor="let site of siteList;let k=index;" [value]="site.siteName">
+                  {{ site.siteName }}
+                </option>
+              </select>
+            </div>
+  
+          </div>
+  
+  
+          <div class="form-group row">
+            <label for="mobileNumber" class="col-sm-3 col-form-label">Mobile Number</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Enter mobileNumber" name="mobileNumber" 
+              [(ngModel)]="person.mobileNumber" required #mobileNumber="ngModel" (keypress)="numbersOnly($event)"
+              [class.is-invalid]="mobileNumber.invalid && mobileNumber.touched" numbersOnly>
+            <small class="text-danger" [class.d-none]="mobileNumber.valid || mobileNumber.untouched">mobileNumber is
+              required</small>
+            </div>
+        </div>
+  
+  
+          <div class="form-group row">
+            <label for="areaCode" class="col-sm-3 col-form-label">Area Code</label>
+            <div class="col-sm-6">
+              <input type="email" class="form-control" id="exampleInputConfirmPassword2"placeholder="Enter Area Code" name="areaCode"
+              [(ngModel)]="person.areaCode">
+          </div>
+        </div>
+  
+  
+          <div class="form-group row">
+            <label for="telnumber" class="col-sm-3 col-form-label">Tel Number</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputPassword2" (keypress)="numbersOnly($event)" placeholder="Enter telnumber" name="telnumber"
+              [(ngModel)]="person.telnumber">
+            
+          </div>
+        </div>
+          
+          <div class="form-group row">
+            <label for="address1" class="col-sm-3 col-form-label">SIP URL</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter sipurl" name="sipurl"
+              [(ngModel)]="person.sipurl">
+                      </div>
+        </div>
+        <div class="form-group row">
+            <label  class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter email" name="email" [(ngModel)]="person.email">
+            </div>
+                     
+        </div>
+        <div class="form-group row">
+            <label for="address1" class="col-sm-3 col-form-label">Address1</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter address1" name="address1"
+              [(ngModel)]="person.address1" required #address1="ngModel"
+              [class.is-invalid]="address1.invalid && address1.touched">
+            <small class="text-danger" [class.d-none]="address1.valid || address1.untouched">address1 is required</small>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="Address2" class="col-sm-3 col-form-label">Address2</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter address2" name="address2"
+              [(ngModel)]="person.address2" required #address2="ngModel"
+              [class.is-invalid]="address2.invalid && address2.touched">
+            <small class="text-danger" [class.d-none]="address2.valid || address2.untouched">address2 is required</small>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+            <label for="Address2" class="col-sm-3 col-form-label">City</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter address2" name="address2"
+              [(ngModel)]="person.address2" required #address2="ngModel"
+              [class.is-invalid]="address2.invalid && address2.touched">
+            <small class="text-danger" [class.d-none]="address2.valid || address2.untouched">city is required</small>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="Address2" class="col-sm-3 col-form-label">state</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"   placeholder="Enter state" name="state" [(ngModel)]="person.state"
+              required #state="ngModel" [class.is-invalid]="state.invalid && state.touched">
+            <small class="text-danger" [class.d-none]="state.valid || state.untouched">state is required</small>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="Address2" class="col-sm-3 col-form-label">country</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2"  placeholder="Enter country" name="country"
+              [(ngModel)]="person.country" required #country="ngModel"
+              [class.is-invalid]="country.invalid && country.touched">
+            <small class="text-danger" [class.d-none]="country.valid || country.untouched">country is required</small>
+          </div>
+        </div>      
+        <div class="form-group row">
+            <label for="zipcode" class="col-sm-3 col-form-label">TagCode</label>
+            <div class="col-sm-6">
+            <a title="ADD">
+              <i (click)="addTag()" class="material-icons">&#xE147;</i></a></div>
+            <div *ngIf="showTag" class="from-group" id="addmobilecontents">
+              <div id="create_mobile" class="form-group">
+                <div class="create_lable"><label for="tagcode">TagCode</label></div>
+                <div><input type="text" class="form-control" style="width: 11rem;" (keypress)="numbersOnly($event)" placeholder="Enter tagcode" name="tagcode"
+                    [(ngModel)]="personTags.tagcode">
+                </div>
+              </div>
+              <div id="create_mobile" class="form-group">
+                <div class="create_lable"><label for="tagcolor">TagColor:</label></div>
+                <div>
+                  <input class="form-control" id="choose" name="tagcolor" [(ngModel)]="personTags.tagcolor" [style.background]="color1"
+                    [(colorPicker)]="color1" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"
+                    (colorPickerClose)="onEventLog('colorPickerClose', $event)"
+                    (cpInputChange)="onEventLog('cpInputChange', $event)"
+                    (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)"
+                    (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)" />
+                </div>
+              </div>
+              <div id="create_date" class="form-group">
+                <div class="create_lable"><label for="address1">TagExpiry:</label></div>
+                <!-- [min]="personMinDate | date:'yyyy-MM-dd'" -->
+                <div><input type="date" id="datevalue" [min]="minDate | date:'yyyy-MM-dd'" style="width:170px" class="form-control"
+                    placeholder="Enter TagExpiry" name="tagExpiray" [(ngModel)]="personTags.tagExpiray">
+                </div>
+              </div>
+              <div id="create_mobile">
+                <input type="button" value="Set Tag" class="btn btn-primary" (click)="settingTagForPerson()"  style="margin-left:8rem; position:absolute;">
+              </div>
+      
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="zipcode" class="col-sm-3 col-form-label">Trade Code</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="exampleInputEmail2" (keypress)="numbersOnly($event)" placeholder="Enter Trade Code" name="tradeCode"
+              [(ngModel)]="person.tradeCode">
+          </div>
+        </div>
+         
+        <div class="form-group row">
+          <label for="zipcode" class="col-sm-3 col-form-label">Property FlatNumber</label>
+          <div class="col-sm-6">
+            <div class="selectBox" (click)="showCheckboxes()">
+              <select class="browser-default custom-select">
+                <option>Select Flat Number</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+              <div>
+                <label *ngFor="let flat of flatNumberList;let i=index;">
+                  <input type="checkbox" (change)="getFlatSelect($event.target.checked,flat)" />{{flat}}</label>
+              </div>
+            </div>
+          </div>
+          </div>
+  
+  
+  
+          <div class="form-group row">
+            <label for="personclassone" class="col-sm-3 col-form-label">Person Class</label>
+            <div class="col-sm-6">
+              <select name="personclassone" class="browser-default custom-select" [(ngModel)]="person.personclassone">
+                <option *ngFor="let personclassArray of personclassArray" [value]="personclassArray.personclassid">
+                  {{ personclassArray.personClassName }}
+                </option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label for="personclassone" class="col-sm-3 col-form-label">Schedule Time</label>
+              <div class="col-sm-6">
+                <input type=button style="width:inherit" data-toggle="modal"
+                data-target="#schedulePop"  value='{{schedule | json}}' required>
+              </div>
+              </div>
+  
+            
+              <div class="container">
+                <div class="modal fade" id="schedulePop">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <table class="table" style="margin:0">
+                          <tbody>
+                            <table class="table table-condensed" id="create_schedule">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>No</th>
+                                  <th>Start Time </th>
+                                  <th>End Time</th>
+                                  <th>Days</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let personsSchedule of personsSchedule;let j=index">
+                                  <td><input type="checkbox" style="border:none; padding-left:5px" #schedule id="selectschedule"
+                                      id="scheduleval{{personsSchedule.scheduleId}}" value={{personsSchedule.scheduleId}}
+                                      class="siteCheckBox"
+                                      (change)="getScheduleForPerson(j,personsSchedule.scheduleId,$event.target.checked)"
+                                      [checked]="checkedSchedul(personsSchedule.scheduleId)" />&nbsp;
+          
+                                  <td><span>{{personsSchedule.scheduleId}}</span></td>
+                                  <td><span>{{personsSchedule.startTime}}</span></td>
+                                  <td><span>{{personsSchedule.endTime}}</span></td>
+                                  <td id="staff_group">
+                                    <li *ngFor="let days of personsSchedule.days"><span class="comma">{{days.day}}</span> </li>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="modal-footer" style="padding-top:0; margin-top:0; border:none">
+                        <p id="user_settings_status" style="color:#ff0000"></p>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" >Set</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+          <div class="form-group row">
+            <label for="personclassone" class="col-sm-3 col-form-label">Expiry Date:</label>
+            <div class="col-sm-6">
+              <input type="date" id="dateExpiry" [min]="personMinDate | date:'yyyy-MM-dd'" class="form-control"
+                placeholder="Enter Expiry Date" name="expiraydate" [(ngModel)]="person.expiraydate">
+            </div>
+            </div>
+    
+          <div class="text-center">
+      
+            <button class="btn btn-primary" [disabled]="personCreate.invalid" type="submit" style="background-color: #93c47dff;
+            border: none; border-radius: .5rem;">Submit</button>
+      
+            <a class="btn btn-light" (click)="goBack()" style="background-color: #fff;
+            border: 1px solid #999;border-radius: .5rem;">Cancel</a>
+      
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+    

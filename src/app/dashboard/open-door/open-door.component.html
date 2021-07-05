@@ -1,0 +1,121 @@
+
+
+    <div class="grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <ngb-tabset type="pills" class="pills-success">
+              <ngb-tab title="Doors">
+                <ng-template ngbTabContent>
+                      <div class="open_return"><h5 style="text-align: center;font-size: 1.8rem;">Open Door</h5>
+                      <a class="btn btn-gradient-primary" (click)="goBack()" 
+                      style="margin-right: 3rem; background-color: #e06666ff !important;color: black;border-radius: .5rem">Return</a></div>
+
+                      <table class="table">
+                        <tbody >
+                          <!-- <tr>
+                            <td style="border:none">
+                              <a class="btn btn-gradient-primary" (click)="goBack()" style="margin-right: 3rem;">Return</a>
+                            </td>
+                          </tr> -->
+                          <div class="open_door">
+                            <tr *ngFor="let doors of totalDoors;let i=index;">
+                              <td style="border:none;padding:unset !important;">
+                                <div class="div-opendoor"
+                                  style="text-align:center;  display:inline-block;padding: 5px; margin:5px">
+                                  <input type="button" value={{doors.doorName}} style="width: 2rem;height: 2rem;border-radius: 4px;
+                                  border: 1px solid #D0D0D0;" id="door{{i}}"
+                                   (click)="changeColor(doors.doorName,i)"
+                                    class="door" />
+                                </div>
+
+                               
+
+
+                              </td>
+                            </tr>
+                          </div>
+                        </tbody>
+                      </table>
+                  
+                </ng-template>
+              </ngb-tab>
+
+
+
+
+              <ngb-tab title="Door Group">
+                <ng-template ngbTabContent>
+                  <div class="container" style="margin-top: 1rem;">
+                    <div style="margin:auto;">
+                      <div class="table-title">
+                        <div style=" display: flex;margin-left: 1rem;">
+                              <input class="form-control" id="searching" type="text" name="search" [(ngModel)]="searchText"
+                                autocomplete="off" placeholder="Start searching.">
+                                <a class="btn btn-gradient-primary mr-2"  (click)="goToDoorGroup(site.siteid)" style="margin-left: 9rem;">
+                                   <span>Create doorGroup
+                                </span></a>
+                              </div>
+                                <div>
+                                <a (click)="goBack()" id="return_back" class="btn btn-gradient-primary" style="background-color: #e06666ff !important;color: black;border-radius: .5rem">Return</a>
+                              </div>
+                              
+                      </div>
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td style="border:none">
+                              <table class="table table-bordered">
+                                <thead class="thead">
+                                  <tr>
+                                    <th>No</th>
+                                    <th>Door Group Name</th>
+                                    <th>Expiry Date</th>
+                                    <th>Updated Date</th>
+                                    <th>Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let doorGroup of doorGroups | filter:searchText; let i=index">
+                                    <td><input type="text" hidden id=doorgroupid [(ngModel)]=doorGroup.doorgroupid />
+                                      <span> {{i+1}}</span>
+                                    </td>
+                                    <td><span>{{doorGroup.doorGroupName}}</span></td>
+                                    <td><span>{{doorGroup.expiraydate}}</span></td>
+                                    <td><span>{{doorGroup.createdDate}}</span></td>
+                                    <td>
+                                      <div class="door_group_action">
+                                        <span> 
+                                            <button (click)="update(doorGroup.doorgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                                <i class="mdi mdi-pencil"></i>
+                                            </button>
+                                        </span>
+                                        <span>
+
+                                            <button (click)="removeSingleDoorGroup(doorGroup.doorgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                                <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                            </button>
+                                        </span>
+                                        
+                                        <span>
+                                            <button (click)="goToDoorGroupMqtt(doorGroup.doorgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                                <i class="material-icons sync_alt">&#xea18;</i>
+                                            </button>
+                                        </span>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+              
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>

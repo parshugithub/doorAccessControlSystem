@@ -1,0 +1,42 @@
+
+    <h4 class="card-title">Edit Engineer</h4>
+    <form class="forms-sample" #updateEngineer="ngForm" id="main_form" (ngSubmit)="onSubmit()" autocomplete="on">
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-2 col-form-label">engineerName</label>
+        <div class="col-sm-5">
+          <input type="text" id="engineerName" name="engineerName" class="form-control" required minlength="2"
+            placeholder="Enter engineerName" [(ngModel)]="engineer.engineerName" #engineerName="ngModel">
+        </div>
+      </div>
+      <div id="create_site" class="form-group row">
+        <label for="deviceId" class="col-sm-2 col-form-label">employeeID</label>
+        <div class="col-sm-5">
+          <input type="text"  placeholder="Enter employeeID" name="employeeID"
+            class="form-control" required minlength="4" [(ngModel)]="engineer.employeeID" #employeeID="ngModel">
+        </div>
+      </div>
+      <div id="create_site" class="form-group row">
+        <label for="userName" class="col-sm-2 col-form-label">userName</label>
+        <div class="col-sm-5">
+          <input type="text" name="userName" placeholder="Enter userName" class="form-control" required
+            minlength="2" [(ngModel)]="engineer.userName" #userName="ngModel">
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-5">
+          <input type="text" name="password" placeholder="Enter password" class="form-control" required
+            minlength="2" [(ngModel)]="engineer.password" #password="ngModel">
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-gradient-primary mr-2"  style="background-color: #93c47dff !important ;color: black;border-radius: .5rem;"
+           type="submit" 
+         >Submit</button>
+
+        <a class="btn btn-gradient-primary mr-2" style="margin-left: 1rem; background-color: #e06666ff !important;color: black;border-radius: .5rem;" (click)="goBack()">Cancel</a>
+
+      </div>
+    </form>
+  

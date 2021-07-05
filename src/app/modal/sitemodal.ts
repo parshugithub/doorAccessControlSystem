@@ -1,0 +1,19 @@
+export class Site {
+    id:number;
+    siteName:string;
+    deviceId:string;
+    siteReference:string;
+    customerName:string;
+    customerAddress:string;
+    customerPhone:string;
+    address2:string;
+    country:string; 
+    area:string;
+    town:string;
+    city:string; 
+   cust_id:string;
+    siteid:number;
+    connectivity:string;
+    imageUrl:string;
+    constructor(){}
+}

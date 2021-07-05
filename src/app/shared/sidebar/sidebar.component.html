@@ -1,0 +1,187 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar"  *ngIf="_service.loggedIn()">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <a href="javascript:;" class="nav-link">
+        <div class="nav-profile-image">
+          <i class="mdi mdi-account-circle" style="font-size: 40px;"></i>  
+                    <span class="login-status online"></span>             
+        </div>
+        <div class="nav-profile-text">
+          <span class="font-weight-bold mb-2">{{customer.firstname}} {{customer.lastname}}</span>
+        </div>
+      </a>
+    </li>
+    <div *ngIf="engineerLogged">
+    <div *ngIf="engineerAdminLogged">
+    <li class="nav-item" *ngIf="voiceoperatorUserLogged" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/home" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Home</span>
+        <i class="mdi mdi-home menu-icon" title="Home"></i>
+      </a>
+    </li></div></div>
+         <div *ngIf="engineerLogged">
+
+     <div *ngIf="engineerAdminLogged">
+
+    <li *ngIf="voiceoperatorUserLogged"  class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-view-dashboard menu-icon" title="Dashboard"></i>
+      </a>
+    </li></div></div>
+  
+    <li class="nav-item" *ngIf="!voiceoperatorUserLogged"  [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/communications" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Home</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="!voiceoperatorUserLogged"  [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/communications" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Communications</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+   
+      <!-- <li class="nav-item" *ngIf="!engineerAdminLogged"  [ngClass]="{ 'active': dashboard.isActive }">
+        <a class="nav-link" routerLink="/engineer-dashboard" routerLinkActive #dashboard="routerLinkActive">
+          <span class="menu-title">Engineer Dashboard</span>
+          <i class="mdi mdi-home menu-icon"></i>
+        </a>
+      </li> -->
+
+
+      <li  class="nav-item" *ngIf="!engineerAdminLogged" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive }">
+        <a class="nav-link" (click)="uiBasicCollapseds = !uiBasicCollapseds" [attr.aria-expanded]="uiBasicCollapseds" aria-controls="ui-basic">
+          <span class="menu-title">Engineer Dashboard</span>
+          <i class="menu-arrow"></i>
+          <i class="mdi mdi-account-star menu-icon"></i>
+        </a>
+        <div class="collapse" id="ui-engineer" [ngbCollapse]="!uiBasicCollapseds">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/engineer-dashboard" routerLinkActive="active" #buttons="routerLinkActive">All Engineers</a></li>
+    
+            <li class="nav-item"> <a class="nav-link" routerLink="/engineer-dashboard/create-engineer" routerLinkActive="active" #accordions="routerLinkActive">Create Engineer</a></li>
+            <li  class="nav-item"> <a class="nav-link" routerLink="/engineer-dashboard/edit-engineer" routerLinkActive="active" #badges="routerLinkActive" style="display: none;">Edit Engineer</a></li>
+            </ul>
+        </div>
+      </li>
+
+
+      <div *ngIf="!engineerLogged">
+        <li  class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive }">
+          <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+            <span class="menu-title">Customers</span>
+            <i class="menu-arrow"></i>
+            <i class="mdi mdi-account-star menu-icon"></i>
+          </a>
+          <div class="collapse" id="ui-basics" [ngbCollapse]="!uiBasicCollapsed">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" (click)="gotoAllCustomers()" routerLinkActive="active" #buttons="routerLinkActive">All Customers</a></li>
+  
+              <li class="nav-item"> <a class="nav-link" (click)="gotoCreateCustomer()" routerLinkActive="active" #accordions="routerLinkActive">Create Customer</a></li>
+              <li  class="nav-item"> <a class="nav-link" routerLink="/settings" routerLinkActive="active" #badges="routerLinkActive" style="display: none;">Settings</a></li>
+              </ul>
+          </div>
+        </li>
+        </div>
+        <div *ngIf="!engineerLogged">
+
+    <div *ngIf="!engineerAdminLogged">
+
+      <li  class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive }">
+        <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+          <span class="menu-title">Customers</span>
+          <i class="menu-arrow"></i>
+          <i class="mdi mdi-account-star menu-icon"></i>
+        </a>
+        <div class="collapse" id="ui-basics" [ngbCollapse]="!uiBasicCollapsed">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" routerLink="/allCustomers" routerLinkActive="active" #buttons="routerLinkActive">All Customers</a></li>
+
+            <li class="nav-item"> <a class="nav-link" routerLink="/createcustomer" routerLinkActive="active" #accordions="routerLinkActive">Create Customer</a></li>
+            <li  class="nav-item"> <a class="nav-link" routerLink="/settings" routerLinkActive="active" #badges="routerLinkActive" style="display: none;">Settings</a></li>
+            </ul>
+        </div>
+      </li>
+    </div>
+</div>
+
+
+
+    <div *ngIf="engineerLogged">
+
+    <div *ngIf="engineerAdminLogged">
+
+    <li *ngIf="voiceoperatorUserLogged" class="nav-item" [ngClass]="{'active' : accordions.isActive || buttons.isActive || badges.isActive }">
+      <a class="nav-link" (click)="uiBasicCollapsed = !uiBasicCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+        <span class="menu-title">Management</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-account-star menu-icon" title="Management"></i>
+      </a>
+      <div class="collapse" id="ui-basic" [ngbCollapse]="!uiBasicCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" routerLink="/usersmanagement" routerLinkActive="active" #accordions="routerLinkActive">User Management</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/person-management" routerLinkActive="active" #accordions="routerLinkActive">Person Management</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/door-management" routerLinkActive="active" #accordions="routerLinkActive">Door Management</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/staffmanagement" routerLinkActive="active" #buttons="routerLinkActive">Staff Management</a></li>
+          <li class="nav-item"> <a class="nav-link" routerLink="/settings" routerLinkActive="active" #badges="routerLinkActive">Settings</a></li>
+          </ul>
+      </div>
+    </li></div></div>
+
+
+    <div *ngIf="engineerLogged">
+
+<li *ngIf="!voiceoperatorUserLogged" class="nav-item" [ngClass]="{'active' : accordions.isActive }">
+      <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+        <span class="menu-title">Other Actions</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-crosshairs-gps menu-icon" title="Other Actions"></i>
+      </a>
+      <div class="collapse" id="ui-basic" [ngbCollapse]="!samplePagesCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link"  routerLink="/communications" routerLinkActive="active" #accordions="routerLinkActive">Fob Where Used</a></li>
+         
+          </ul>
+      </div>
+    </li></div>
+
+    <div *ngIf="engineerLogged">
+
+    <div *ngIf="engineerAdminLogged">
+
+    <li *ngIf="voiceoperatorUserLogged" class="nav-item" [ngClass]="{'active' : accordions.isActive }">
+      <a class="nav-link" (click)="samplePagesCollapsed = !samplePagesCollapsed" [attr.aria-expanded]="uiBasicCollapsed" aria-controls="ui-basic">
+        <span class="menu-title">Other Actions</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+      </a>
+      <div class="collapse" id="ui-basic" [ngbCollapse]="!samplePagesCollapsed">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link"  routerLink="/dashboard" routerLinkActive="active" #accordions="routerLinkActive">Fob Where Used</a></li>
+         
+          </ul>
+      </div>
+    </li>
+</div></div>
+<div *ngIf="engineerLogged">
+
+<div *ngIf="engineerAdminLogged">
+
+    <li *ngIf="voiceoperatorUserLogged" class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Notification Setting</span>
+        <i class="mdi mdi-bell-ring menu-icon" title="Notification Setting"></i>
+      </a>
+    </li>
+   </div></div>
+    <li *ngIf="!voiceoperatorUserLogged" class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/communications" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Notification Setting</span>
+        <i class="mdi mdi-bell-ring menu-icon"></i>
+      </a>
+    </li>
+
+  </ul>
+</nav>

@@ -1,0 +1,146 @@
+.card{
+  max-width: 70%;
+  margin-left: 15%;
+}
+
+.jumbotron {
+    max-width: 100%;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    color: inherit;
+    background-color:#f8f9fa;
+  }
+  .container{
+      margin-top: 50px;
+      max-width: 50rem !important;
+  }
+  .bg-primary {
+    background-color: #5d9cec;
+    color: #fff !important;
+  }
+  #addmobilecontents{
+    height: 218px;
+    position: absolute;
+    background: #ededed;
+    margin-left: 24rem;
+    z-index: 1;
+  }
+  
+  .panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+  }
+  
+
+  .card-title#createPerson{
+    text-align: start;
+    margin-left: 210px;
+    margin-bottom: 33px;
+  }
+  #create_person {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr ; */
+    grid-template-columns: 15% 28% 20% 0%;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 2rem;
+  }
+  
+  #create_mobile {
+  display: grid;
+  grid-template-columns: 29% 44%;
+  gap: 2rem;
+  margin-top: 10px;
+  align-items: center;
+  }
+  #create_Tag_person{
+    display: grid;
+    grid-template-columns: 6% 39%;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 7rem;
+    align-items: end;
+  }
+  
+  #create_area{
+    
+    display: grid;
+    grid-template-columns: 36% 70%;
+    gap: 2rem;
+    align-items: center
+  
+  }
+  
+  
+  #create_date{
+    display: grid;
+    grid-template-columns: 29% 67%;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  
+  
+  .text-center{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .create_lable{
+    text-align: end;
+  }
+  
+  #main_form{
+  padding: 1%;
+  }
+  
+  i.material-icons {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 0.5rem;
+  }
+  
+  
+  .selectBox {
+    position: relative;
+  }
+  
+  .selectBox select {
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  #checkboxes {
+    display: none;
+    border: 1px #ffff solid;
+    background: #fff;
+  }
+  
+  #checkboxes label {
+    display: block;
+  }
+  
+  #checkboxes label:hover {
+    background-color: #1e90ff;
+  }
+  #choose_color{
+    width: 11rem;
+  }
+
+
+  .create_lable{
+    label{
+        font-weight: bold;
+    }
+    }

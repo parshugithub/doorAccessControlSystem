@@ -1,0 +1,308 @@
+
+
+<div class="">
+  <div class="card">
+  <div class="card-body">
+  <h4 class="card-title" id="createDoor">Edit Door</h4>
+  
+  
+  
+  <form class="forms-sample" #editDoor="ngForm" autocomplete="on"      (submit)="updateDoor()">
+  
+  
+  <div class="form-group row">
+  <label for="custId" class="col-sm-3 col-form-label">Select site</label>
+  <div class="col-sm-6">
+  <select name="siteName" class="browser-default custom-select" (change)="getPersonToMap($event.target.value)">
+    <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+    <option *ngFor="let site of siteList;let k=index;" [value]="site.siteName">
+  {{ site.siteName }}
+  </option>
+  </select>
+  </div>
+  </div>
+
+<!-- 
+  <select name="siteName"  style="width: 87%; background-color:#eef4fc;height: 34px;"  class="browser-default custom-select"
+  (change)="getPersonToMap($event.target.value)" id="selectsite" [(ngModel)]="site.siteName">
+    <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+    <option *ngFor="let site of siteList; let k=index;" [value]="site.siteName">
+      {{ site.siteName }}
+      
+    </option>
+  </select> -->
+
+  
+  <div class="form-group row">
+  <label class="col-sm-3 col-form-label">Door Name</label>
+  
+  <div class="col-sm-6">
+  <input type="text" class="form-control"  placeholder="Enter Door Name"
+  name="doorname" [(ngModel)]="door.doorname" required #doorname="ngModel">
+  
+  </div>
+  </div>
+  
+<!--     
+  <div class="form-group row">
+      <label for="exampleInputUsername2" class="col-sm-2 col-form-label">First Name</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="exampleInputUsername2" placeholder="First Name"name="firstName"
+        [(ngModel)]="user.firstName" required #firstName="ngModel"
+        [class.is-invalid]="firstName.invalid && firstName.touched">
+      <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">FirstName is required</small>
+    </div>
+    </div> -->
+  
+  <div class="form-group row">
+  <label for="zipcode" class="col-sm-3 col-form-label">Trade Code</label>
+  <div class="col-sm-6">
+  <input type="text" class="form-control" id="FirstName"  [(ngModel)]="door.tradecode" required #tradecode="ngModel"  placeholder="Enter Tradecode"
+  name="tradecode">
+  </div>
+  </div>
+  
+  <div class="form-group row">
+  <label for="personclassone" class="col-sm-3 col-form-label">Lock time (Sec)</label>
+  <div class="col-sm-6">
+  <input type="text" [(ngModel)]="door.locktime" required #locktime="ngModel" class="form-control"  (keypress)="numberOnly($event)" placeholder="Lock time (Sec)" name="tradeCode"
+  >
+  </div>
+  </div>
+  
+  <!-- <div class="form-group row">
+  <label for="personclassone" class="col-sm-3 col-form-label">Access type</label>
+  <div class="col-sm-6">
+  <select name="personclassone" class="browser-default custom-select" >
+  
+  </select>
+  </div>
+  </div> -->
+  <div class="form-group row">
+      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Access type</label>
+      <div class="col-sm-6">
+          <select name="user_type" class="browser-default custom-select" [(ngModel)]="door.accessType">
+            <option class="dropdown-item" disabled selected value="undefined">-- Select AccesssType --</option>
+            <option *ngFor="let accessType of accessTypes"  [value]="accessType.id">
+                {{ accessType.name }}
+              </option>
+
+            </select>
+      </div>
+    </div>
+  
+  
+    <!-- <div class="form-group row">
+      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Type</label>
+      <div class="col-sm-6">
+          <select name="user_type" class="browser-default custom-select" (change)="getPersonTypeToMap($event.target.value)">
+            <option class="dropdown-item" disabled selected value="undefined">-- Select Type --</option>
+            <option *ngFor="let type of types;let m=index;"  [value]="type.id">
+                {{ type.name }}
+              </option>
+
+            </select>
+      </div>
+    </div> -->
+
+    <div class="form-group row">
+      <label for="zipcode" class="col-sm-3 col-form-label">Type</label>
+      <div class="col-sm-6">
+        <div class="selectBox" (click)="showCheckboxes()">
+          <select class="browser-default custom-select">
+            <option>Select Type</option>
+          </select>
+          <div class="overSelect"></div>
+        </div>
+        <div id="checkboxes">
+          <div style="display: flex;
+          flex-direction: column;cursor: pointer;">
+           <!-- <a>Persons</a>
+           <a>PersonGroups</a> -->
+
+            <label>
+              <input type="checkbox" data-toggle="modal" data-target="#personPop"  value="person" />person</label>
+              <label>
+                <input type="checkbox"  data-toggle="modal" data-target="#personGroupPop" value="personGroup"/>personGroup</label>
+
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="container">
+        <div class="modal fade" id="personPop">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <table class="table" style="margin:0">
+                  <tbody>
+                    <table class="table table-condensed" id="create_schedule">
+                      <thead>
+                        <tr>
+                          <th></th>
+                         <th>FirstName </th>
+                          <th>LastName</th>
+                          <th>tradeCode</th>
+                          <th>Mobile Number</th>
+                          <th>Email</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let persons of personsArray;let m=index">
+                          <td><input type="checkbox" style="border:none; padding-left:5px" #schedule id="selectschedule"
+                              id="scheduleval{{persons.personid}}" value={{persons.personid}}
+                              class="siteCheckBox"
+                              (change)="getForPerson(persons.personid,$event.target.checked)"
+                              [checked]="checkedPerson(persons.personid)" /></td>
+    
+                          <td><span>{{persons.firstName}}</span></td>
+                          <td><span>{{persons.lastName}}</span></td>
+                          <td><span>{{persons.tradeCode}}</span></td>
+                          <td><span>{{persons.mobileNumber}}</span></td>
+                          <td><span>{{persons.email}}</span></td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer" style="padding-top:0; margin-top:0; border:none">
+                <p id="user_settings_status" style="color:#ff0000"></p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >Set</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+      <div class="container">
+        <div class="modal fade" id="personGroupPop">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <table class="table" style="margin:0">
+                  <tbody>
+                    <table class="table table-condensed" id="create_schedule">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>personGroupName </th>
+                          <th>expirydate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let personsSchedule of personGroupArray;let j=index">
+                          <td><input type="checkbox" style="border:none; padding-left:5px" #schedule id="selectschedule"
+                              id="scheduleval{{personsSchedule.pgroupid}}" value={{personsSchedule.personGroupName}}
+                              class="siteCheckBox"
+                              (change)="getForPersonGroup(j,personsSchedule.personGroupName,$event.target.checked)"
+                              [checked]="checkedPersonGroup(personsSchedule.personGroupName)" />&nbsp;</td>
+    
+                          <!-- <td><span>{{personsSchedule.pgroupid}}</span></td> -->
+                          <td><span>{{personsSchedule.personGroupName}}</span></td>
+                          <td><span>{{personsSchedule.expirydate}}</span></td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer" style="padding-top:0; margin-top:0; border:none">
+                <p id="user_settings_status" style="color:#ff0000"></p>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" >Set</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <div class="form-group row">
+    <label for="personclassone" class="col-sm-3 col-form-label">Schedule Time</label>
+    <div class="col-sm-6">
+      <input type=button style="width:inherit" data-toggle="modal"
+      data-target="#schedulePop"  value='{{schedule | json}}' required>
+    </div>
+    </div>
+
+  
+<div class="container">
+  <div class="modal fade" id="schedulePop">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <table class="table" style="margin:0">
+            <tbody>
+              <table class="table table-condensed" id="create_schedule">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>No</th>
+                    <th>Start Time </th>
+                    <th>End Time</th>
+                    <th>Days</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let personsSchedule of personsSchedule;let j=index">
+                    <td><input type="checkbox" style="border:none; padding-left:5px" #schedule 
+                        id="scheduleval{{personsSchedule.scheduleId}}" value={{personsSchedule.scheduleId}}
+                        class="siteCheckBox"
+                        (change)="getScheduleForPerson(j,personsSchedule.scheduleId,$event.target.checked)"
+                        [checked]="checkedSchedul(personsSchedule.scheduleId)" /></td>
+
+                    <td><span>{{personsSchedule.scheduleId}}</span></td>
+                    <td><span>{{personsSchedule.startTime}}</span></td>
+                    <td><span>{{personsSchedule.endTime}}</span></td>
+                    <td id="staff_group">
+                      <li *ngFor="let days of personsSchedule.days"><span class="comma">{{days.day}}</span> </li>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer" style="padding-top:0; margin-top:0; border:none">
+          <p id="user_settings_status" style="color:#ff0000"></p>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" >Set</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<div class="form-group row" >
+  <label for="personclassone" class="col-sm-3 col-form-label">Door Description</label>
+  <div class="col-sm-6">
+    <input type=button style="width:inherit" (click)="goToDoorDescription()" id="doorDescID">
+  </div>
+  </div>
+
+  
+  
+  <div class="text-center">
+  
+  <button class="btn btn-primary"  type="submit" style="background-color: #93c47dff;
+  border: none; border-radius: .5rem; color: #000;">Submit</button>
+  </div>
+  </form>
+  </div>
+  </div>
+  </div>
+
+ 
+
+
+
+
+
+

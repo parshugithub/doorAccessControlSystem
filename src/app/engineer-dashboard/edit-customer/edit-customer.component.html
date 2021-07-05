@@ -1,0 +1,27 @@
+
+<h4 class="card-title">Edit Customer</h4>
+<form class="forms-sample" #updateEngineer="ngForm" id="main_form" (ngSubmit)="onSubmit()" autocomplete="on">
+  <div id="create_site" class="form-group row">
+    <label class="col-sm-2 col-form-label">Customer ID</label>
+    <div class="col-sm-5">
+      <input type="text" id="customerID" name="customerID" class="form-control" required minlength="2"
+        placeholder="Enter customerID" [disabled]="true" [(ngModel)]="customerProfile.customerID" #customerID="ngModel">
+    </div>
+  </div>
+  <div id="create_site" class="form-group row">
+    <label for="deviceId" class="col-sm-2 col-form-label">Customer Email</label>
+    <div class="col-sm-5">
+      <input type="text"  placeholder="Enter customerEmail" name="customerEmail"
+        class="form-control" required minlength="4" [(ngModel)]="customerProfile.customerEmail" #customerEmail="ngModel">
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <button class="btn btn-gradient-primary"  style="background-color: #93c47dff !important ;color: black;border-radius: .5rem;"
+       type="submit" 
+     >Submit</button>
+
+    <a class="btn btn-gradient-primary" style="margin-left: 1rem; background-color: #e06666ff !important;color: black;border-radius: .5rem;" (click)="goBack()">Cancel</a>
+
+  </div>
+</form>

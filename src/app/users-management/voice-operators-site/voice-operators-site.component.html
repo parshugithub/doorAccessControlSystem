@@ -1,0 +1,36 @@
+<div class="container body-content">
+    <h3>Voice Operator:{{respectedUser.userName}}</h3>
+    <table class="table table-bordered">
+        <tbody>
+            
+            <tr class="thead">
+                <th>
+                    SiteName
+                </th>
+                <th>
+                    Is Site
+                </th>
+            </tr>
+            <tr  *ngFor="let site of sites; let i=index">
+                <td hidden>
+                    <span id="siteId_refer{{i}}">{{site.siteid}}</span>
+
+                </td>
+                <td>
+                    <span id="siteName_refer{{i}}">{{site.siteName}}</span>
+
+                </td>
+                <td>
+
+                    <label class="container">
+                        <input type="checkbox"   id="sitevoicetext{{site.siteid}}"  data-md-icheck (change)="createVoiceSite($event,i)"/>
+                          <span class="checkmark"></span>
+                        </label>
+
+                    <!-- <input type="checkbox" class="siteCheckbox" sitename="site2" value="2" name="Site_2" checked=""> -->
+                </td>
+            </tr>
+         
+        </tbody>
+    </table>
+</div>

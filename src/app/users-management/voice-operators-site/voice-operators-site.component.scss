@@ -1,0 +1,19 @@
+tr.thead{
+    background-color: #2262c6ff;
+    color: #ffff;
+}
+
+.voice_forsite{
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+.voice_forsite_content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+
+.table td{
+    padding-top: unset !important;
+    padding-bottom: unset !important;
+}

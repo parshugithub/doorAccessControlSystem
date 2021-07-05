@@ -1,0 +1,106 @@
+
+  .container_channels{
+    padding: 2rem;
+ }
+
+ 
+ .tab-content{
+ margin: 2rem;
+ display: grid;
+ justify-content: center;
+ }
+   
+ 
+ div.div-channel, div.div-staffdoor {
+   border: 1px solid #ddd;
+   padding: 5px;
+   margin-right: 2px;
+   margin-bottom: 2px;
+   display: inline-block;
+}
+
+.row-padding > td {
+   padding: 2px !important;
+   vertical-align: middle !important;
+}
+.actionbtn{
+    display: flex;
+
+}
+
+
+*{
+   font-weight: bold;  
+ }
+ 
+ 
+ table input{
+   border-radius: 0.4rem;
+     border: 1px solid;
+     background-color: #eef4fc;
+ }
+ 
+ .DayReset, .MonthReset{
+   border: 1px solid;
+   
+ }
+ .actionbtn{
+     display: flex;
+ 
+ .btn.btn-icon{
+     width: 3rem;
+     height: 3rem;
+     padding: 0;}
+ }
+ 
+ input{
+   height: 2rem;
+ }
+ 
+ ul.justify-content-start.nav.nav-pills{
+   padding-left: 170px;
+ }
+ 
+ #monthLabel {
+   margin-right: -40px;
+     margin-left: 15px;
+ 
+ }
+ #update{
+    margin-top: 1rem;
+    background-color: #6a99e1ff;
+    padding: .688rem 7.313rem;
+    border: .5px solid black;
+    background-color: #ffd966ff !important; 
+    color: black;
+    border: none;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+ }
+ 
+ li.nav-link.active{
+   background-color: #6a99e1ff;
+ }
+ 
+ tbody{
+   width: 100%;
+ }
+ .alert-table input{
+   height: 2rem; 
+   width: 275px;
+ }
+ 
+ .alertLabels{
+   width: 38%;
+   text-align: left;
+   padding-left:20%;
+ }
+ 
+ 
+ li.nav-item{
+   align-items: center;
+ }
+ 
+ 

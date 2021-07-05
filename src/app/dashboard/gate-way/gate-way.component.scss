@@ -1,0 +1,29 @@
+.headersearch{
+    display: flex;
+    align-items: center;
+    .col-sm-6{
+        height: fit-content;
+    }
+    button{
+        padding: 9px;
+    }
+    .form-group{
+        margin: 11px;
+
+    }
+}
+
+.thead{
+    text-align: center;
+}
+tbody{
+    text-align: center !important;
+}
+
+.headersearch .returnBtn{
+    background-color: #e06666ff !important;
+    color: black;
+    border: none;
+    float:right;
+    padding: .6rem 1rem;
+    }

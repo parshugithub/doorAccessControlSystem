@@ -1,0 +1,60 @@
+
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-primary text-white mr-2">
+      <i class="mdi mdi-home"></i>
+    </span>
+    Dashboard
+  </h3>
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching">
+      <div class="input-group-append">
+        <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row_sites">
+<div id="add_new" class="card bg-gradient-danger card-img-holder text-white">
+  <a  routerLink="/dashboard/createsite" class="card-body" style="align-self: center;display: flex;" id="add_account">
+      <i class="mdi mdi-map-marker-plus" style="font-size:100px"></i>
+      <label style="align-self: center;"> Add new Site</label>
+      
+  </a>
+</div>
+  
+  <div  *ngFor="let site of site | filter:searchText; let i = index">
+
+    <div class="card bg-gradient-danger card-img-holder text-white" style=" width: min-content; ">
+      <a (click)="viewSite(site.siteName)" class="site_body">
+
+        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <div class="inner_site" id="sit_inner{{i}}">
+          <div>
+            <h5>Site Name
+              
+            </h5>
+            <h3 class="mb-5">{{site.siteName}}</h3>
+          </div>
+          <div>
+            <h5 class="card-text">Device id</h5>
+            <h3 class="mb-5">{{site.deviceId}}</h3>
+          </div>
+          <div>
+            <h6 class="card-text">City</h6>
+            <h3 class="mb-5">{{site.city}}</h3>
+          </div>
+        </div>
+
+      </a>
+    </div>
+
+  </div>
+
+
+
+
+</div>
+
+  

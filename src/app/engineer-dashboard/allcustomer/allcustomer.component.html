@@ -1,0 +1,66 @@
+<div id="new_user" class="col-sm-13">
+
+    <a (click)="addCustomer()" class="btn btn-gradient-primary">
+        <span>Add Customer</span></a>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th style="padding: 1rem;text-align: center;">No</th>
+            <th style="padding: 1rem;text-align: center;">Customer ID</th>
+            <th style="padding: 1rem;text-align: center;">Customer Email</th>
+            <th style="padding: 1rem;text-align: center;">Created Date</th>
+            <th style="padding: 1rem;text-align: center;">Sites Infromation</th>
+            <th>
+              Actions
+            </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        <tr *ngFor="let customes of customerProfile;let i=index;">
+            <td>
+                <input type="text" hidden id=doorid class="form-control" />
+                <span>{{i+1}}</span>
+            </td>
+            <td>
+                {{customes.customerID}}
+            </td>
+            <td>
+                {{customes.customerEmail}}
+            </td>
+            <td>
+                {{customes.createdDate}}
+            </td>
+            <td>
+                <div ngbDropdown>
+                    <button class="btn btn-gradient-primary" type="button" id="dropdownMenuOutlineButton1" ngbDropdownToggle>
+                      SiteInfo
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownMenuOutlineButton1">
+                      <a class="dropdown-item" (click)="poweronreset(customes.custID)" style="color: rgb(201, 163, 163);">All Sites</a>
+                      <a class="dropdown-item" (click)="lockdown(customes.custID)" style="color: rgb(201, 193, 193);">Create Site</a>
+                    </div>
+                  </div>
+            </td>
+            <td>
+              <div class="actionbtn">
+              <span>
+                  <button type="button" (click)="updateCustomer(customes.custID)" class="btn btn-gradient-primary btn-rounded btn-icon">
+                      <i  class="mdi mdi-pencil" data-toggle="tooltip" title="Edit"></i></button>                   
+              </span>
+            <span>
+              <button type="button" (click)="deleteCustomerCalling(customes.custID)" class="btn btn-gradient-primary btn-rounded btn-icon">
+                  <i class="mdi mdi-delete" data-toggle="tooltip" title="Delete"></i></button>
+              </span>
+             
+
+             
+                
+          </div>
+          </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+.door{
+    width: 2rem;
+height: 2rem;
+background-color: #6a99e1ff;
+border-radius: 4px;
+border: 1px solid #D0D0D0;
+margin: 1px;
+}
+
+
+.staffmanage{
+    display: flex;
+    
+.btn.btn-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0;}
+}
+.card-header{
+    border-bottom: unset;
+
+}
+
+
+.staff_total_doors{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.staff_group_create{
+    label{
+        font-size: 15px;
+        margin-right: 20px;    }
+
+    input{
+    width: 200px; 
+    margin-right: 20px;
+    padding-left: 5px;  }
+
+    button{
+        width: 134px;
+        padding: 9px;   }
+
+}

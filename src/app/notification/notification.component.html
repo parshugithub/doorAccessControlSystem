@@ -1,0 +1,105 @@
+<div class="col-lg-12 grid-margin stretch-card">
+
+    
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Notifications</h4>
+
+        <form #addEventLogForm="ngForm" (ngSubmit)="searchEventData()" novalidate>
+            <div class="row" style="margin-top:10px;margin-bottom: 10px;">
+              <div class="col-sm-3 form-group">
+
+                <div class="search-field d-none  d-md-block">
+                  <form class="d-flex align-items-center h-100" action="#">
+                    <div class="input-group" style="border: 1px solid #ebedf2;">
+                     
+                      <input type="text" class="form-control  border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+                      autocomplete="off" placeholder=" Start searching." style="padding-left: 0px;">
+                    </div>
+                  </form>
+                </div>
+
+<!--                 
+                <div class="search-hero">
+        
+                  <input class="form-control" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+                    autocomplete="off" placeholder="&#61442;  Start searching.">
+                </div> -->
+              </div>
+              <div class="col-sm-3 form-group">
+                <input id="startDate" type="text" #startdate="ngModel" name="startdate" [(ngModel)]="model.startDate"
+                  placeholder="From Date" bsDatepicker [bsConfig]="{ isAnimated: true }" class="form-control" />
+              </div>
+              <div class="col-sm-3 form-group">
+                <input id="endDate" type="text" #enddate="ngModel" name="enddate" [(ngModel)]="model.endDate"
+                  placeholder="To Date" bsDatepicker [bsConfig]="{ isAnimated: true }" class="form-control" />
+              </div>
+              <div class="col-sm-3 form-group">
+                <button type="submit" class="btn btn-gradient-primary">Search</button>
+              </div>
+            
+            </div>
+          </form>
+       
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th> No </th>
+                <th>Tittle</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+              <tr *ngFor="let eventLog of eventLogsInfo   | paginationPipe:currentPage:itemsPerPage| filter:searchText;">
+                <td>{{eventLog.loginid}}</td>
+                <td>{{eventLog.event}}</td>
+                <td>{{eventLog.description}} {{eventLog.status}}</td>
+                <td>{{eventLog.updatedDate | date:'MM-dd-yyy'}}</td>
+
+                <!-- <td width="80px" align="center" style="padding: 6px;">1</td>
+                <td width="220px" align="center" style="padding: 6px;">Login</td>
+                <td width="500px" align="center" style="padding: 6px;">ParshuramVoice logged in successfully.</td>
+                <td width="220px" align="center" style="padding: 6px;">23/02/2021 05:44:14</td> -->
+                <td width="80px" valign="middle">
+                    <a  title="Delete Item">
+                        <i
+          class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                    </a>
+                </td>
+            </tr>
+            <tr *ngIf="!eventLogsInfo||eventLogsInfo.length==0">
+                <td class="no_data" colspan="9">
+                  No Data Found
+                </td>
+              </tr>
+            </thead>
+            <!-- <tbody>
+                <tr *ngFor="let eventLog of eventLogsInfo | paginationPipe:currentPage:itemsPerPage | filter:searchText;">
+                    <td>{{eventLog.loginid}}</td>
+                    <td>{{eventLog.event}}</td>
+                    <td>{{eventLog.description}} {{eventLog.status}}</td>
+                    <td>{{eventLog.updatedDate | date:'MM-dd-yyy'}}</td>
+
+                   
+                    <td width="80px" align="center" valign="middle">
+                        <a  title="Delete Item">
+                            <i
+              class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                        </a>
+                    </td>
+                </tr>
+                <tr *ngIf="!eventLogsInfo||eventLogsInfo.length==0">
+                    <td colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+            </tbody> -->
+          </table>
+        </div>
+        <pagination [totalItems]="eventLogsInfo.length" (pageChanged)="pageChanged($event)" [itemsPerPage]="5" [maxSize]="5">
+        </pagination> 
+      </div>
+    </div>
+  </div>

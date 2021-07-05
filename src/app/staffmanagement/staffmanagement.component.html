@@ -1,0 +1,491 @@
+<div class=" grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="card-header" style="display: flex; justify-content: space-between; background:none; margin-bottom: 10px;">
+        <h4 class="card-title" style="place-self: flex-end;">Staffs</h4>
+
+        <!-- <button type="button" class="btn btn-gradient-primary btn-rounded btn-icon" (click)="open(mymodal)">
+          <i class="mdi mdi-account-plus"></i>
+        </button> -->
+
+
+
+      </div>
+      <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <p style="align-items: center; font-size: medium;"><b>Create staff</b></p>
+
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            <span aria-hidden="true">×</span>
+
+          </button>
+
+        </div>
+        <div class="modal-footer">
+          <div class="modal-body">
+
+            <table class="table table-condensed" id="create_staff" style="margin:0">
+              <tr class="create_first">
+                <td style="border:none">FirstName</td>
+                <td class="staff_create" style="border:none"><input type="text" style="width: 12.4rem;" [(ngModel)]="staff1.firstname"
+                    required #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" />
+                  <small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">firstname is
+                    required</small>
+                </td>
+              </tr>
+              <tr class="create_first">
+                <td style="border:none">LastName</td>
+                <td class="staff_create" style="border:none"><input type="text" style="width: 12.4rem;" [(ngModel)]="staff1.lastname"
+                    required #lastname="ngModel" [class.is-invalid]="lastname.invalid && lastname.touched" />
+                  <small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">lastname is
+                    required</small>
+                </td>
+              </tr>
+              <tr class="create_first">
+                <td style="border:none">Payroll No.</td>
+                <td class="staff_create" style="border:none"><input type="text" (keypress)="numberOnly($event)" style="width: 12.4rem;"
+                    [(ngModel)]="staff1.payrollno" required #payrollno="ngModel"
+                    [class.is-invalid]="payrollno.invalid && payrollno.touched" />
+                  <small class="text-danger" [class.d-none]="payrollno.valid || payrollno.untouched">payrollno is
+                    required</small>
+                </td>
+              </tr>
+              <tr class="create_first">
+                <td style="border:none">DateExpire</td>
+                <td class="staff_create" style="border:none"><input type="datetime-local" style="width: 12.4rem;" id="datevale"
+                    [(ngModel)]="staff1.expiraydate" required #expiraydate="ngModel"
+                    [class.is-invalid]="expiraydate.invalid && expiraydate.touched" />
+                  <small class="text-danger" [class.d-none]="expiraydate.valid || expiraydate.untouched">expiraydate
+                    is required</small>
+                </td>
+              </tr>
+
+              <tr class="create_first">
+                <td  style="border:none">Schedule Time</td>
+                <td style="border:none"><input type=button style="width: 12.4rem;" readonly id="scheduleval" value='{{schedule | json}}'
+                  (click)="openModal(editProfileModal)"  required
+                  />
+                    
+
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer" style="margin:0; gap: 1rem;">
+            <p id="create-staff-info" style="color:#0000ff"></p>
+            <p id="create-staff-error" style="color: #ff0000"></p>
+
+            <div class="text-center">
+
+              <button class="btn btn-gradient-primary mr-2" type="submit" data-dismiss="modal"
+                (click)="createStaff();modal.close('Save click')" style="background-color: #93c47dff !important;padding: .7rem 1.3rem;
+                border: none; border-radius: .5rem; color: #000;" >Submit</button>
+
+              <a class="btn btn-gradient-primary mr-2" (click)="modal.close('Save click')" style="background-color: #e06666ff !important;
+              border: none; border-radius: .5rem; color: #000;">Cancel</a>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+      <ng-template #editProfileModal let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileLabel">Time Profile</h5>
+          <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+            <table class="table table-condensed" id="create_schedule">
+
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>No</th>
+                  <th>Start Time </th>
+                  <th>End Time</th>
+                  <th>Days</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let staffsSchedule of staffsSchedule;let j=index">
+                  <td><input type="checkbox" style="border:none; padding-left:5px" #schedule id="selectschedule"
+                    id="scheduleval{{staffsSchedule.schedule}}" value={{staffsSchedule.scheduleId}} class="siteCheckBox"
+                    (change)="getScheduleForStaff(j,staffsSchedule.scheduleId,$event.target.checked)"   [checked]="checked(staffsSchedule.scheduleId)"
+                    />&nbsp;
+                 
+                  <td><span>{{staffsSchedule.schedule}}</span></td>
+                  <td><span>{{staffsSchedule.startTime}}</span></td>
+                  <td><span>{{staffsSchedule.endTime}}</span></td>
+                  <td id="staff_group">
+                    <li *ngFor="let days of staffsSchedule.days"><span class="comma">{{days.day}}</span> </li>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+              <button type="button"  (click)="allselectedSchedules()" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </ng-template>
+
+      <ngb-tabset type="pills" class="pills-success" style="margin-top: 10px;">
+
+        <ngb-tab title="Staff" style="margin-top: 10px;">
+          <ng-template ngbTabContent>
+        <button type="button" class="btn btn-gradient-primary mr-2" style="float: right; margin-bottom: 1rem; padding: .8rem 1.2rem;"  (click)="open(mymodal)">Create staff</button>
+
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead cass="thead">
+                  <th>No</th>
+                  <th>Name</th>
+                  <th>PayRoll No</th>
+                  <th>Staff Group</th>
+                  <th>Date Expire</th>
+                  <th>Date Updated</th>
+                  <th>Actions</th>
+
+                </thead>
+                <tbody>
+                  <tr *ngFor="let staff of staff;let i=index">
+                    <td><input type="text" hidden id=staffid [(ngModel)]=staff.staffid />
+                      <span> {{i+1}}</span>
+                    </td>
+                    <td><span>{{staff.firstname}} {{staff.lastname}}</span></td>
+                    <td><span>{{staff.payrollno}}</span></td>
+                    <td id="staff_group">
+                      <li *ngFor="let staffgroup of staff.staffgroup"><span
+                          class="comma">{{staffgroup.staffGroupName}}</span> </li>
+                    </td>
+                    <td><span>{{staff.expiraydate}}</span></td>
+                    <td><span>{{staff.createdDate}}</span></td>
+                    <td class="staffmanage">
+                      <button type="button" data-toggle="modal" data-target="#editStaffs"
+                        (click)="update(staff.staffid)" class="edit"
+                        class="btn btn-gradient-primary btn-rounded btn-icon ">
+                        <i class="mdi mdi-pencil" data-toggle="tooltip" title="Upload"
+                          _ngcontent-oxv-c114=""></i></button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="editStaffs" role="dialog">
+                        <div class="modal-dialog">
+
+                          <div class="modal-content">
+
+
+
+                            <div class="modal-header" id="set_headding">
+                              <h4 class="modal-title" style="position: absolute;">Edit staff
+                              </h4>
+
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <!-- <h4 class="modal-title">Modal Header</h4> -->
+                            </div>
+
+                            <div class="modal-body">
+
+                              <table class="table" style="margin:0">
+                                <tbody>
+
+                                  <tr>
+                                    <td  style="border:none">
+                                      <p class="edit_staff" style="margin-top:5px">FirstName</p>
+                                    </td>
+                                    <td style="border:none"><input type="text" style="width:12.5rem;"
+                                        [(ngModel)]="updatestaff.firstname" required #firstname="ngModel"
+                                        [class.is-invalid]="firstname.invalid && firstname.touched" />
+                                      <small class="text-danger"
+                                        [class.d-none]="firstname.valid || firstname.untouched">firstname is
+                                        required</small>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td  style="border:none">
+                                      <p class="edit_staff" style="margin-top:5px">LastName</p>
+                                    </td>
+                                    <td style="border:none"><input type="text" style="width:12.5rem;"
+                                        [(ngModel)]="updatestaff.lastname" required #lastname="ngModel"
+                                        [class.is-invalid]="lastname.invalid && lastname.touched" />
+                                      <small class="text-danger"
+                                        [class.d-none]="lastname.valid || lastname.untouched">lastname is
+                                        required</small>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td  style="border:none">
+                                      <p class="edit_staff" style="margin-top:5px">Payroll No</p>
+                                    </td>
+                                    <td style="border:none"><input type="text" style="width:12.5rem;"
+                                        (keypress)="numberOnly($event)" [(ngModel)]="updatestaff.payrollno" required
+                                        #payrollno="ngModel"
+                                        [class.is-invalid]="payrollno.invalid && payrollno.touched" />
+                                      <small class="text-danger"
+                                        [class.d-none]="payrollno.valid || payrollno.untouched">payrollno is
+                                        required</small>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td style="border:none">
+                                      <p class="edit_staff" style="margin-top:5px">DateExpire</p>
+                                    </td>
+                                    <td style="border:none">
+                                      <input type="datetime-local" style="width:12.5rem;" name="expiraydate"
+                                        id="datevaleUpdate" [(ngModel)]="updatestaff.expiraydate" required
+                                        #expiraydate="ngModel"
+                                        [class.is-invalid]="expiraydate.invalid && expiraydate.touched" />
+                                      <small class="text-danger"
+                                        [class.d-none]="expiraydate.valid || expiraydate.untouched">expiraydate is
+                                        required</small>
+                                    </td>
+                                  </tr>
+                                  <tr class="create_first">
+                                    <td  style="border:none">
+                                      <p class="edit_staff" style="margin-top:5px">Schedule Time</p>
+
+                                    </td>
+                                    <td style="border:none"><input type=button style="width: 12.5rem;" readonly id="scheduleval" value='{{schedule | json}}'
+                                      (click)="openModal(editProfileModal)"  required
+                                      />
+                                        
+                    
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="modal-footer">
+                              <div class="text-center">
+                                <button class="btn btn-gradient-primary mr-2" type="submit"
+                                  (click)="onSubmitUpdateStaff()" style="background-color: #ffd966ff !important; border: none; color: #000;border-radius: .4rem;">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                             </div>
+                              <button type="button" class="btn btn-gradient-primary mr-2" data-dismiss="modal"
+                               style="background-color: #e06666ff !important; border: none; border-radius:.4rem;color: #000;">Close</button>
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                      <span>
+                        <button type="button" (click)="deleteStaffCalling(staff.staffid)" class="delete"
+                          data-toggle="modal" class="btn btn-gradient-primary btn-rounded btn-icon">
+                          <i class="mdi mdi-delete" data-toggle="tooltip" title="Delete"></i></button>
+
+
+                      </span>
+
+
+
+                    </td>
+                   
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Staff Group" style="    padding: unset !important;">
+          <ng-template ngbTabContent style="    padding: unset !important;">
+            <div style="margin:auto; padding: unset i !important;">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td style="border:none">
+                                <div id="main_form_group" style="display: flex;margin-bottom: 2rem;">  
+                                  <div style="display: grid;  gap: 3%; grid-template-columns: 38% 55%;">
+
+                                  <label style="margin-top: .5rem;">StaffGroup Name</label>
+                                  <input type="text" id="staff_group_name" class="form-control" 
+                                      placeholder="Enter staffGroupName" name="staffGroupName"
+                                      [(ngModel)]="staffGroup.staffGroupName" required #staffGroupName="ngModel"/>  
+                                      </div>     
+                                      
+                                      <div style="margin-left: 1rem;">                           
+                                  <button class="btn btn-gradient-primary" style="padding: .8rem 1.4rem;white-space: nowrap;" (click)="create_staff_group()">
+                                    <span style="margin-left: -6px;">StaffGroup</span> </button>
+                                </div>  
+                                </div>
+
+                      <table class="cstm-table">
+                        <tbody>
+                         
+                          <tr>
+                            <td style="border:none; vertical-align:initial;padding: unset;">
+                              <p style="margin-right: 26px;
+                              ">Staff Groups:</p>
+                              <select id="staff_group_members" [(ngModel)]="selectionModel" size="10"
+                                (change)="onChangeStaffGroup($event.target.value)" style="overflow: scroll; width: 144px;margin-right: 10px;height: 414px;"
+                                class="form-control">
+                                <option *ngFor="let staffmember of staffGroupArray;let i=index"
+                                  [value]="staffmember.groupid" selected style="padding:5px 2px">
+                                  {{staffmember.staffGroupName}} </option>
+                              </select>
+                            </td>
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p> Staff:</p>
+                              <table id="staff">
+                                <tbody>
+
+
+                                  <tr *ngFor="let staffs of numberOfStaffs;let i=index">
+
+                                    <td style="border:none;padding: 0.3rem;">
+                                      <select id="staff_members{{i}}" name="staff" style="width: 120px;height: 45px;"
+                                        class="browser-default custom-select"
+                                        (change)="getStaffToMap($event.target.value,i)">
+                                        <option style="padding:5px 2px" [value]="0"> </option>
+
+                                        <option *ngFor="let staff of staff" style="padding:5px 2px"
+                                          [value]="staff.staffid">
+                                          {{staff.firstname}} {{staff.lastname}}
+                                        </option>
+
+                                      </select>
+                                    </td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+                            </td>
+                           
+
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p>Tags:</p>
+                              <table id="staff_tags">
+                                <tbody >
+                                  <tr>
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_1" class="form-control" value="0"
+                                        (keypress)="numbersOnly($event)" (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffffff;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_2" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ff0000;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_3" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#00ff00;">
+                                    </td>
+                                  </tr>
+                                  <tr > 
+                                    <td style=" padding: 0.3em; border:none">
+                                      <input type="text" id="tag_4" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#0000ff;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_5" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffff00;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_6" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffa500;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_7" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#808080;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_8" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#000000; color: white;">
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                           
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p style="    text-align: left;  margin-left: 1rem;">Sites:</p>
+                              <div style="border:solid 1px #eeeeee; width:134px;margin-right: 26px;height:414px; overflow-y:scroll">
+                                <table id="staff_sites" class="table-condensed">
+                                  <tbody style="display: flex;
+                                  flex-direction: column;">
+                                    <tr *ngFor="let site of site;let j=index">
+                                      <td style="display: flex;justify-content: flex-start;align-items: center;gap: 0.2rem;margin-bottom: -1rem;"><input type="checkbox" style="border:none;" #site
+                                          id="selectsite" id="siteval{{site.siteid}}" value={{site.siteid}}
+                                          class="siteCheckBox" (change)="getSitesForStaffGroup(j)">&nbsp;
+                                        <label id="site{{j}}" style="border:none">{{site.siteName}}</label>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </td>
+                            
+                            <td style="border: none; padding: unset; vertical-align: initial">
+                              <p>Doors:</p>
+
+
+                              <div class="staff_total_doors">
+                                <div id="staff_doors" *ngFor="let door of doors;let k=index;">
+
+
+                                  <input type="button" value={{door}} style="width: 2rem;
+                                  height: 2rem;
+                                  background-color: #6a99e1ff;
+                                  border-radius: 4px;
+                                  border: 1px solid #D0D0D0;"
+                                    id="door{{k}}" (click)="changeColor(door,k)" class="door" />
+
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table style="float: right;margin-top: 21px;">
+                      <tbody>
+                          <tr>
+                            <td style="border:none" id="staff_group_create">
+
+
+                              <button class="btn btn-gradient-primary mr-2" style="margin-right: 10px;"
+                                (click)="update_staff_group()"  style="background-color: #ffd966ff !important; color: black;border: none;">Update StaffGroup</button>
+                              <button class="btn btn-gradient-primary mr-2" style="margin-right: 20px;"
+                                (click)="remove_staff_group_modal()" style="background-color: #e06666ff !important;color: black;border-radius: .5rem">Delete StaffGroup</button>
+                              <button class="btn btn-gradient-primary mr-2" onclick="program_staff_group_modal()">Program StaffGroup</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

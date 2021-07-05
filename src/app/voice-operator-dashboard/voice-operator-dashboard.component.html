@@ -1,0 +1,135 @@
+<div class="voice_main">
+    <div id="callProgressData" class="dropdown">
+      <button class="btn bg-green dropdown-toggle" type="button" style="background-color: #00aa4e;" id="v-pills-home-tab" data-toggle="collapse" 
+      data-target="#callProgress" (click)="toggleCalls()">
+       <span>Calls In Progress</span> 
+       <span class="caret"></span>
+       </button>
+
+    <div class="collapse" id="callProgress" *ngIf="show">
+      <tr><td> <p class="progress-section">In Progress</p></td>      </tr>
+      <table  class="table table-bordered table-striped"> 
+          <thead><tr>
+              <th>ID</th>
+              <th>SIP Telephone No.</th>
+              <th>SIP User Name</th>
+              <th>SIP Logon User</th>
+              <th>Date</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+
+<div class="dropdown" >
+  <button class="btn bg-yellow dropdown-toggle" style="background-color: #f6be4e;" id="v-pills-profile-tab" role="button"
+   data-toggle="collapse" data-target="#callsQueueHold" 
+    (click)="toggleCalls()"> Calls In Queue - On Hold
+    <span class="caret"></span>
+  </button>
+  <div class="collapse" id="callsQueueHold" *ngIf="show">
+    <tr><td> <p class="progress-section">In Queue</p>  </td></tr>
+    <table  class="table table-bordered table-striped"> 
+        <thead><tr>
+            <th>ID</th>
+            <th>SIP Telephone No.</th>
+            <th>SIP User Name</th>
+            <th>SIP Logon User</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  </table>
+</div>
+</div>
+
+<div class="dropdown">
+  <button class="btn bg-red dropdown-toggle" style="background-color: #df220d;" id="v-pills-messages-tab" data-toggle="collapse"  role="button"
+   data-target="#callsQueueRinging" (click)="toggleCalls()">
+    Calls In Queue - Ringing
+    <span class="caret"></span>
+  </button>
+  <div class="collapse" id="callsQueueRinging" *ngIf="show">
+    <tr><td> <p class="progress-section">In Queue</p>  </td></tr>
+    <table  class="table table-bordered table-striped"> 
+        <thead><tr>
+            <th>ID</th>
+            <th>SIP Telephone No.</th>
+            <th>SIP User Name</th>
+            <th>SIP Logon User</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+  </table>
+</div>  
+</div>
+
+
+
+  
+  <!-- <div class="center-tabs">
+    <h1>jhkzjhf</h1>
+    <div>
+      <iframe allow="microphone; camera" allowfullscreen="true" frameborder="0" width="350" height="540" src="../../assets/webphone/softphone_launch.html?isdemopage=true" name="softphone" id="softphone" class="frame_conatiner" scrolling="no"></iframe>
+  
+    </div>
+  </div> -->
+  
+  <div id="dvcalldata" class="tab-bg1 dis-blk custm-tab">
+    <div id="dvIncomingCallData" class="panel2 outer-main">
+        <div class="left-tabs">
+            <div id="dvcallsHead" class="flip1 width_table add_icon bg-blue">
+                <span>Caller Information</span><div class="type"></div>
+            </div>
+            <div id="dvCallerInformation" class="inner-flip">
+                Calls Information Will be here..........<br>
+            </div>
+        </div>
+        <div class="center-tabs">
+            <div id="dvcallsHead" class="flip1 width_table add_icon bg-blue">
+                <span>Softphone</span><div class="type"></div>
+            </div>
+            <div class="pt15" style="margin:auto;" align="center">
+                <div id="alternate_content">
+                  <iframe allow="microphone; camera" allowfullscreen="true" frameborder="0" width="100%" height="570" src="../../assets/webphone/softphone.html?isdemopage=true" name="softphone" id="softphone" class="frame_conatiner" scrolling="no"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-tabs">
+            <div id="dvcallsHead" class="flip1 width_table add_icon bg-blue">
+                <span>Video Stream</span><div class="type"></div>
+            </div>
+            <div class="video-outer">
+                <img src="/Softphone/images/blank.jpg" id="BlankImage" style="width: 95%; margin: 0px auto; display: none;">
+                <div id="video_content" style="display: none;">
+                </div>
+                <label id="lblName" style="font-weight: normal; display: none;"></label>
+                <div id="VideoInput">
+       <iframe width="100%" height="480" src="https://rtsp.me/embed/YGQrE33B/" frameborder="0" allowfullscreen autoplay="1"></iframe>
+                </div>
+                <div class="text-right"> <button id="DisconnectButton" class="btn btn-success" style="display: none;">Disconnect</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="text-right left-tabs b0 mt15">
+            
+        </div>
+        <div class="text-right center-tabs b0 mt15">
+            
+            <a href="javascript:void(0)" onclick="openDoor()" class="btn btn-primary doorOpen">Door Open</a>
+        </div>
+        <div class="text-right right-tabs b0 mt15" style="border:none">
+            <a class="btn btn-primary" href="/Communications/SiteCameras?number=0" id="siteCamerasBtn" style="float:left;display:none;"
+             target="_blank">View all Site Cameras</a>
+            <button class="btnfullscreen btn btn-primary fullScreen" type="button">Full Screen</button>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+

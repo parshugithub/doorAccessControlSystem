@@ -1,0 +1,68 @@
+<div class="form-group" style="padding: 2rem;">
+    
+    <!-- <input type="button" id=back class="btn btn-info" value="Return To Site"
+    (click)="back()" /> -->
+
+    <button class="btn btn-gradient-primary" id=back  (click)="back()" style="background-color: #e06666ff !important;position: absolute;right: 4rem;
+    margin-top: -3rem;">Return To Site</button>
+
+    <table class="table table-bordered" >
+    
+        <thead>
+            <tr class="engineer_param">
+    
+                <th>No</th>
+                <th>Door Name</th>
+                <th>My Local Relays</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let door of alldoors;let i=index;" class="engineer_param_content">
+                <td >
+    
+                    <input type="text" hidden id=doorid class="form-control" />
+                    <span>{{i+1}}</span>
+    
+    
+                </td>
+                <td>
+    
+                    <input type="text" id="doorname{{i+1}}" placeholder="Door Name" 
+                        (keyup)="doorname($event,i,$event.target.value)" class="form-control" />
+    
+    
+                </td>
+                <td class="realay">
+                    <div class="realay_inner">
+                        <input  type="checkbox" name="inlineRadioOptions" id="enable{{i+1}}"
+                            value="enable" (change)="lockrelay($event.target.value)" />
+                        <label class="form-check-label" for="inlineRadio1">Relay1</label>
+                    </div>
+
+                    <div class="realay_inner">
+                        <input  type="checkbox" name="inlineRadioOptions" id="disable{{i+1}}"
+                            value="disable"  (change)="lockrelay($event.target.value)" />
+                        <label class="form-check-label" for="inlineRadio2">Relay2</label>
+                    </div> 
+                </td>
+    
+    
+    
+                <td >   
+
+                    <input type="button" id=addval{{i}} class="btn btn-gradient-primary" value="Add"
+                        (click)="addDoor(i,siteid)" style="background-color: #93c47dff !important;border-radius: .5rem;"/>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    </div>
+    <div class="form-group">
+        <!-- <input type="button"class="btn btn-info" id="info" value="Add more" (click)="addRow(arralenghth)"/> -->
+        <button class="btn btn-gradient-primary"  id="info" (click)="addRow(arralenghth)" style="background-color: #93c47dff !important;border-radius: .5rem;margin-left: 2rem;">Add more</button>        
+
+        
+    </div>

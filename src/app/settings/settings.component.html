@@ -1,0 +1,169 @@
+<div class=" grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+       
+        <ngb-tabset type="pills" class="pills-success">
+         
+          <ngb-tab title="Sip Settings">
+            <ng-template ngbTabContent>
+              
+                <table id="table-alert-setting" class="table table-bordered" style="margin-bottom:1rem">
+                    <tbody><tr class="row-padding">
+                        <td style="background-color:#eeeeee;font-weight: bold;">Server Address: </td>
+                        <td>
+                            <!-- <input style="border:none; outline:none;" id="serverAddress_0" placeholder="sip.com" value=""> -->
+                            <input style="border:none; outline:none;" placeholder="sip.com" type="text"  id="server_Address" 
+                            class="form-control" (keyup)="serverCreate($event)">
+                        </td>
+                
+                        <td  style="background-color:#eeeeee;font-weight: bold;">Register Interval: </td>
+                        <td>
+                            <!-- <input style="border:none; outline:none;" id="registerInterval_0" placeholder="0" value=""> -->
+                            <input style="border:none; outline:none;" placeholder="0" type="text"  id="register_interval" 
+                            class="form-control" (keyup)="registerCreate($event)">
+                        </td>
+                
+                        <td  style="background-color:#eeeeee;font-weight: bold;">Port Number:</td>
+                        <td>
+                            <!-- <input style="border:none; outline:none;" id="portNumber_0" placeholder="0" value=""> -->
+                            <input style="border:none; outline:none;" placeholder="0" type="text"  id="port_number" 
+                            class="form-control" (keyup)="port($event)">
+                        </td>
+                
+                        <td><button class="btn btn-gradient-primary mr-2" style="padding: .8rem 1.4rem;" (click)="createSip()">Create</button></td>
+                    </tr>
+                </tbody>
+            </table>
+          
+                <!-- <div class="col-md-12" style="border-bottom:1px solid red; margin-top:10px; margin-bottom:10px;"></div> -->
+     
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead"> 
+                            <th>Server Address</th>
+                            <th>Register Interval</th>
+                            <th>Port Number</th>
+                            <th>Action</th>
+              
+                          </thead>
+                      <tbody>
+                        <tr *ngFor="let sip of allSips;">
+                          
+                         
+                            <td><input  type="text"  class="form-control" [(ngModel)]="sip.serverAddress"></td>
+                     
+                            <td><input type="text"  class="form-control" [(ngModel)]="sip.registerInterval" ></td>
+                            <td ><input type="text"  class="form-control" [(ngModel)]="sip.portNumber" ></td>
+                                  
+                          <td>
+                            <div class="actionbtn">
+
+
+                     
+                            <button *ngIf="sip.id !== editRowID" title="Upload" (click)="updateSip(sip)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                              <i class="mdi mdi-upload"></i>
+                            </button>
+                           
+                         
+                          <button type="button" *ngIf="sip.id !== editRowID" (click)="deleteSipCalling(sip)" style="cursor: pointer;" class="btn btn-gradient-primary btn-rounded btn-icon">
+                            <i class="mdi mdi-delete"></i> </button>
+
+
+                        </div>
+                        </td>
+                            
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+              
+            </ng-template>
+          </ngb-tab>
+          
+          <ngb-tab title=" Alert Settings" id="alert" style="background-color: #6a99e1ff; ">
+            <ng-template ngbTabContent>
+              <div class="media">
+                <div style="margin:auto; width:100%;">
+                    <table id="table-alert-setting" class="table table-bordered" style="margin:-0px;">
+                        <tbody class="alert-table"><tr>
+                            <td align="right" class="alertLabels" style="background-color:#eeeeee">Check Period(m)</td>
+                            <td><input value="1440"></td>
+                        </tr>
+                        <tr>
+                            <td align="right" class="alertLabels" style="background-color:#eeeeee ">InOut Size(MB)</td>
+                            <td><input value="500"></td>
+                        </tr>
+                        <tr>
+                            <td align="right" class="alertLabels" style="background-color:#eeeeee; width: 20%;">Eventlog Size</td>
+                            <td><input value="150"></td>
+                        </tr>
+                        <tr>
+                            <td align="right" class="alertLabels" style="background-color:#eeeeee">Reset Date</td>
+                            <td id="month">
+                               <label for="" id="monthLabel" style="font: bold;">Month 
+                                <select class="MonthReset" style="margin-right: 60px;padding: 5px 10px;">
+                                            <option value="1" selected="">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                </select>
+                              </label>
+                                <label for="" id="dayLabel" style="font: bold;">Day 
+                                <select class="DayReset" style="padding:5px 10px;">
+                                            <option value="1" selected="">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                </select>
+                              </label>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                    <div style="display: grid;width: 50%;
+                    margin: auto;">
+                      <button class="btn btn-primary pull-right"  id="update"  onclick="update_alert_setting()">Update</button>
+                    </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>

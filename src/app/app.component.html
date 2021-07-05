@@ -1,0 +1,37 @@
+ <div class="container-scroller" >
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <div class="container-fluid page-body-wrapper" >
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+       <div class="content-wrapper">
+        <!-- <app-spinner *ngIf="isLoading"></app-spinner> -->
+        <div contentAnimate *ngIf="!isLoading" class="h-100">
+          <router-outlet></router-outlet>
+        </div>
+      </div> 
+     
+    </div>
+   
+  </div>
+ 
+</div> 
+
+<!-- <div style="background-color: #fff;" *ngIf="!_service.loggedIn()">
+  
+  <div class="container" id="navbar-header">
+    <div class="navbar-header">
+      <img class="img-responsive" src="assets/images/logo.jpg" width="460" />
+    </div>
+    <app-navbar *ngIf="showNavbar"></app-navbar>
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+      <div class="content-wrapper">
+       <app-spinner *ngIf="isLoading"></app-spinner>
+       <div contentAnimate *ngIf="!isLoading" class="h-100">
+         <router-outlet></router-outlet>
+       </div>
+     </div> 
+    
+   </div>
+  </div>
+</div> -->

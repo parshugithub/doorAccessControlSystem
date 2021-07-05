@@ -1,0 +1,214 @@
+
+
+    <div class="grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <ngb-tabset type="pills" class="pills-success" #tabset="ngbTabset" >
+
+            <ngb-tab title="Door">
+              <ng-template ngbTabContent>
+              
+              <div class="table-wrapper">
+              <div class="table-title-1">
+              <div id="users_search" class="row" style="justify-content: space-between;margin: unset;">
+              <div class="search-hero">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+              placeholder=" Start searching.">
+              
+              </div>
+
+              <div class="col-sm-4">
+                <select name="siteName"  style="width: 87%; background-color:#eef4fc;height: 34px;"  class="browser-default custom-select"
+                (change)="getDoorToMap($event.target.value)" id="selectsite" [(ngModel)]="siteName">
+                  <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+                  <option *ngFor="let site of siteList; let k=index;" [value]="site.siteName">
+                    {{ site.siteName }}
+                    
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-sm-6">
+                                <select name="siteName"  style="width: 87%; background-color:#eef4fc;height: 34px;"  class="browser-default custom-select"
+                                (change)="getPersonToMap($event.target.value)" id="selectsite" [(ngModel)]="site.siteName">
+                                  <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+                                  <option *ngFor="let site of siteList; let k=index;" [value]="site.siteName">
+                                    {{ site.siteName }}
+                                    
+                                  </option>
+                                </select>
+                              </div> -->
+              <div id="new_user" style="margin-left: 1rem;" >
+              <button class="btn btn-gradient-primary mr-2" routerLink="create-door" style="white-space: nowrap;
+              padding: .8rem 1.4rem;">
+              <span>Create door
+              </span></button>
+              
+              
+              
+              
+              <a (click)="goBack()" class="btn btn-primary mr-2" style="margin-left: 15px; padding: .8rem 1.6rem;
+              border-radius: .4rem;background-color: #e06666ff;color: #fff; border: none; padding: 14px 34px;">Return</a>
+              </div>
+              
+              </div>
+              </div>
+              
+              <table class="table table-bordered" style="margin-top: 2rem;">
+              <thead class="thead">
+              <tr>
+              
+              <th>No</th>
+              <th>Door Name</th>
+              <th>Trade Code</th>
+              <th>Lock Time</th>
+              <th>Acess Type</th>
+              <th>Type</th>
+              <th>Schedule</th>
+              <th>Door Description</th>
+              <th>Actions</th>
+              
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let doorL of doorList | filter:searchText; let i=index" class="person_body">
+              <td><input type="text" hidden id=doorid [(ngModel)]=doorL.doorid />
+              <span> {{i+1}}</span>
+              </td>
+              <td><span>{{doorL.doorname}}</span></td>
+              
+               <td ><span>{{doorL.tradecode}}</span></td> 
+              
+            
+              
+              <td><span>{{doorL.locktime}}</span></td>
+              <td><span>{{doorL.accessType}}</span></td>
+                <td class="person_groupd">
+              <li *ngFor="let pg of doorL.persongroup;let i=index"><span class="commas">{{pg.personGroupName}}</span> </li>
+              </td>
+              <td class="person_groupd">
+                <li *ngFor="let sh of doorL.schedule;let i=index"><span class="commas">{{sh.scheduleId}}</span> </li>
+                </td>
+               
+                <!-- description -->
+                <td class="person_groupd">
+                  <li *ngFor="let dd of doorL.doordesc;let i=index"><span class="commas">{{dd.description}}</span> </li>
+                  </td>
+              <!-- <td><span>{{person.city}}</span></td>
+              <td><span>{{person.state}}</span></td>
+               -->
+              <td style="display: flex;">
+              
+              
+              <button (click)="updateDoorManagement(doorL.doorid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+              <i class="mdi mdi-pencil"></i>
+              </button>
+              
+              
+              <button type="button" (click)="deleteDoorCalling(doorL.doorid)" style="cursor: pointer;" class="btn btn-gradient-primary btn-rounded btn-icon">
+              <i class="mdi mdi-delete"></i> </button>
+              
+              </td>
+              </tr>
+              </tbody>
+              </table>
+              
+              </div>
+              </ng-template>
+              
+              </ngb-tab>
+          
+
+
+
+            
+
+
+
+            <ngb-tab title="Door Group" id="doorGroupTab3">
+              <ng-template ngbTabContent>
+                <div class="container" style="margin-top: 1rem;">
+                  <div style="margin:auto;">
+                    <div class="table-title">
+                      <div style=" display: flex;margin-left: 1rem;">
+                            <input class="form-control" id="searching" type="text" name="search" [(ngModel)]="searchText"
+                              autocomplete="off" placeholder="Start searching.">
+          
+
+                              <div class="col-sm-6">
+                                <select name="siteName"  style="width: 87%; background-color:#eef4fc;height: 34px;"  class="browser-default custom-select"
+                                (change)="getPersonToMap($event.target.value)" id="selectsite" [(ngModel)]="site.siteName">
+                                  <option class="dropdown-item" disabled selected value="undefined">-- Select Site --</option>
+                                  <option *ngFor="let site of siteList; let k=index;" [value]="site.siteName">
+                                    {{ site.siteName }}
+                                    
+                                  </option>
+                                </select>
+                              </div>
+                              <button class="btn btn-gradient-primary" (click)="goToDoorGroup()" style="white-space: nowrap; padding: .8rem 1rem;">
+                                 <span>Create doorGroup
+                              </span></button>
+                            </div>
+                              <div>
+                              <a routerLink="/dashboard" id="return_back" class="btn btn-gradient-primary" style="padding: .8rem 1.4rem;background-color: #e06666ff !important;color: black;border-radius: .5rem">Return</a>
+                            </div>
+                            
+                    </div>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td style="border:none">
+                            <table class="table table-bordered">
+                              <thead class="thead">
+                                <tr>
+                                  <th>No</th>
+                                  <th>Door Group Name</th>
+                                  <th>Expiry Date</th>
+                                  <th>Updated Date</th>
+                                  <th>Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let doorGroup of doorGroups | filter:searchText; let i=index">
+                                  <td><input type="text" hidden id=doorgroupid [(ngModel)]=doorGroup.doorgroupid />
+                                    <span> {{i+1}}</span>
+                                  </td>
+                                  <td><span>{{doorGroup.doorGroupName}}</span></td>
+                                  <td><span>{{doorGroup.expiraydate}}</span></td>
+                                  <td><span>{{doorGroup.createdDate}}</span></td>
+                                  <td>
+                                    <div class="door_group_action">
+                                      <span> 
+                                          <button (click)="update(doorGroup.dgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                              <i class="mdi mdi-pencil"></i>
+                                          </button>
+                                      </span>
+                                      <span>
+
+                                          <button (click)="removeSingleDoorGroup(doorGroup.dgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                              <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                          </button>
+                                      </span>
+                                      
+                                      <span>
+                                          <button (click)="goToDoorGroupMqtt(doorGroup.doorgroupid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                              <i class="material-icons sync_alt">&#xea18;</i>
+                                          </button>
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>

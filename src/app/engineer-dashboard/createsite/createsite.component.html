@@ -1,0 +1,126 @@
+
+
+
+    <form class="form-horizontal" role="form" >
+        <h3 style="text-align: center;margin-bottom: 2rem;">Add To Site</h3>
+       <div class="site_device">
+        <div class="form-group ">
+           <div><label for="sitename">Site Name</label></div> 
+            <div class="col-sm-5">
+                <input type="text" id="sitename" [(ngModel)]="engineerSite.siteName"  #siteName="ngModel" placeholder="Site Name"
+                    name="siteName" class="form-control" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="margin-right: 0.5rem;"><label for="deviceid">DeviceId</label></div>
+            <div class="col-sm-5">
+                <input type="text" id="deviceid" [(ngModel)]="engineerSite.deviceID" #deviceID="ngModel" placeholder="deviceid"
+                    name="deviceID" class="form-control" autofocus>
+            </div>
+        </div>
+    
+
+        <div class="form-group" style="justify-content: center;">
+            <label for="Doors" class="col-sm-1 control-label"></label>
+            <div class="col-sm-3" >
+                <input type="button" class="btn btn-gradient-primary siteBtn" value="Add Site" (click)="addsite()">
+            </div>
+            <button (click)="goReturn()"  class="btn btn-gradient-primary cancelBtn">Cancel</button>
+
+        </div>
+    </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Add Doors For Site</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <tr>
+
+                                    <th>No</th>
+                                    <th>Door Name</th>
+                                    <th>Door DeviceID</th>
+                                    <th>Door Type</th>
+                                    <th>Lock Time</th>
+                                    <th>Add</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let door of doors;let i=index;">
+                                    <td>
+
+                                        <input type="text" hidden id=doorid class="form-control" />
+                                        <span>{{i+1}}</span>
+
+
+                                    </td>
+                                    <td>
+                                       
+                                            <input type="text" id="doorname{{i}}"  placeholder="Door Name"  
+                                             (keyup)="doorname($event,i,$event.target.value)"
+                                                class="form-control" />
+
+                                       
+                                    </td>
+                                    <td>
+
+                                        <input type="text" id="doorDeviceid{{i}}" placeholder="Device id" (keyup)="deviceid($event,i,$event.target.value)"
+                                            class="form-control" />
+                                        <!-- <span>{{i+1}}</span> -->
+
+
+                                    </td>
+                                    <td>
+                                        
+                                            <select class="form-control" id="doortype{{i}}" (change)="HR($event,i,$event.target.value)">
+                                                <!-- <option value="volvo">Volvo</option> -->
+                                                <option selected>Select </option>
+                                                <option value="HR">HR</option>
+                                                <option value="NR">NR</option>
+                                            </select>
+        
+                                    </td>
+
+                                    <td>
+
+                                        <input type="text" id=locktime{{i}} class="form-control" (keyup)="locktime($event,i,$event.target.value)" placeholder="lock time(s)"/>
+                                        <!-- <span>{{i+1}}</span> -->
+
+
+                                    </td>
+                                    <td>
+
+                                        <input type="button" id=addval{{i}}  class="btn btn-success" value="Add" (click)="addDoor(i)" style="background-color: #93c47dff !important;
+                                        color: black;
+                                        border-radius: .5rem;"/>
+                                        <!-- <span>{{i+1}}</span> -->
+
+
+                                    </td>
+
+
+
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </form> <!-- /form -->
+

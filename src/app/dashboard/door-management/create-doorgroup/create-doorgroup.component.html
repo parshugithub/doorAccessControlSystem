@@ -1,0 +1,89 @@
+
+                        <div class="container" style="margin-top: 1rem; width: 40%; float: left;">
+                          <form #doorGroupCreate="ngForm" id="main_form" (submit)="createDoorGroup()">
+                            
+                            <div id="create_person" class="form-group">
+                              <div class="create_lable" style="margin-bottom: 1px;"><label for="firstName">DoorGroup Name:</label></div>
+                              <div> <input type="text" class="form-control" [(ngModel)]="doorGroup.doorGroupName" placeholder="Enter doorGroup Name"
+                                  name="firstName"  required >
+                              </div>
+                            </div>
+
+                            <div class="form-group row" style="margin-bottom: 2px;">
+                              <label for="custId" class="col-sm-3 col-form-label">Select site</label>
+                              <div class="col-sm-6">
+                                <select name="siteName"  style="width: 247.5px;
+                                height: 33.5px;  border-radius: 0.4rem;margin-left: 41px;
+                                border: 1px solid; margin-top: 10px;  background-color: #eef4fc !important;" class="browser-default custom-select"(change)="getPersonToMap($event.target.value)" id="selectsite" [(ngModel)]="site.siteName">                                    <option *ngFor="let site of siteList;let k=index;" [value]="site.siteName">
+                                    {{ site.siteName }}
+                                  </option>
+                                </select>
+                              </div>
+                    
+                            </div>
+                    
+                        
+                        
+                            <div id="create_person" class="form-group">
+                              <div  class="create_lable"><label for="mobileNumber">Door Numbers:</label>
+                              </div>
+                              <div><input type="text" id="add" readonly (click)="toggle()" value='{{doorArray | json}}' class="form-control" placeholder="select the doorNumber" name="doorNumber"
+                                   required 
+                                  > 
+                                </div>                     
+                              <div *ngIf="show" class="from-group" id="adddoorcontents">
+                                <div class="open_door">
+                                  <tr *ngFor="let doors of doorsContent;let i=index;" >
+                                      <td style="border:none" align="left">
+                                   <div class="open_door_inner">
+                                      <input type="checkbox" value={{doors.doorName}} style="width: 1.3rem;height: 1.3rem; background-color: #6a99e1ff;
+                                      border-radius: 4px; 
+                                      border: 1px solid #D0D0D0;" class="largerCheckbox"
+                                      id="door{{i}}" 
+                                       [checked]="checked(doors.doorName)" (change)="onChange($event.target.checked, doors.doorName)">
+                                      <span class="door_select">{{doors.doorName}}</span>   
+                                  </div>
+                          
+                                      </td>
+                                      
+                                  </tr>
+                                  <div   class="showmore">
+
+                                 
+
+                                    <button  (click)="getDoorShowMoreData()" [disabled]="counter>=totalDoors.length"  type="button" title="Show tag site from database" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                      <i  class="mdi mdi-arrow-down"></i></button>
+
+                                    </div>
+                                  </div>
+                        
+                              </div>
+                            </div>
+                        
+                            <div id="create_person" class="form-group" style="padding-top:1rem;">
+                              <div class="create_lable"><label for="address1">Expiry Date:</label></div>
+                              <div><input type="datetime-local" id="dateExpiry"  class="form-control"
+                                  placeholder="Enter Expiry Date" [(ngModel)]="doorGroup.expiraydate" name="expiraydate">
+                              </div>
+                            </div>
+
+                           
+
+                            <div class="text-center" style="margin-top: 2.5rem;">
+                        
+                              <button class="btn btn-gradient-primary mr-2" [disabled]="doorGroupCreate.invalid" type="submit" 
+                              style="background-color: #93c47dff !important; border: none; color: #000;">Submit</button>
+                        
+                              <a class="btn btn-gradient-primary mr-2" routerLink="/door-management" 
+                              style="background-color: #e06666ff !important; border: none; color: #000;">Cancel</a>
+                             
+                            </div>
+                          </form>
+                         
+                        </div>
+
+
+
+
+
+                  

@@ -1,0 +1,92 @@
+<!--    <div class="modal-header" id="set_headding">
+          <h4 class="modal-title">Engineer Log In</h4>
+        </div>
+        <div class="modal-body" id="set_body">
+          <table class="table" style="margin:0">
+            <tbody>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">User Name</p>
+                </td>
+                <td style="border:none">
+
+
+                  <input #model="ngModel" name="title" type="text" id="user_settings_firstname" class="form-control"
+                    [(ngModel)]="engineer.userName" required>
+
+                  <div *ngIf="model.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">Password</p>
+                </td>
+                <td style="border:none"><input #model1="ngModel" name="title" type="text" id="user_settings_lastname"
+                    class="form-control" [(ngModel)]="engineer.password" required>
+                  <div *ngIf="model1.invalid" style="color: red">Required</div>
+                </td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer"  id="set_footer">
+          <p id="user_settings_status" style="color:#ff0000"></p>
+          <button type="button" class="btn btn-gradient-primary" [disabled]="model.invalid" [disabled]="model1.invalid"
+          
+            data-dismiss="modal" style="background-color: #ffd966ff !important; color: black;border: none;" (click)="engineer_Logged()">Login</button>
+          <button type="button" class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;" data-dismiss="modal" >Cancel</button>
+        </div>
+   -->
+
+
+   
+
+   <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header" id="set_headding">
+        <h4 class="modal-title">Engineer Log In</h4>
+      </div>
+      <div class="modal-body" id="set_body">
+        <table class="table" style="margin:0">
+          <tbody>
+            <tr>
+              <td style="border:none">
+                <p style="margin-top:5px">User Name</p>
+              </td>
+              <td style="border:none">
+
+
+                <input #model="ngModel" name="title" type="text" id="user_settings_firstname" class="form-control"
+                [(ngModel)]="engineer.userName" required>
+
+              <div *ngIf="model.invalid" style="color: red">Required</div>
+
+
+              </td>
+            </tr>
+            <tr>
+              <td  style="border:none">
+                <p style="margin-top:5px">Password</p>
+              </td>
+              <td style="border:none"><input #model1="ngModel" name="title" type="text" id="user_settings_lastname"
+                class="form-control" [(ngModel)]="engineer.password" required>
+              <div *ngIf="model1.invalid" style="color: red">Required</div>
+            </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer"  id="set_footer">
+        <p id="user_settings_status" style="color:#ff0000"></p>
+        <button type="button" class="btn btn-gradient-primary" 
+          data-dismiss="modal" style=" color: black;border: none;" (click)="engineer_Logged()">Login</button>
+        <button class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+

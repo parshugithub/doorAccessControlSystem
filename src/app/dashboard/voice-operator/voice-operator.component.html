@@ -1,0 +1,67 @@
+<div class=" stretch-card" >
+    <div class="card-body" style="padding: unset;">
+        <div class="card-header" style="display: flex;justify-content: space-between;">
+            <h3>Voice Operators</h3>  
+            <a  class="btn btn-gradient-primary" (click)="goBack()">Return</a>
+        </div>
+    </div>
+    </div>
+
+    <div class="card">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead">
+              <tr>
+                <th>
+                    UserName
+                </th>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    LastName
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Is Voice Operator
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let voice of voices;let i=index;">
+                    <td>
+                       {{voice.userName}}
+                    </td>
+        
+                    <td>
+                        {{voice.firstName}}
+                    </td>
+                    <td>
+                        {{voice.lastName}}
+                    </td>
+                    <td>
+                        {{voice.address}}
+                    </td>
+                    <td>
+                        {{voice.email}}
+                    </td>
+                    <td>
+   
+                        <label class="container">
+                            <input type="checkbox"   id="voicetxt{{i}}"  data-md-icheck (change)="createVoice($event,i)"/>
+                              <span class="checkmark"></span>
+                            </label>
+    
+                    </td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+  

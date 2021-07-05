@@ -1,0 +1,1100 @@
+<div class="moveToSitePanel">
+<div id="move_to_site">
+    <ul class="nav nav-pills" id="move_to_site_tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#channels">Channels</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="getSchedules()" data-toggle="pill" href="#schedules">Schedules</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#Tradecodes-doors" style="padding: .6rem 1rem;">Tradecodes & Doors</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#staffaccess-options" style="padding: .6rem 1rem;">StaffAccess & Options</a>
+        </li>
+        <li class="nav-item" style="margin-right:unset !important">
+            <a class="nav-link" data-toggle="pill" href="#Enable-events-DateTime" style="padding: .6rem 1rem;">Enable Events & DateTime</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content">
+    <div id="channels" class="container tab-pane active">
+        <div class="retrieve">
+            <button class="btn btn-outline-primary" style="margin-right: 10px; "
+                onclick="retrieve_all_channel_site()">Retrieve from Site</button>
+            <button class="btn btn-outline-primary" style="margin-right:10px"
+                onclick="program_all_channel_site()">Program to Site</button>
+            <button class="btn btn-outline-primary" onclick="SaveSelectedCheckboxes()">Save Checkbox
+                Selection</button>
+        </div>
+
+          <br>
+          <br>
+
+
+
+        <table id="table-channels" class="table-bordered">
+            <thead >
+                <tr >
+                    <th style="text-align:center;padding-top: 0.5rem;">
+                        <input type="checkbox" class="total-attach">
+                    </th>
+                    <th style="text-align:center;padding: 1rem;">Ch</th>
+                    <th style="text-align:center;padding: 1rem;">Flat</th>
+                    <th style="text-align:center;padding: 1rem;">PPP</th>
+                    <th style="text-align:center;padding: 1rem;">Door</th>
+                    <th style="text-align:center;padding: 1rem;">Tag</th>
+                    <th style="text-align:center;padding: 1rem;">Action</th>
+                    <th style="text-align:center;padding: 1rem;">Updated</th>
+                </tr>
+              </thead>
+            <tbody>
+
+                
+
+                <tr  *ngFor="let channles of totalChannlesArray;let i=index">
+                    <td style="text-align: center;
+                        padding-top: 25rem;">
+                        <input type="checkbox" class="channel-attach" id="chkChannel_1" checked="checked">
+                    </td>
+                    <td style="text-align: center;padding-top: 25rem;    ">{{i+1}}</td>
+                    <td style="padding-top: 25rem;"><input id="txtFlat{{i}}" type="text" style="padding: 12px;" class="form-control"
+                            (keyup)="onKey($event,i)"></td>
+                    <td style="padding-top: 25rem;"><input type="text" style="padding: 12px;" id="ppp{{i}}" class="form-control"
+                            (keyup)="onKey($event,i)"></td>
+                    <td name="door" value="door">
+
+                        <div style="display: grid;
+                        grid-template-columns: repeat(5, 1fr);">
+
+                            <tr *ngFor="let doors of totalDoors;let k=index;">
+
+                                <div id="ck-button">
+                                    <label style="margin-bottom: unset;">
+                                        <input type="checkbox" id="doorSelected{{k}}{{i}}"
+                                            value={{doors.doorName}} class="door{{k}}"
+                                            (change)="onChangeCat(doors.doorName, $event.target.checked,k)">
+                                        <span>{{doors.doorName}}</span>
+                                    </label>
+                                </div>
+
+                            </tr>
+                        </div>
+
+
+                    </td>
+
+                    <td name="tag">
+
+                        <tr *ngFor="let tags of numberOfTags;let j =index">
+
+                            <ul style="list-style-type:none; padding-left:0px; margin-bottom:5px;">
+                                <form id="tag_form" name="myForm">
+                                    <li style="display: flex;
+                                        flex-direction: column;
+                                        gap: 1rem;">
+                                        <div class="tag_parent">
+                                           
+                                            <div style="
+                                            text-align: center;
+                                            border-radius: 0.3rem;
+                                            padding: 0.2rem;">
+                                            <button type="button" value="{{j+1}}" class="tag-color" id="tag-color_10{{j}}{{i}}" data-tag="61000072"  name="tagcolor"  [style.background]="color1"
+                                            [(colorPicker)]="color1" (colorPickerOpen)="onEventLog('colorPickerOpen', $event,j,i)"
+                                            (colorPickerClose)="onEventLog('colorPickerClose', $event,j,i)"
+                                            (cpInputChange)="onEventLog('cpInputChange', $event,j,i)"
+                                            (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event,j,i)"
+                                            (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event,j,i)">{{j+1}}</button></div>
+                                            
+
+                                            <div> <input type="text" style="width: 9rem;background-color: #6a99e1ff;
+                                                border-radius: 0.4rem;color: #fff;" value="Tag_{{j+1}}"
+                                                    readonly class="field" id="tagid{{j}}{{i}}"></div>
+                                        </div>
+                                        <div class="tag_parent">
+                                           
+                                            <div style="    width: 41px;
+                                            text-align: center;
+                                            border-radius: 0.3rem;
+                                            padding: 0.2rem;">
+                                            <!-- <button type="button" value="{{j+1}}" class="tag-color" id="tag-color_10{{j}}{{i}}" data-tag="61000072"  name="tagcolor"  [style.background]="color1"
+                                            [(colorPicker)]="color1" (colorPickerOpen)="onEventLog('colorPickerOpen', $event,j,i)"
+                                            (colorPickerClose)="onEventLog('colorPickerClose', $event,j,i)"
+                                            (cpInputChange)="onEventLog('cpInputChange', $event,j,i)"
+                                            (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event,j,i)"
+                                            (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event,j,i)">{{j+1}}</button> -->
+                                        </div>
+                                            
+
+                                            <div><input #todo type="text" (keypress)="numberOnly($event)" style=" width: 9rem;background-color: #6a99e1ff;
+                                                border-radius: 0.4rem;color: #fff;" class="form-control"
+                                                minlength="8" name="fname" maxlength="10"
+                                                id="tagname{{j}}{{i}}" class="field"></div>
+                                        </div>
+                                        <div style="margin-left:3rem;">
+                                            
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="hexa_one">
+                                            <div> <input type="checkbox" class="tag-hexadecimal-checkbox"
+                                                    (click)="convertHexadecimal($event,todo.value,j,i)"
+                                                    tagid="10" id="check_10"></div>
+
+                                            <div style="font-size: 1rem;"> <label>Hexadecimal</label></div>
+                                        </div>
+                                        <div class="clear_set">
+                                            <div> <button tagid="10" id="tag_save" class="btn btn-success"
+                                                    style="background-color: #e06666ff;color: #000;"
+                                                    ng-really-message="Are you sure?"
+                                                    (click)="clear(j,i)">clear</button></div>
+                                            <div> <button type="submit" id="tag_clear" value="Submit"
+                                                    tagid="10" class="btn btn-success"
+                                                    style="background-color: #93c47dff; color: #000;"
+                                                    (click)="setTag(j,i)">save</button></div>
+                                        </div>
+                                        <div> <span tagid="10" tagindex="0" chindex="1"
+                                                class="glyphicon glyphicon-open program-tag-channel"
+                                                title="Program to site" style="color: #428bca;"></span>
+                                        </div>
+                                    </li>
+                                </form>
+                            </ul>
+
+
+                        </tr>
+                        
+
+                    </td>
+                    <td style="padding-top: 25rem;">
+
+                        <div style="display: flex;">
+                            <button type="button" title="Show tag site from database"
+                                class="btn btn-gradient-primary btn-rounded btn-icon">
+                                <i class="material-icons file_download"></i></button>
+
+
+                            <button type="button" title="Program to site" (click)="createChannel(i)"
+                                class="btn btn-gradient-primary btn-rounded btn-icon">
+                                <i class="material-icons file_upload"></i></button>
+                        </div>
+                    </td>
+
+                    <td style="padding-top: 25rem;width: 160px;">
+
+                        <input type="text" disabled id="channeldatevalue{{i}}"
+                            style="border: 0;color: #212529; background:transparent;" />
+                    </td>
+
+                </tr>
+                <div style="display: flex;margin-left: 1rem;width: max-content;">
+                <button class="btn btn-gradient-primary"  id="info" (click)="addRow(arralenghth)" style="background-color: #6a99e1ff !important;margin-top: 2rem;margin-bottom: 2rem;">Add More Channel</button>        
+               </div>
+            </tbody>
+        </table>
+    </div>
+
+    
+
+    <div id="schedules" class="container tab-pane fade">
+        <div class="retrieve">
+            <button class="btn btn-outline-primary" style="margin-right: 10px; "
+                onclick="retrieve_all_schedule_site()">Retrieve from Site</button>
+            <button class="btn btn-outline-primary" style="margin-right:10px"
+                onclick="program_all_schedule_site()">Program to Site</button>
+        </div>
+        <table id="table-schedules" class="table-bordered table-condensed">
+
+                <thead>
+                    <tr class="schedule_head">
+                        <th class="schedule_head_inner" style="text-align:center;padding: 0.6rem;" >
+                            Sch
+                        </th>
+                        <th  class="schedule_head_inner">
+                            Start Time
+                        </th>
+                        <th  class="schedule_head_inner">
+                            End Time
+                        </th>
+                        <th  class="schedule_head_inner">
+                            Days
+                        </th>
+                        <th  class="schedule_head_inner">
+                            Action
+                        </th>
+                        <th  class="schedule_head_inner">
+                            Updated
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let schedules of totalSchedules;let i=index;">
+                        <td><span id="scheduleid{{i}}" >{{i+1}}</span></td>
+
+                        <td>
+
+
+                            <div class="selectStartEndTime">
+                                <div>
+                                    <select id="scstart{{i}}" class="startEndTimeSelect" >
+                                        <option [value]="startTime" *ngFor="let startTime of hoursArray;let i=index;"
+                                            (change)="scheduleHoursTime($event,i)">
+                                            {{startTime}}</option>
+                                    </select>
+                                </div>
+                                <div> <span style="font-size:2rem"> : </span></div>
+                                <div> <select id="scstartone{{i}}" class="startEndTimeSelect" >
+                                        <option [value]="minute" *ngFor="let minute of minutesArray;let i=index;"
+                                            (change)="scheduleMinutesTime($event,i)">{{minute}}
+                                        </option>
+
+                                    </select></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="selectStartEndTime">
+                                <div> <select id="scsend{{i}}" class="startEndTimeSelect">
+                                        <option [value]="hour" *ngFor="let hour of hoursArray;let i=index;">
+                                            {{hour}}</option>
+                                    </select></div>
+                                <div> <span style="font-size:2rem"> : </span></div>
+                                <div> <select id="scsendone{{i}}" class="startEndTimeSelect">
+                                        <option [value]="minute" *ngFor="let minute of minutesArray;let i=index;">
+                                            {{minute}}
+                                        </option>
+                                    </select></div>
+                            </div>
+
+                        </td>
+                        <td>
+
+                            <table class="table table-striped">
+
+                                <tbody>
+                                    <div class="doors_lists" id="days">
+                                        <tr *ngFor="let day of daysArray;let k=index;">
+
+                                            <input type="button" value={{day}} id="days{{i}}{{k}}"
+                                                style="width: 2rem;
+                                                height: 2rem;
+                                                border-radius: 4px;
+                                                border: 1px solid #D0D0D0;"
+                                                (click)="changeColorForDays(day,k,i)" class="door" />
+                                        </tr>
+                                    </div>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <div style="display: flex;">
+                                <button type="button" title="Show tag site from database"
+                                    class="btn btn-gradient-primary btn-rounded btn-icon">
+                                    <i class="material-icons file_download"></i></button>
+
+
+                                <button type="button" title="Show tag site from database" (click)="createSchedule(i)"
+                                    class="btn btn-gradient-primary btn-rounded btn-icon">
+                                    <i class="material-icons file_upload"></i></button>
+                            </div>
+
+                        </td>
+                        <td>
+
+                            <input type="text" disabled id="scheduledateval{{i}}"
+                                style="border: 0;color: #212529; background:transparent;" />
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+
+
+        </table>
+
+    </div>
+    
+    <div  id="Tradecodes-doors" class="container tab-pane fade">
+        <div class="tradeCodeDoorTables" style="display: flex; gap:1.5rem;">
+            <div>        
+
+              <div class="retrieveFrom">
+                <button class="btn btn-outline-primary"
+                onclick="retrieve_all_tradecode_site()">Retrieve from
+                Site</button>
+                <button class="btn btn-outline-primary"
+                onclick="program_all_tradecode_site()">Program to Site</button>
+
+             </div>
+            
+                <table class="table-bordered" style="margin-top: 1.5rem;">
+                    <thead >
+                        <tr style="background-color: #2262c6ff;">
+                            <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Trade</th>
+                            <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >TradeCode</th>
+                            <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Schedule</th>
+                            <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Action</th>
+                            <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Updated</th>
+                        </tr>
+                    
+                      </thead>
+                    <tbody>
+                        
+                    
+                        <tr *ngFor="let trade of totalTradeCodes;let i=index;">
+                            <td style="text-align: center;padding-top: 0.5rem;">
+                                <span id="tradecodeid{{i}}"> {{i+1}}</span>
+                            </td>
+
+
+                            <td>
+
+                                <input type="text" (keypress)="numberOnly($event)" id="tradeC{{i}}"
+                                    minlength="4" maxlength="4" class="form-control"
+                                    (keyup)="onScheduleKey($event,i)">
+                            </td>
+                            <td><input type="text" (keypress)="numberOnly($event)" id="tradeS{{i}}"
+                                    class="form-control" (keyup)="onScheduleTradeKey($event,i)"
+                                    id="schedulenovalue"></td>
+                            <td>
+
+
+                                <div style="display: flex;justify-content: center;">
+                                    <button type="button" title="Show tag site from database"
+                                        class="btn btn-gradient-primary btn-rounded btn-icon">
+                                        <i class="material-icons file_download"></i></button>
+
+
+                                    <button type="button" (click)="createTradeCode(i)" tagindex="0"
+                                        title="Program to site"
+                                        class="btn btn-gradient-primary btn-rounded btn-icon">
+                                        <i class="material-icons file_upload"></i></button>
+                                </div>
+
+
+
+                            </td>
+                            <td style="background-color: #ffff;"><input type="text" disabled
+                                    id="tradeUpdateDate{{i}}" style="border: 0;color: #212529;" /></td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        <div>
+            <div class="retrieveFrom">
+                <button class="btn btn-outline-primary"
+                onclick="retrieve_all_door_site()">Retrieve from Site</button>
+                <button class="btn btn-outline-primary"
+                onclick="program_all_door_site()">Program to Site</button>
+    
+             </div>
+             <table class="table-bordered" style="margin-top: 1.5rem;">
+                <thead >
+                    <tr style="background-color: #2262c6ff;">
+                        <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Door</th>
+                        <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >LockTime(s)</th>
+                        <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Schedule</th>
+                        <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Action</th>
+                        <th style="text-align:center;padding-top: 0.6rem;padding-bottom: 0.6rem;" >Updated</th>
+                    </tr>
+                  
+                  </thead>
+               
+                <tbody>
+                    <tr *ngFor="let doorName of totalDoorsRefer;let i = index;">
+
+
+
+                        <td style="text-align: center;padding-top: 0.5rem;">
+                            <span id="tradecodewithid{{i}}">{{i+1}}</span>
+                        </td>
+
+
+                        <td><input type="number" name="LockTime{{i}}" id="LockTime{{i}}" value="0"
+                                class="form-control" (keyup)="onLockKey($event,i)"></td>
+                        <td><input type="number" class="form-control" value="0" style="padding-right: .2rem;"
+                                (keyup)="onScheduleWithKey($event,i)" id="tradeWithS{{i}}"></td>
+
+
+                        <td>
+
+
+
+                            <div style="display: flex;justify-content: center;">
+                                <button type="button" title="Show tag site from database"
+                                    class="btn btn-gradient-primary btn-rounded btn-icon">
+                                    <i class="material-icons file_download"></i></button>
+
+
+                                <button type="button" (click)="createTradeCodeDoor(i)" tagindex="0"
+                                    title="Program to site"
+                                    class="btn btn-gradient-primary btn-rounded btn-icon">
+                                    <i class="material-icons file_upload"></i></button>
+                            </div>
+
+                        </td>
+                        <td style="background-color: #ffff;">
+                            <input type="text" id="tradedateval{{i}}" disabled
+                                style="border: 0;color: #212529; " />
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            
+        </div>
+        
+
+        </div>
+    </div>
+
+
+    <div id="staffaccess-options" class="container tab-pane fade">
+<div style="display: flex;
+justify-content: space-around;">
+        <div class="retrieve_forms" style="gap: 1rem;margin-right: 6rem;">
+            <div>
+                <button class="btn btn-outline-primary" 
+                    onclick="retrieve_all_door_site()">Retrieve from Site</button>
+            </div>
+            <div>
+                <button class="btn btn-outline-primary" style="width: 13rem !important;"
+                    onclick="program_all_door_site()">Program to Site</button>
+            </div>
+        </div>
+        <!-- <div class="retrieve_form">
+            <td align="right" style="border:none">
+                <button class="btn btn-outline-primary" onclick="retrieve_all_staff_access_site()">Retrieve from
+                    Site</button>
+            </td>
+            <td align="left" style="border:none">
+                <button class="btn btn-outline-primary" onclick="program_all_staff_access_site()">Program to
+                    Site</button>
+            </td>
+        </div> -->
+</div>
+        <table>
+            <tbody>
+                <tr>
+                    <div class="staff_access">
+                        <div>
+                            <td>
+                                
+                                <table class="table-bordered" style="margin-top: 1rem;background-color: #fff;">
+                                    <tbody id="main_form">
+                                        <tr class="staff_head">
+                                            <th class="five_param">Staff</th>
+                                            <th class="five_param">Access Level</th>
+                                            <th class="five_param">Pass Number </th>
+                                            <th class="five_param">Action</th>
+                                            <th class="five_param" style="background-color: #2262c6ff;">Updated</th>
+                                        </tr>
+                                        <tr class="staff_content"
+                                            *ngFor="let staffid of totalStaffAccessAndOptions;let i=index;">
+                                            <td style="text-align: center;padding-top: 0.5rem;">
+                                                <span id="staffaccessid{{i}}">{{i+1}}</span>
+                                            </td>
+
+
+
+
+                                            <td>
+                                                <select id="staffA{{i}}" class="browser-default custom-select">
+                                                    <option [value]="accessLevel"
+                                                        *ngFor="let accessLevel of accessingData;let i = index;"
+                                                        (change)="staffAccessKey($event,i)">{{accessLevel}}</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="number"  id="staffP{{i}}" class="form-control"
+                                                    (keyup)="staffPaswsKey($event,i)"></td>
+
+
+                                            <td  style="display: flex;justify-content: center;">
+
+                                                <div style="margin-top: 0.2rem;">
+                                                    <button type="button" title="Show tag site from database"
+                                                        class="btn btn-gradient-primary btn-rounded btn-icon">
+                                                        <i class="material-icons file_download"></i></button>
+
+
+                                                    <button type="button" title="Show tag site from database"
+                                                        (click)="createAccess(i)"
+                                                        class="btn btn-gradient-primary btn-rounded btn-icon">
+                                                        <i class="material-icons file_upload"></i></button>
+                                                </div>
+
+                                                <!-- <span tagindex="0" data-toggle="modal" title="Show tag site from database"
+                                                style="color: #428bca;"><i
+                                                    class="material-icons file_download"></i></span>
+                                            <span (click)="createAccess(i)" data-toggle="modal" title="Program to site"
+                                                style="color: #428bca;"><i _ngcontent-oxv-c114=""
+                                                    class="material-icons file_upload"></i></span> -->
+
+                                            </td>
+                                            <td style="background-color: #ffff;">
+                                                <input type="text" id="staffUpdateDate{{i}}" disabled
+                                                    style="border: 0;color: #212529; background:transparent;" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </div>
+                        <!-- <div>
+                            <td>
+                               
+                                <table id="table_doors" style="margin-top: 1rem;background-color: #fff;"
+                                    class="table-bordered table-condensed">
+                                    <tbody>
+
+                                        <tr>
+                                            <td class="five_param_option" style="background-color: #015C92;color: #fff;">System option1</td>
+                                            <td class="five_param_option" style="background-color: #015C92;color: #ffff;">System option2</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><input type="checkbox" class="optionOne" onclick="option1change(this)"
+                                                    value="1">
+                                                    <label>Wardon to PPP</label></td>
+                                            <td><input type="checkbox" class="optionTwo" onclick="option2change(this)"
+                                                    value="1"><label>Alert Calls to PPP</label></td>
+
+                                        </tr>
+                                        <tr>
+
+                                            <td><input type="checkbox" class="optionOne" onclick="option1change(this)"
+                                                    value="2"> <label>EN PPP</label></td>
+                                            <td><input type="checkbox" class="optionTwo" onclick="option2change(this)"
+                                                    value="2"><label>Wardon-OP 1 only</label></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="4">Turns Interface</label>
+                                            </td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="4">Fault Monitoring</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="8">DI BST</label></td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="8">Future use</label></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="16">Speech Synth</label>
+                                            </td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="16">Future use</label></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="32">4 Digit Trade</label>
+                                            </td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="32">Future use</label></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="64">Future use</label></td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="64">Future use</label></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td> <label><input type="checkbox" class="optionOne"
+                                                        onclick="option1change(this)" value="128">Live Event
+                                                    Transfer</label></td>
+                                            <td><label><input type="checkbox" class="optionTwo"
+                                                        onclick="option2change(this)" value="128">Future use</label>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                            </td>
+                        </div> -->
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div id="Enable-events-DateTime" class="container tab-pane fade">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <div style="display: flex;">
+                        <div style="width: 76%;">
+                            <td>
+                                <table id="table_events_enable">
+                                    <tbody>
+                                        <tr class="door_open">
+                                            <td style="border:none">
+                                                <button class="btn btn-outline-primary" 
+                                                    onclick="program_all_events_enable_site()">Program to Site</button>
+                                            </td>
+                                            <td align="right" id="all_events" style="border:none;">
+                                                <button class="btn btn-outline-primary" style="margin-left: 60px;"
+                                                    onclick="retrieve_all_events_enable_site()">Retrieve from
+                                                    Site</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
+                                        <div class="table-wrapper-scroll-y custom-scrollbar" style="margin-top: 30px;
+                                        border: 1px solid #000; border-radius: .25rem; width: 350px; margin-left: 15px;">
+                                            <table class="table table-bordered">
+                                                <tbody> 
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open Tag" value="1"
+                                                                    id="remoteEventType_1" checked=""> Door Open Tag</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open HS" value="2"
+                                                                    id="remoteEventType_2" checked=""> Door Open HS</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open Trade" value="3"
+                                                                    id="remoteEventType_3" checked=""> Door Open Trade</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open Exit" value="4"
+                                                                    id="remoteEventType_4" checked=""> Door Open Exit</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open Forced" value="5"
+                                                                    id="remoteEventType_5" checked=""> Door Open Forced</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Left Open" value="6"
+                                                                    id="remoteEventType_6" checked=""> Door Left Open</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open Remote" value="7"
+                                                                    id="remoteEventType_7" checked=""> Door Open Remote</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open PC" value="8"
+                                                                    id="remoteEventType_8" checked=""> Door Open PC</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Open" value="D"
+                                                                    id="remoteEventType_D" checked=""> Door Open</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Door Closed" value="d"
+                                                                    id="remoteEventType_d" checked=""> Door Closed</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Mains On" value="M"
+                                                                    id="remoteEventType_M" checked=""> Mains On</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Mains Off" value="m"
+                                                                    id="remoteEventType_m" checked=""> Mains Off</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Invalid Trade" value="t"
+                                                                    id="remoteEventType_t" checked=""> Invalid Trade</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Prog Changed" value="p"
+                                                                    id="remoteEventType_p" checked=""> Prog Changed</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Ch Timeout" value="T"
+                                                                    id="remoteEventType_T" checked=""> Ch Timeout</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_ChHs Status" value="H"
+                                                                    id="remoteEventType_H" checked=""> ChHs Status</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Fault Monitor" value="x"
+                                                                    id="remoteEventType_x" checked=""> Fault Monitor</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Exit Safety Contact" value="S"
+                                                                    id="remoteEventType_S" checked=""> Exit Safety
+                                                                Contact</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Exit Safety Contact Clear" value="s"
+                                                                    id="remoteEventType_s" checked=""> Exit Safety Contact
+                                                                Clear</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Lock Monitor " value="L"
+                                                                    id="remoteEventType_L" checked=""> Lock Monitor </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Lock Monitor Clear" value="l"
+                                                                    id="remoteEventType_l" checked=""> Lock Monitor
+                                                                Clear</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Tamper" value="Z"
+                                                                    id="remoteEventType_Z" checked=""> Tamper</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Tamper Clear" value="z"
+                                                                    id="remoteEventType_z" checked=""> Tamper Clear</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Vibration" value="V"
+                                                                    id="remoteEventType_V" checked=""> Vibration</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Vibration Clear" value="v"
+                                                                    id="remoteEventType_v" checked=""> Vibration Clear</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_LockDown" value="Q"
+                                                                    id="remoteEventType_Q" checked=""> LockDown</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_LockDown Clear" value="q"
+                                                                    id="remoteEventType_q" checked=""> LockDown Clear</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Fire" value="F" id="remoteEventType_F"
+                                                                    checked=""> Fire</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_fire" value="f" id="remoteEventType_f"
+                                                                    checked=""> fire</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border:none">
+        
+                                                        <div class="checkbox">
+                                                            <label style="display: flex;
+                                                            align-items: center;
+                                                            gap: 0.5rem;"><input type="checkbox" class="remoteEventTypes"
+                                                                    name="remoteEventType_Lock Current" value="I"
+                                                                    id="remoteEventType_I"> Lock Current</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        
+                            </td>
+                        </div>
+                        <div style="margin-top: 16px; width: 40%;">
+                            <td style=" border-top:none;">
+                                <table id="table_datetime">
+                                    <tbody>
+                                        <tr id="remoteSiteTime">
+                                            <button class="btn btn-outline-primary" style="padding: 12px 60px;">RemoteSite Time </button>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none; padding-bottom:30px" >
+                                                <button class="btn btn-outline-primary" style= "
+                                                margin-top: 40px;background-color: #6a99e1ff !important; color: #fff;"
+                                                    (click)="retrieve_all_datetime_site()">Retrieve DateTime from
+                                                    Site</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none; padding-bottom: 4px;">
+                                                <button class="btn btn-outline-primary" style=" background-color: #6a99e1ff !important; color: #fff"
+                                                    (click)="program_all_datetime_site()">Program GMT+1 Time to
+                                                    Site</button>
+                                                <input type="text" [(ngModel)]="enableDateAndTimeObj.enableDateAndTime"
+                                                    id="dateval" disabled
+                                                    style="border: 0;color: #212529; background:transparent;" />
+
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none; padding: 10px;">
+                                                <button class="btn btn-outline-primary" style="padding: 12px 34px; background-color: #6a99e1ff !important; color: #fff"
+                                                    (click)="program_all_datetime_site_uk()">Program GMT Time to
+                                                    Site</button>
+                                                <input type="text"
+                                                    [(ngModel)]="enableDateAndTimeObj.enableDateAndTimeUK"
+                                                    id="datevaluk" disabled
+                                                    style="border: 0;color: #212529; background:transparent;" />
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="border:none">
+                                                <button class="btn btn-outline-primary"
+                                                    (click)="program_alldatetime_india()" style="padding: 12px 37px; background-color: #6a99e1ff !important; color: #fff">Program India Time to
+                                                    Site</button>
+                                                <input type="text"
+                                                    [(ngModel)]="enableDateAndTimeObj.enableDateAndTimeindia"
+                                                    id="datevalIndia" disabled
+                                                    style="border: 0;color: #212529; background:transparent;" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="programmedTime" style="border:none"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </div>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+</div>

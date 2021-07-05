@@ -1,0 +1,79 @@
+<div class="col-lg-12 grid-margin stretch-card">
+
+    
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Remote Event Log For Site</h4>
+
+        <form #addEventLogForm="ngForm" (ngSubmit)="searchEventData()" novalidate>
+            <div class="row" style="margin-top:10px;margin-bottom: 10px;">
+              <div class="col-sm-3 form-group">
+
+                <div class="search-field d-none  d-md-block">
+                  <form class="d-flex align-items-center h-100" action="#">
+                    <div class="input-group" style="border: 1px solid #ebedf2;">
+                     
+                      <input type="text" class="form-control  border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+                      autocomplete="off" placeholder=" Start searching." style="padding-left: 0px;">
+                    </div>
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="col-sm-3 form-group">
+                <input id="startDate" type="text" #startdate="ngModel" name="startdate" [(ngModel)]="model.startDate"
+                  placeholder="From Date" bsDatepicker [bsConfig]="{ isAnimated: true }" class="form-control" />
+              </div>
+              <div class="col-sm-3 form-group">
+                <input id="endDate" type="text" #enddate="ngModel" name="enddate" [(ngModel)]="model.endDate"
+                  placeholder="To Date" bsDatepicker [bsConfig]="{ isAnimated: true }" class="form-control" />
+              </div>
+              <div class="col-sm-3 form-group">
+                <button type="submit" class="btn btn-gradient-primary mr-2" style="padding-top: 0.7rem;
+                padding-bottom: 0.7rem;
+            ">Search</button>
+              </div>
+            
+            </div>
+          </form>
+       
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="thead">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">EventNumber</th>
+                    <th scope="col">DateEvent</th>
+                    <th scope="col">EventType</th>
+                    <th scope="col">EventDescription</th>
+                    <th scope="col">EventInfoCode</th>
+                    <th scope="col">EventInfoCodeDescription</th>
+                    <th scope="col">DateEventRetrieved</th>
+                  </tr>
+                  <tr *ngFor="let eventLogSite of remoteEventLogForSiteInfo | paginationPipe:currentPage:itemsPerPage | filter:searchText;">
+                    <th scope="row">{{eventLogSite.id}}</th>
+                    <td>{{eventLogSite.eventNumber}}</td>
+                    <td>{{eventLogSite.dateEvent}}</td>
+                    <td>{{eventLogSite.eventType}}</td>
+                    <td>{{eventLogSite.eventDescription}}</td>
+                    <td>{{eventLogSite.eventInfoCode}}</td>
+                    <td>{{eventLogSite.eventInfoCodeDescription}}</td>
+                    <td>{{eventLogSite.dateEventRetrieved | date:'MM-dd-yyy'}}</td>
+                   
+                  </tr>
+                  <tr *ngIf="!remoteEventLogForSiteInfo||remoteEventLogForSiteInfo.length==0">
+                    <td class="no_data" colspan="9">
+                      No Data Found
+                    </td>
+                  </tr>
+            </thead>
+          
+          </table>
+        </div>
+        <!-- <pagination [totalItems]="eventLogsInfo.length" (pageChanged)="pageChanged($event)" [itemsPerPage]="5" [maxSize]="5">
+        </pagination>  -->
+      </div>
+    </div>
+  </div>

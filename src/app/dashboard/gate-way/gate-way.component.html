@@ -1,0 +1,356 @@
+<div class=" grid-margin stretch-card">
+  <div class="card">
+  <div class="card-body">
+  
+  <ngb-tabset type="pills" class="pills-success" style="margin-top: 10px;">
+  
+  <!--Error Logs-->
+  <ngb-tab title="Error Logs">
+  <ng-template ngbTabContent >
+  <div class="content">
+  <div class="row headersearch">
+  <div class="col-sm-3">
+  
+  <form class="d-flex align-items-left h-100" action="#">
+  <div class="input-group" style="border: 1px solid #ebedf2;">
+  
+  <input type="text" class="form-control border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+  autocomplete="off" placeholder=" Start searching." style="padding-left: 0px; ">
+  </div>
+  </form>
+  </div>
+  <div class="col-sm-6">
+  
+  <form #addEventLogForm="ngForm" (ngSubmit)="searchErrorLogsData()" novalidate style="display: flex;">
+  
+  <div class=" form-group">
+  <input id="startDate"
+  type="text" #startdate="ngModel" name="startdate"
+  [(ngModel)]="errorLogsmodel.startDate"
+  placeholder="From Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <input id="endDate" type="text" #enddate="ngModel" name="enddate"
+  [(ngModel)]="errorLogsmodel.endDate"
+  placeholder="To Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <button type="submit" class="btn btn-gradient-primary mr-2" >Search</button>
+  </div>
+  
+  </form>
+  </div>
+  <div class="col-sm-3">
+  <button (click)="goReturn()" class="btn btn-gradient-primary returnBtn"
+  >Return</button>
+  
+  </div>
+  </div>
+  </div>
+  <div class="table-responsive">
+  <table class="table table-bordered">
+  <thead class="thead">
+  <tr>
+  <th>No</th>
+  <th>date and Time</th>
+  <th>DeviceId</th>
+  <th>Error Description</th>
+  <th>Error Type</th>
+  <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ErroLogsresult of ErroLogsresult;let i = index;">
+  <!-- <td>{{ErroLogsresult.srNo}}</td> -->
+  <td scope="row">
+  <input type="text" hidden id=srNo [(ngModel)]=ErroLogsresult.id/>
+  <span> {{i+1}}</span>
+  </td>
+  
+  <td>{{ErroLogsresult.dateAndTime}}</td>
+  <td>{{ErroLogsresult.deviceId}}</td>
+  <td>{{ErroLogsresult.errorDescription}}</td>
+  <td>{{ErroLogsresult.errorType}}</td>
+  <td>{{ErroLogsresult.status}}</td>
+  
+  </tr>
+  
+  </tbody>
+  </table>
+  </div>
+  
+  </ng-template>
+  </ngb-tab>
+  
+  
+  
+  <!--backtask-->
+  <ngb-tab title="Back Task">
+  <ng-template ngbTabContent >
+  <div class="row headersearch">
+  <div class="col-sm-3">
+  
+  <form class="d-flex align-items-left h-100" action="#">
+  <div class="input-group" style="border: 1px solid #ebedf2; ">
+  
+  <input type="text" class="form-control border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+  autocomplete="off" placeholder=" Start searching." style="padding-left: 0px; ">
+  </div>
+  </form>
+  </div>
+  <div class="col-sm-6">
+  
+  <form #addEventLogForm="ngForm" (ngSubmit)="searchBackTaskeventLogsData()" novalidate style="display: flex;">
+  
+  <div class=" form-group">
+  <input id="startDate"
+  type="text" #startdate="ngModel" name="startdate"
+  [(ngModel)]="backTaskmodel.startbackTaskDate"
+  placeholder="From Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <input id="endDate" type="text" #enddate="ngModel" name="enddate"
+  [(ngModel)]="backTaskmodel.endBackDate"
+  placeholder="To Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <button type="submit" class="btn btn-gradient-primary mr-2" >Search</button>
+  </div>
+  
+  </form>
+  </div>
+  <div class="col-sm-3">
+  <button (click)="goReturn()" class="btn btn-gradient-primary returnBtn"
+  >Return</button>
+  
+  </div>
+  
+  </div>
+  
+  <div class="table-responsive">
+  <table class="table table-bordered">
+  <thead class="thead">
+  <tr>
+  <th>Task No</th>
+  <th>Device Id</th>
+  <th>Date and Time</th>
+  <th>Task Description</th>
+  <th>Task Status</th>
+  <th>Task Time</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let backtaskresult of backtaskresult;let i = index;">
+  <!-- <td>{{backtaskresult.taskId}}</td> -->
+  
+  <td >
+  <input type="text" hidden id=taskId [(ngModel)]=backtaskresult.id/>
+  <span> {{i+1}}</span>
+  </td>
+  
+  <td>{{backtaskresult.deviceid}}</td>
+  <td>{{backtaskresult.dateAndTime}}</td>
+  <td>{{backtaskresult.taskDescription}}</td>
+  <td>{{backtaskresult.taskStatus}}</td>
+  <td>{{backtaskresult.taskTime}}</td>
+  
+  </tr>
+  
+  </tbody>
+  </table>
+  </div>
+  </ng-template>
+  </ngb-tab>
+  <!--Embeedded Control Events-->
+  <ngb-tab title="Embeedded Control Events">
+  <ng-template ngbTabContent >
+  
+  <div class="row headersearch">
+  <div class="col-sm-3">
+  
+  <form class="d-flex align-items-left h-100" action="#">
+  <div class="input-group" style="border: 1px solid #ebedf2;">
+  
+  <input type="text" class="form-control border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+  autocomplete="off" placeholder=" Start searching." style="padding-left: 0px; ">
+  </div>
+  </form>
+  </div>
+  <div class="col-sm-6">
+  
+  <form #addEventLogForm="ngForm" (ngSubmit)="searchEmbeedddeventLogsData()" novalidate style="display: flex;">
+  
+  <div class=" form-group">
+  <input id="startDate"
+  type="text" #startdate="ngModel" name="startdate"
+  [(ngModel)]="embeeddedControlmodel.startEmbeeddedDate"
+  placeholder="From Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <input id="endDate" type="text" #enddate="ngModel" name="enddate"
+  [(ngModel)]="embeeddedControlmodel.endstartEmbeeddedDate"
+  placeholder="To Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <button type="submit"class="btn btn-gradient-primary mr-2" >Search</button>
+  </div>
+  
+  </form>
+  </div>
+  <div class="col-sm-3">
+  <button (click)="goReturn()" class="btn btn-gradient-primary returnBtn"
+  >Return</button>
+  
+  </div>
+  
+  </div>
+  <div class="table-responsive">
+  <table class="table table-bordered">
+  <thead class="thead">
+  <tr>
+  <th>No</th>
+  <th>date and Time</th>
+  <th>DoorId</th>
+  <th>DeviceID</th>
+  <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let embeddedControllerResult of embeddedControllerResult;let i = index;">
+  <td>{{i+1}}</td>
+  <td>{{embeddedControllerResult.dateAndTime}}</td>
+  <td>{{embeddedControllerResult.door_id}}</td>
+  <td>{{embeddedControllerResult.deviceId}}</td>
+  <td>{{embeddedControllerResult.status}}</td>
+  
+  
+  </tr>
+  
+  </tbody>
+  </table>
+  </div>
+  </ng-template>
+  </ngb-tab>
+  
+  
+  <!--Site Control Events-->
+  <ngb-tab title="Site Control Events">
+  <ng-template ngbTabContent >
+  
+  
+  <div class="row headersearch">
+  <div class="col-sm-3">
+  
+  <form class="d-flex align-items-left h-100" action="#">
+  <div class="input-group" style="border: 1px solid #ebedf2;">
+  
+  <input type="text" class="form-control border-0" id="search_event" type="text" name="search" [(ngModel)]="searchText"
+  autocomplete="off" placeholder=" Start searching." style="padding-left: 0px; ">
+  </div>
+  </form>
+  </div>
+  <div class="col-sm-6">
+  
+  <form #addEventLogForm="ngForm" (ngSubmit)="searchSitecontroleventLogsData()" novalidate style="display: flex;">
+  
+  <div class=" form-group">
+  <input id="startDate"
+  type="text" #startdate="ngModel" name="startdate"
+  [(ngModel)]="siteControlLogsmodel.startsiteControlDate"
+  placeholder="From Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <input id="endDate" type="text" #enddate="ngModel" name="enddate"
+  [(ngModel)]="siteControlLogsmodel.startsiteControlEndDate"
+  placeholder="To Date"
+  bsDatepicker
+  [bsConfig]="{ isAnimated: true }"
+  class="form-control"/>
+  </div>
+  <div class=" form-group">
+  <button type="submit" class="btn btn-gradient-primary mr-2" >Search</button>
+  </div>
+  
+  </form>
+  </div>
+  <div class="col-sm-3">
+  <button (click)="goReturn()" class="btn btn-gradient-primary returnBtn"
+  >Return</button>
+  
+  </div>
+  
+  </div>
+  <div class="table-responsive">
+  <table class="table table-bordered">
+  <thead class="thead">
+  <tr>
+  <th>No</th>
+  <th>date and Time</th>
+  <th>Device Data</th>
+  <th>Event Type</th>
+  <th>Message Success</th>
+  <th>Person Name</th>
+  <th>Physical Access Authorised</th>
+  <th>deviceid/Site</th>
+  <th>Two DoorControllerId</th>
+  <th>Weigned Device Classification</th>
+  <th>Weigned Device Type</th>
+  <th>Weigned or lock channel Num</th>
+  
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let sitecontrollerResult of sitecontrollerResult;let i = index;">
+  <!-- <td>{{sitecontrollerResult.srNo}}</td> -->
+  <td >
+  <input type="text" hidden id=srNo [(ngModel)]=sitecontrollerResult.id/>
+  <span> {{i+1}}</span>
+  </td>
+  <td>{{sitecontrollerResult.dateAndTime}}</td>
+  <td>{{sitecontrollerResult.deviceData}}</td>
+  <td>{{sitecontrollerResult.eventType}}</td>
+  <td>{{sitecontrollerResult.messageSuccess}}</td>
+  <td>{{sitecontrollerResult.personName}}</td>
+  <td>{{sitecontrollerResult.physicalAccessAuthorised}}</td>
+  <td>{{sitecontrollerResult.site}}</td>
+  <td>{{sitecontrollerResult.twoDoorcontrollerId}}</td>
+  <td>{{sitecontrollerResult.weigendDeviceClassification}}</td>
+  <td>{{sitecontrollerResult.weigendDeviceType}}</td>
+  <td>{{sitecontrollerResult.weigendOrLockChannelNum}}</td>
+  
+  
+  
+  </tr>
+  
+  </tbody>
+  </table>
+  </div>
+  </ng-template>
+  </ngb-tab>
+  
+  </ngb-tabset>
+  
+  </div>
+  </div>
+  </div>

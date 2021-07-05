@@ -1,0 +1,490 @@
+<div class="grid-margin">
+    
+  <ngb-tabset type="pills" class="pills-success">
+    <ngb-tab title="Person" style="border: unset !important; padding: 0;">
+      <ng-template ngbTabContent style="width: max-content !important;" >
+            <div class="table-wrapper">
+              <div class="table-title">
+                <div id="users_search" class="row" style="justify-content: space-between;margin: unset;">
+                  <div class="search-hero">
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                      placeholder=" Start searching.">
+
+                  </div>
+                  <div id="new_user" >
+                    <button (click)="goToSitePersonCreate()" class="btn btn-gradient-primary mr-2" style="padding: 14px 18px; border: none; color: #000;" 
+                    type="submit"
+                    >Create person</button>
+
+                      <button (click)="goToSitePersonUpadte()" class="btn btn-primary mr-2"  
+                      type="submit" 
+                      style="margin-left: 15px; background-color: #ffd966ff; color: #000; border: none; padding: 14px;border-radius: .4rem;"
+                      >Update person</button>
+
+                    
+                    <a (click)="goToSite()" class="btn btn-primary mr-2"
+                     style="margin-left: 15px; background-color: #e06666ff;color: #000; border: none; padding: 14px 34px;border-radius: .4rem;">Return</a>
+                  </div>
+                  
+                </div>
+              </div>
+
+              <table class="table table-bordered" style="margin-top: 2rem;">
+                <thead class="thead">
+                  <tr>
+
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>PersonClass</th>
+                    <th>PersonGroup</th>
+                    <th>mobileNumber</th>
+                    <th>address1</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Actions</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let person of persons | filter:searchText; let i=index" class="person_body">
+                    <td><input type="text" hidden id=personid [(ngModel)]=person.personid />
+                      <span> {{i+1}}</span>
+                    </td>
+                    <td><span>{{person.firstName}} {{person.lastName}}</span></td>
+                     <td class="person_class" style="border-top:unset  !important">
+                      <li ><span>{{person.personclassone.personClassName}} </span></li>
+                      
+                    </td> 
+                    <!-- <td ><span>{{pc.personClassName}}</span></td> -->
+
+                    <td class="person_group">
+                      <li *ngFor="let pg of person.persongroup"><span class="commas">{{pg.personGroupName}}</span> </li>
+                    </td>
+
+                    <td><span>{{person.mobileNumber}}</span></td>
+                    <td><span>{{person.address1}}</span></td>
+
+                    <td><span>{{person.city}}</span></td>
+                    <td><span>{{person.state}}</span></td>
+
+                    <td style="display: flex;">
+
+                      
+                      <button (click)="update(person.personid)" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                        <i class="mdi mdi-pencil"></i>
+                      </button>
+                     
+                   
+                    <button type="button" (click)="deletePersonCalling(person.personid)" style="cursor: pointer;" class="btn btn-gradient-primary btn-rounded btn-icon">
+                      <i class="mdi mdi-delete"></i> </button>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+          
+        
+
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="PersonClass" >
+      <ng-template ngbTabContent>
+        <div style="margin:auto;">
+          <div class="table-title">
+
+            <div id="users_search" class="row" style="justify-content: space-between;margin: unset;">
+              <div class="search-hero">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                  placeholder=" Start searching.">
+
+              </div>
+              <div id="new_user" style="display: flex;" >
+                <div> <button (click)="open(mymodal)" class="btn btn-gradient-primary mr-2"  
+                  type="submit"
+                  style="background-color: #6a99e1ff; color: #000;">Create Personclass</button></div>
+
+                
+                <div><a (click)="goToSite()" class="btn btn-primary" style="background-color: #e06666ff;margin-left: 30px;color: #000;">Return</a></div>
+              </div>
+              
+            </div>
+           
+           
+
+          </div>
+          <ng-template #mymodal let-modal id="temp" style="size: 10rem;">
+            <div class="modal-header">
+              <p style="align-items: center; font-size: medium;"><b>Person Class</b></p>
+
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+                <span aria-hidden="true">×</span>
+
+              </button>
+
+            </div>
+            <div class="modal-footer">
+              <div class="modal-body">
+
+                <table class="table table-condensed" id="create_staff" style="margin:0;">
+                  <tr class="create_first">
+                    <td style="border:none">Person Class Name</td>
+                    <td class="create_first_inner" style="border:none"><input type="text" 
+                        [(ngModel)]="personclassobj.personClassName" required #personClassName="ngModel"
+                        [class.is-invalid]="personClassName.invalid && personClassName.touched" />
+                      <small class="text-danger"
+                        [class.d-none]="personClassName.valid || personClassName.untouched">firstname is
+                        required</small>
+                    </td>
+                  </tr><br>
+
+
+                  <tr class="create_first">
+                    <td style="border:none">DateExpire</td>
+                    <td  class="create_first_inner" style="border:none"><input type="datetime-local"
+                        id="expiredate" [(ngModel)]="personclassobj.expirydate" required #expirydate="ngModel"
+                        [class.is-invalid]="expirydate.invalid && expirydate.touched" />
+                      <small class="text-danger" [class.d-none]="expirydate.valid || expirydate.untouched">expiraydate
+                        is
+                        required</small>
+                    </td>
+                  </tr>
+
+
+                </table>
+              </div><br>
+              <div class="modal-footer" style="margin:0" id="classcreate">
+                <p id="create-staff-info" style="color:#0000ff"></p>
+                <p id="create-staff-error" style="color: #ff0000"></p>
+
+                <div class="text-center">
+
+                  <button class="btn btn-primary" type="submit" data-dismiss="modal"
+                    (click)="createpersonclass()" 
+                    style="padding: .7rem 1.3rem;border: none; margin-left: 6.5rem;border-radius: .5rem; background-color: #93c47dff ;" >Submit</button>
+
+                  <a class="btn btn-info" style="text-align: start;
+                  padding: 10px 18px;background-color: #fff; text-align: start; border-radius: .5rem;color: #000;
+                  border: 1px solid #999 !important;margin-left: 10px;" (click)="modal.close('Save click')">Cancel</a>
+                </div>
+              </div>
+
+            </div>
+          </ng-template>
+          <table class="table" style="margin-top: 2rem;">
+            <tbody>
+              <tr>
+                <td style="border:none; padding:0;">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Person Class Name</th>
+                        <th>Expiry Date</th>
+                        <th>Updated Date</th>
+                        <th>Actions</th>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let personClasses of personClasses | filter:searchText; let i=index">
+                        <td><input type="text" hidden id=personclassid [(ngModel)]=personClasses.personclassid />
+                          <span> {{i+1}}</span>
+                        </td>
+                        <td><span>{{personClasses.personClassName}}</span></td>
+                        <td><span>{{personClasses.expirydate}}</span></td>
+                        <td><span>{{personClasses.createddate}}</span></td>
+                        <td >
+
+
+                          <!-- <span> 
+                            <a (click)="gettingSinglePersonClass(personClasses.personclassid)" data-toggle="modal"
+                              data-target="#updatePersonclassPop" class="edit" style="cursor: pointer;"><i
+                                class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a></span> -->
+
+
+                                <button (click)="gettingSinglePersonClass(personClasses.personclassid)" data-toggle="modal"
+                              data-target="#updatePersonclassPop" class="edit" style="cursor: pointer;" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                  <i class="mdi mdi-pencil"></i>
+                                </button>
+                               
+                             
+                            
+
+                          <div class="modal fade" id="updatePersonclassPop">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+
+                                <div class="modal-header" id="update_person_class">
+                                  <h4 class="modal-title">Edit Person Class</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <table class="table" style="margin:0">
+                                    <tbody>
+                                      <tr>
+                                        <td align="left" style="border:none;font-weight: bold  !important;
+                                        ">
+                                          <p style="margin-top:5px">Person Class Name
+                                          </p>
+                                        </td>
+                                        <td  class="create_first_inner" style="border:none">
+
+
+                                          <input #model="ngModel" name="title" type="text" id="personclass_name"
+                                            class="form-control" [(ngModel)]="personClass.personClassName"
+                                            required>
+
+                                          <div *ngIf="model.invalid" style="color: red">Required</div>
+
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="border:none">
+                                          <p style="margin-top:5px;font-weight: bold  !important;
+                                          ">Date Expiry</p>
+                                        </td>
+                                        <td  class="create_first_inner" style="border:none"><input #model1="ngModel" name="title"
+                                            type="datetime-local" id="personclass_expiryDate" class="form-control"
+                                            value="expirydate" [(ngModel)]="personClass.expirydate" required>
+                                          <div *ngIf="model1.invalid" style="color: red">Required</div>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="modal-footer" style="padding-top:0; margin-top:0; border:none; margin-left: 84px;gap:1rem;">
+                                  <p id="personclass_status" style="color:#ff0000"></p>
+                                  <button type="button" class="btn btn-primary" [disabled]="model.invalid"
+                                    [disabled]="model1.invalid"  data-dismiss="modal"
+                                    (click)="updatedPersonClass()"  
+                                    style="background-color: #ffd966ff; color: black;border: none; padding: 10px 20px;border-radius: .4rem;">Update</button>
+                                  <button type="button" class="btn btn-danger" 
+                                  style="background-color: #e06666ff; color: #000; border: none; padding: 10px 20px;border-radius: .4rem; " data-dismiss="modal"
+                                   >Cancel</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                                  <button type="button" (click)="remove_person_class_modal(personClasses.personclassid)"
+                              class="delete" data-toggle="modal" style="cursor: pointer;" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                <i class="mdi mdi-delete"></i> </button> 
+
+
+
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="PersonGroups">
+      <ng-template ngbTabContent>
+          <div style="margin:auto;">
+            <div class="table-title">
+              
+              <div id="users_search" class="row" style="justify-content: space-between;margin: unset;">
+                <div class="search-hero">
+                  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                    placeholder=" Start searching." style="margin-left: 18px;">
+
+                </div>
+                <div id="new_user" style="display: flex;" >
+                  <div> <button (click)="openPersonGroup(mygroupmodal)" class="btn btn-gradient-primary mr-2"  
+                    type="submit"
+                    style="background-color: #6a99e1ff ;">Create PersonGroup</button></div>
+
+                  
+                  <div><a (click)="goToSite()" class="btn btn-primary" style="background-color: #e06666ff; margin-left: 30px;">Return</a></div>
+                </div>
+                
+              </div>
+
+
+
+            </div>
+            <ng-template #mygroupmodal let-modal id="temp" style="size: 10rem;">
+              <div class="modal-header">
+                <p style="align-items: center; font-size: medium;"><b>Person Group</b></p>
+  
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  
+                  <span aria-hidden="true">×</span>
+  
+                </button>
+  
+              </div>
+              <div class="modal-footer">
+                <div class="modal-body">
+  
+                  <table class="table table-condensed" id="create_staff" style="margin:0">
+                    <tr class="create_first">
+                      <td style="border:none">
+                        <label style="width: max-content;">Person Group Name</label> </td>
+                      <td  class="create_first_inner" style="border:none"><input type="text" 
+                          [(ngModel)]="persongroupobj.personGroupName" required #personGroupName="ngModel"
+                          [class.is-invalid]="personGroupName.invalid && personGroupName.touched" />
+                        <small class="text-danger"
+                          [class.d-none]="personGroupName.valid || personGroupName.untouched">person group is
+                          required</small>
+                      </td>
+                    </tr><br>
+  
+  
+                    <tr class="create_first">
+                      <td style="border:none">DateExpire</td>
+                      <td  class="create_first_inner" style="border:none"><input type="datetime-local" 
+                          id="expiregroupdate" [(ngModel)]="persongroupobj.expirydate" required #expirydate="ngModel"
+                          [class.is-invalid]="expirydate.invalid && expirydate.touched" />
+                        <small class="text-danger" [class.d-none]="expirydate.valid || expirydate.untouched">expirydate
+                          is
+                          required</small>
+                      </td>
+                    </tr>
+  
+  
+                  </table>
+                </div><br>
+                <div class="modal-footer" style="margin:0" id="classcreate">
+                  <p id="create-staff-info" style="color:#0000ff"></p>
+                  <p id="create-staff-error" style="color: #ff0000"></p>
+  
+                  <div class="text-center" style="margin-left: 6.5rem;">
+  
+                    <button class="btn btn-primary" type="submit" data-dismiss="modal"
+                      (click)="createpersongroup()" style="text-align: start; padding: .7rem 1.3rem;border: none; border-radius: .5rem; background-color: #93c47dff ;">
+                      Submit</button>
+  
+                    <a class="btn btn-info" (click)="modal.close('Save click')" style="text-align: start;
+                    padding: 10px 18px;background-color: #fff; text-align: start; border-radius: .5rem;color: #000;
+                    border: 1px solid #999 !important;margin-left: 10px;">Cancel</a>
+                  </div>
+                </div>
+  
+              </div>
+            </ng-template>
+            <table class="table" style="width: 102%; margin-top: 1rem;">
+              <tbody>
+                <tr>
+                  <td style="border:none">
+                    <table class="table table-bordered" >
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Person Group Name</th>
+                          <th>Expiry Date</th>
+                          <th>Updated Date</th>
+                          <th>Actions</th>
+                        </tr>
+  
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let personGroups of personGroups | filter:searchText; let i=index">
+                          <td><input type="text" hidden id=persongroupid [(ngModel)]=personGroups.persongroupid />
+                            <span> {{i+1}}</span>
+                          </td>
+                          <td><span>{{personGroups.personGroupName}}</span></td>
+                          <td><span>{{personGroups.expirydate}}</span></td>
+                          <td><span>{{personGroups.createddate}}</span></td>
+                          <td>
+  
+  
+                            
+
+
+                                  <button (click)="gettingSinglePersonGroup(personGroups.persongroupid)" data-toggle="modal"
+                                  data-target="#updatePersongroupPop" class="btn btn-gradient-primary btn-rounded btn-icon" style="cursor: pointer;">
+                                      <i class="mdi mdi-pencil"></i>
+                                    </button>
+
+
+                            <div class="modal fade" id="updatePersongroupPop">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+  
+                                  <div class="modal-header" id="update_person_class">
+                                    <h4 class="modal-title">Edit Person Group</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <table class="table" style="margin:0">
+                                      <tbody>
+                                        <tr>
+                                          <td align="left" style="border:none">
+                                            <p style="margin-top:5px;font-weight: bold  !important;
+                                            ">Person Group Name
+                                            </p>
+                                          </td>
+                                          <td style="border:none">
+  
+  
+                                            <input #model="ngModel" name="title" type="text" id="persongroup_name"
+                                              class="form-control" [(ngModel)]="persongroupobj.personGroupName"
+                                              required>
+  
+                                            <div *ngIf="model.invalid" style="color: red">Required</div>
+  
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td align="left" style="border:none">
+                                            <p style="margin-top:5px;font-weight: bold  !important;
+                                            ">Date Expiry</p>
+                                          </td>
+                                          <td style="border:none"><input #model1="ngModel" name="title"
+                                              type="datetime-local" id="persongroup_expiryDate" class="form-control"
+                                              value="expirydate" [(ngModel)]="persongroupobj.expirydate" required>
+                                            <div *ngIf="model1.invalid" style="color: red">Required</div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer" style="padding-top:0; margin-top:0; border:none;gap: .5rem;">
+                                    <p id="persongroup_status" style="color:#ff0000"></p>
+                                    <button type="button" class="btn btn-primary" [disabled]="model.invalid"
+                                      [disabled]="model1.invalid"  data-dismiss="modal"
+                                      (click)="updatedPersonGroup()" 
+                                       style="background-color: #ffd966ff; color: black;border: none; padding: 10px 20px;border-radius: .4rem;
+                                      margin-left: 82px;">Update</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"  
+                                    style="background-color: #e06666ff;margin-left: 10px; color: black;border: none; padding: 10px 20px;border-radius: .4rem;"
+                                      >Cancel</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <span><a (click)="remove_person_group_modal(personGroups.persongroupid)"
+                                style="cursor: pointer;" class="delete" data-toggle="modal"><i class="material-icons"
+                                  data-toggle="tooltip" title="Delete">&#xE872;</i></a></span> -->
+
+                                  <button type="button" (click)="remove_person_group_modal(personGroups.persongroupid)"
+                                 data-toggle="modal" style="cursor: pointer;" class="btn btn-gradient-primary btn-rounded btn-icon">
+                                    <i class="mdi mdi-delete"></i> </button> 
+
+
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+        
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+</div>

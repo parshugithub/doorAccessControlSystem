@@ -1,0 +1,92 @@
+<div class="">
+  
+      <h4 class="card-title">Update User</h4>
+
+
+      
+      <form class="forms-sample" #updateUser="ngForm" id="main_form" (ngSubmit)="onSubmit()" autocomplete="on">
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Username</label>
+
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username"  disabled name="userName"
+            [(ngModel)]="user.userName" required #userName="ngModel"
+            [class.is-invalid]="userName.invalid && userName.touched" >
+          <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">userName is required</small>
+
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">First Name</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="First Name"name="firstName" [(ngModel)]="user.firstName" required #firstName="ngModel"
+            [class.is-invalid]="firstName.invalid && firstName.touched"  >
+          <small class="text-danger" [class.d-none]="firstName.valid || firstName.untouched">firstName is required</small>
+        </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Last Name</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Last Name" name="lastName"
+            [(ngModel)]="user.lastName" required #lastName="ngModel"
+            [class.is-invalid]="lastName.invalid && lastName.touched" >
+          <small class="text-danger" [class.d-none]="lastName.valid || lastName.untouched">lastName is required</small>
+        </div>
+      </div>
+
+
+        <div class="form-group row">
+          <label for="exampleInputConfirmPassword2" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-5">
+            <input type="email" class="form-control" id="exampleInputConfirmPassword2" placeholder="Email"  name="email" [(ngModel)]="user.email"
+            required #email="ngModel" [class.is-invalid]="email.invalid && email.touched" >
+          <small class="text-danger" [class.d-none]="email.valid || email.untouched">email is required</small>
+        </div>
+      </div>
+
+
+        <div class="form-group row">
+          <label for="exampleInputPassword2" class="col-sm-2 col-form-label">Phone Number</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="exampleInputPassword2" (keypress)="numberOnly($event)" placeholder="Enter phone_number" name="phone_number"
+            [(ngModel)]="user.phone_number" required #phone_number="ngModel"
+            [class.is-invalid]="phone_number.invalid && phone_number.touched"  >
+          <small class="text-danger" [class.d-none]="phone_number.valid || phone_number.untouched">phone_number is
+            required</small>
+        </div>
+      </div>
+        
+        <div class="form-group row">
+          <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Address</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Address"  name="address" [(ngModel)]="user.address"
+            required #address="ngModel" [class.is-invalid]="address.invalid && address.touched"  >
+          <small class="text-danger" [class.d-none]="address.valid || address.untouched">address is required</small>
+        </div>
+      </div>
+  
+
+        <div class="form-group row">
+          <label for="exampleInputMobile" class="col-sm-2 col-form-label">UserType</label>
+          <div class="col-sm-5">
+            <select name="user_type"  class="browser-default custom-select" [(ngModel)]="user.user_type" >
+              <option *ngFor="let user_type of usertypes" [value]="user_type.name">
+                {{ user_type.name }}
+              </option>
+              </select>
+          </div>
+        </div>
+       
+       <div class="all_submit">
+        <button type="submit" class="btn btn-gradient-primary mr-2" 
+         style="background-color: #ffd966ff !important; color: black;border: none;">Update</button>
+        <button class="btn btn-gradient-primary mr-2"  style="background-color: #e06666ff !important; color: black;border: none;" (click)="goBack()">Cancel</button>
+      </div>
+      </form>
+   
+</div>

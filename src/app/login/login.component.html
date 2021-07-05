@@ -1,0 +1,286 @@
+
+
+<div class="login-reg-panel">
+	<div class="login-info-box">
+	<h2>Have an account?</h2>
+	<label id="label-register" (click)="LoginMe()" for="log-reg-show">Login</label>
+	<input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+	</div>
+	
+	<div class="register-info-box" >
+	<h2>Don't have an account?</h2>
+	<label id="label-login" (click)="RegisterMe()" for="log-login-show">Register</label>
+	<input type="radio" name="active-log-panel" id="log-login-show">
+	</div>
+	
+	<div class="white-panel">
+	<div class="login-show">
+	<h2>LOGIN</h2>
+	
+	<form #loginForm="ngForm" id="main_form" (ngSubmit)="loginCustomer();">
+	<small class="text-danger">{{msg}}</small>
+	
+	<div class="form-group">
+	<label for="email">Email/UserName</label>
+	<input type="text" class="form-control" placeholder="Enter email or username" name="email1"
+	[(ngModel)]="customer.emailId" required #emailId="ngModel"
+	[class.is-invalid]="emailId.invalid && emailId.touched">
+	
+	</div>
+	
+	<div class="form-group">
+	<label for="pwd">Password:</label>
+	<input type="password" class="form-control" placeholder="Enter password" name="pwd1"
+	[(ngModel)]="customer.password" required #password="ngModel"
+	[class.is-invalid]="password.invalid && password.touched">
+	<small class="text-danger" [class.d-none]="password.valid || password.untouched">password is
+	required</small>
+	</div>
+	
+	
+	<button [disabled]="loginForm.form.invalid" type="submit" class="btn btn-gradient-primary" style="background-color: #93c47dff !important; margin-bottom: 25px;">Login</button>
+
+	<div style="display: flex;
+	justify-content: space-between;"><a (click)="forgotPassword()" style="cursor: pointer;color: #fe7c96 !important;">Forgot Pasword?</a>
+	<a id="enggAnchor" style="cursor: pointer;color: #fe7c96 !important;" (click)="enggFunction()">Go To Engineer Logged in</a></div>
+	
+	
+	</form>
+	</div>
+	<div class="enggLogin" style="padding-bottom: 88px;" *ngIf="enggLog">
+    <h2 style="color: #000; margin-top:50px; text-align: initial; margin-left: 41px; margin-bottom: 20px;">Engineer LOGIN</h2>
+	
+	<small class="text-danger">{{msg}}</small>
+	
+	<div class="form-group email">
+	<label for="email">Email/UserName</label>
+	<input type="text" class="form-control" placeholder="Enter email or username" name="email1"
+	[(ngModel)]="engineer.userName" required #userName="ngModel"
+	[class.is-invalid]="userName.invalid && userName.touched">
+	
+	</div>
+	
+	<div class="form-group password">
+	<label for="pwd">Password:</label>
+	<input type="password" class="form-control" placeholder="Enter password" name="pwd1"
+	[(ngModel)]="engineer.password" required #password="ngModel"
+	[class.is-invalid]="password.invalid && password.touched">
+	<small class="text-danger" [class.d-none]="password.valid || password.untouched">password is
+	required</small>
+	</div>
+	<p class="signin button">
+	
+	<button  type="submit"  class="btn btn-gradient-primary" (click)="engineer_Logged()" style="background-color: #93c47dff !important;">Login</button>
+    <a (click)="CancelEngg()" class="btn btn-light" style="cursor: pointer;padding: 13px 35px; color: #fe7c96;
+    border-radius: .5rem; margin-left: 25px;" >Cancel</a>	
+</p>
+	<div style="position: absolute;
+    right: 3rem;
+    bottom: 1rem;">
+	</div>
+	
+
+
+
+
+<!-- 
+	<div class="modal-dialog">
+		<div class="modal-content">
+	
+		  <div class="modal-header" id="set_headding">
+			<h4 class="modal-title">Engineer Log In</h4>
+		  </div>
+		  <div class="modal-body" id="set_body">
+			<table class="table" style="margin:0">
+			  <tbody>
+				<tr>
+				  <td style="border:none">
+					<p style="margin-top:5px">User Name</p>
+				  </td>
+				  <td style="border:none">
+	
+	
+					<input #model="ngModel" name="title" type="text" id="user_settings_firstname" class="form-control"
+					[(ngModel)]="engineer.userName" required>
+	
+				  <div *ngIf="model.invalid" style="color: red">Required</div>
+	
+	
+				  </td>
+				</tr>
+				<tr>
+				  <td  style="border:none">
+					<p style="margin-top:5px">Password</p>
+				  </td>
+				  <td style="border:none"><input #model1="ngModel" name="title" type="text" id="user_settings_lastname"
+					class="form-control" [(ngModel)]="engineer.password" required>
+				  <div *ngIf="model1.invalid" style="color: red">Required</div>
+				</td>
+				</tr>
+				
+			  </tbody>
+			</table>
+		  </div>
+		  <div class="modal-footer"  id="set_footer">
+			<p id="user_settings_status" style="color:#ff0000"></p>
+			<button type="button" class="btn btn-gradient-primary" 
+			  data-dismiss="modal" style=" color: black;border: none;" (click)="engineer_Logged()">Login</button>
+			<button (click)="goReturn()"  class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;">Cancel</button>
+		  </div>
+	
+		</div>
+	  </div>
+	 -->
+	
+
+	
+
+
+</div>
+	
+	<div class="register-show">
+	<h2>REGISTER</h2>
+	
+	<form #Registerform="ngForm" id="main_form" (submit)="registerCustomer(Registerform)" autocomplete="on">
+	<div>
+		<div class="form-group">
+			<label for="firstname" data-icon="u">Customer Profile id</label>
+			<input type="text" id="customerProfileId"  class="form-control" placeholder="Enter customer profileid" name="firstname" >
+			</div>
+
+	<div class="form-group">
+	<label for="firstname" data-icon="u">First Name:</label>
+	<input type="text" class="form-control" placeholder="Enter firstname" name="firstname" [(ngModel)]="customer.firstname" required #firstname="ngModel"
+	[class.is-invalid]="firstname.invalid && firstname.touched">
+	<small class="text-danger" [class.d-none]="firstname.valid || firstname.untouched">Firstname is required</small>
+	</div>
+	
+	
+	<div class="form-group">
+	<label for="lastname" data-icon="u">Last Name:</label>
+	<input type="text" class="form-control" placeholder="Enter lastname" name="lastname" [(ngModel)]="customer.lastname" required #lastname="ngModel"
+	[class.is-invalid]="lastname.invalid && lastname.touched">
+	<small class="text-danger" [class.d-none]="lastname.valid || lastname.untouched">Lastname is required</small>
+	</div>
+	
+	
+	
+	
+	<div class="form-group">
+	<label for="mobileNo">Mobile No:</label>
+	<input type="mobileNo" class="form-control" placeholder="Enter mobileNo" name="mobileNo" [(ngModel)]="customer.mobileNo" required #mobileNo="ngModel"
+	[class.is-invalid]="mobileNo.invalid && mobileNo.touched">
+	<small class="text-danger" [class.d-none]="mobileNo.valid || mobileNo.untouched">MobileNo is required</small>
+	
+	</div>
+	
+	
+	<div class="form-group">
+	<label for="address" >Address:</label>
+	<input type="mobileNo" class="form-control" placeholder="Enter address" name="address" [(ngModel)]="customer.address" required #address="ngModel"
+	[class.is-invalid]="address.invalid && address.touched">
+	<small class="text-danger" [class.d-none]="address.valid || address.untouched">Address is required</small>
+	
+	</div>
+	
+	
+	<div class="form-group">
+	<label for="email" data-icon="e">Email:</label>
+	<input type="text" class="form-control" id="userEmailReference" placeholder="Enter email" name="email" [(ngModel)]="customer.emailId" required
+	#emailId="ngModel"
+	[class.is-invalid]="emailId.invalid && emailId.touched">
+	<div *ngIf="emailId.errors && emailId.invalid && emailId.touched">
+	<small class="text-danger" *ngIf="emailId.errors.required">Email Id is Required</small>
+	<small class="text-danger" *ngIf="emailId.errors.pattern">Enter the valid email address</small>
+	</div>
+	</div>
+	
+	
+	
+	<div class="form-group">
+	<label for="pwd" data-icon="p">Password:</label>
+	<input type="password" class="form-control" placeholder="Enter password" name="pwd" [(ngModel)]="customer.password" #password="ngModel" required minlength="6"
+	[class.is-invalid]="password.invalid && password.touched">
+	<div *ngIf="password.errors && password.invalid && password.touched">
+	<small class="text-danger" [class.d-none]="password.valid || password.untouched">password is required.</small>
+	<small class="text-danger" *ngIf="password.errors.minlength"> Password must be at least 6 characters</small>
+	
+	</div>
+	
+	</div>
+	
+	
+	
+	<div class="form-group">
+	<label for="pwd" data-icon="p">Confirm Password:</label>
+	<input type="password" class="form-control" placeholder="Enter confirmPassword" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="customer.confirmPassword" required
+	[class.is-invalid]="confirmPassword.invalid && confirmPassword.touched">
+	<small class="text-danger" [class.d-none]="(confirmPassword.value == password.value) || confirmPassword.untouched">password & confirmPassword must be the same </small>
+	</div>
+	</div>
+	
+	<!-- <div class="checkbox">
+	<label><input type="checkbox" name="remember"> Remember me</label>
+	</div> -->
+	<p class="signin button">
+	
+	<button [disabled]="Registerform.form.invalid" type="submit" class="btn btn-gradient-primary" style="background-color: #93c47dff !important;">Register</button>
+	</p>
+	
+	</form>
+	
+	<!-- <input type="button" value="Register"> -->
+	</div>
+	</div>
+	</div>
+	
+	
+	<!--
+	<div class="modal fade" id="engineerLoged">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	
+	<div class="modal-header" id="set_headding">
+	<h4 class="modal-title">Engineer Log In</h4>
+	</div>
+	<div class="modal-body" id="set_body">
+	<table class="table" style="margin:0">
+	<tbody>
+	<tr>
+	<td align="right" style="border:none">
+	<p style="margin-top:5px">User Name</p>
+	</td>
+	<td style="border:none">
+	
+	
+	<input #model="ngModel" name="title" type="text" id="user_settings_firstname" class="form-control"
+	[(ngModel)]="engineer.userName" required>
+	
+	<div *ngIf="model.invalid" style="color: red">Required</div>
+	
+	</td>
+	</tr>
+	<tr>
+	<td align="right" style="border:none">
+	<p style="margin-top:5px">Password</p>
+	</td>
+	<td style="border:none"><input #model1="ngModel" name="title" type="text" id="user_settings_lastname"
+	class="form-control" [(ngModel)]="engineer.password" required>
+	<div *ngIf="model1.invalid" style="color: red">Required</div>
+	</td>
+	</tr>
+	
+	</tbody>
+	</table>
+	</div>
+	<div class="modal-footer" id="set_footer">
+	<p id="user_settings_status" style="color:#ff0000"></p>
+	<button type="button" class="btn btn-gradient-primary" [disabled]="model.invalid" [disabled]="model1.invalid"
+	
+	data-dismiss="modal" style="background-color: #ffd966ff !important; color: black;border: none;" (click)="engineer_Logged()">Login</button>
+	<button type="button" class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;" data-dismiss="modal" >Cancel</button>
+	</div>
+	
+	</div>
+	</div>
+	</div> -->

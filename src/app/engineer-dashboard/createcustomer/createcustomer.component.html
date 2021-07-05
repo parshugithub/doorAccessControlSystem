@@ -1,0 +1,45 @@
+
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header" id="set_headding">
+          <h4 class="modal-title">Add Customer</h4>
+        </div>
+        <div class="modal-body" id="set_body">
+          <table class="table" style="margin:0">
+            <tbody>
+              <tr>
+                <td style="border:none">
+                  <p style="margin-top:5px">Customer Id</p>
+                </td>
+                <td style="border:none">
+
+
+                  <input  type="text" id="customerid" class="form-control" placeholder="Customer id *"
+                  value="">
+
+
+                </td>
+              </tr>
+              <tr>
+                <td  style="border:none">
+                  <p style="margin-top:5px">Email Id</p>
+                </td>
+                <td style="border:none"><input type="text" id="email" class="form-control" placeholder="Email *" value="" />
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer"  id="set_footer">
+          <p id="user_settings_status" style="color:#ff0000"></p>
+          <button type="button" class="btn btn-gradient-primary" 
+            data-dismiss="modal" style=" color: black;border: none;" (click)="addcustomer()">Submit</button>
+          <button (click)="goReturn()"  class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;">Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  

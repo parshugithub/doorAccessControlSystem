@@ -1,0 +1,204 @@
+<div class="card">
+  <div class="card-body">
+
+<h4 class="card-title">Update Site</h4>
+
+    <form #updateSite="ngForm" id="main_form" (ngSubmit)="onSubmit()" autocomplete="on">
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">Sitename</label>
+        <div class="col-sm-9">
+          <input type="text" id="siteName" name="siteName" class="form-control" required minlength="2"
+            placeholder="Enter siteName" [(ngModel)]="site.siteName" #siteName="ngModel">
+
+          <div *ngIf="siteName.invalid && (siteName.dirty || siteName.touched)" class="alert alert-danger">
+            <div *ngIf="siteName.errors.required">
+              Name is required.
+            </div>
+            <div *ngIf="siteName.errors.minlength">
+              Name must be at least 2 characters long.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="create_site" class="form-group row">
+        <label for="deviceId" class="col-sm-3 col-form-label">Deviceid</label>
+        <div class="col-sm-9">
+          <input type="text" (keypress)="numbersOnly($event)" placeholder="Enter deviceId" name="deviceId"
+            class="form-control" required minlength="4" [(ngModel)]="site.deviceId" #deviceId="ngModel">
+          <div type="text" *ngIf="deviceId.invalid && (deviceId.dirty || deviceId.touched)" class="alert alert-danger">
+            <div *ngIf="deviceId.errors.required">
+              deviceId is required.
+            </div>
+            <div *ngIf="deviceId.errors.minlength">
+              deviceId must be at least 4 Digits.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="create_site" class="form-group row">
+        <label for="siteReference" class="col-sm-3 col-form-label">Sitereference</label>
+        <div class="col-sm-9">
+          <input type="text" name="siteReference" placeholder="Enter siteReference" class="form-control" required
+            minlength="2" [(ngModel)]="site.siteReference" #siteReference="ngModel">
+
+          <div *ngIf="siteReference.invalid && (siteReference.dirty || siteReference.touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="siteReference.errors.required">
+              siteReference is required.
+            </div>
+            <div *ngIf="siteReference.errors.minlength">
+              siteReference must be at least 2 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label for="customerName" class="col-sm-3 col-form-label">Customername</label>
+        <div class="col-sm-9">
+          <input type="text" name="customerName" placeholder="Enter customerName" class="form-control" required
+            minlength="2" [(ngModel)]="site.customerName" #customerName="ngModel">
+          <div *ngIf="customerName.invalid && (customerName.dirty || customerName.touched)" class="alert alert-danger">
+            <div *ngIf="customerName.errors.required">
+              customerName is required.
+            </div>
+            <div *ngIf="customerName.errors.minlength">
+              customerName must be at least 2 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label for="customerAddress" class="col-sm-3 col-form-label">Customeraddress</label>
+        <div class="col-sm-9">
+          <input type="text" name="customerAddress" placeholder="Enter customerAddress" class="form-control" required
+            minlength="2" [(ngModel)]="site.customerAddress" #customerAddress="ngModel">
+          <div *ngIf="customerAddress.invalid && (customerAddress.dirty || customerAddress.touched)"
+            class="alert alert-danger">
+            <div *ngIf="customerAddress.errors.required">
+              customerAddress is required.
+            </div>
+            <div *ngIf="customerAddress.errors.minlength">
+              customerAddress must be at least 2 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="create_site" class="form-group row">
+        <label for="customerPhone" class="col-sm-3 col-form-label">Customerphone</label>
+        <div class="col-sm-9">
+
+          <input type="text" name="customerPhone" (keypress)="numberOnly($event)" placeholder="Enter customerPhone"
+            class="form-control" required minlength="10" [(ngModel)]="site.customerPhone" #customerPhone="ngModel">
+          <div *ngIf="customerPhone.invalid && (customerPhone.dirty || customerPhone.touched)"
+            class="alert alert-danger">
+            <div *ngIf="customerPhone.errors.required">
+              customerPhone is required.
+            </div>
+            <div *ngIf="customerPhone.errors.minlength">
+              customerPhone must be at least 10 numbers.
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">Address2</label>
+        <div class="col-sm-9">
+          <input type="text" name="address2" placeholder="Enter address2" class="form-control" required minlength="2"
+            [(ngModel)]="site.address2" #address2="ngModel">
+          <div *ngIf="address2.invalid && (address2.dirty || address2.touched)" class="alert alert-danger">
+            <div *ngIf="address2.errors.required">
+              address2 is required.
+            </div>
+            <div *ngIf="address2.errors.minlength">
+              address2 must be at least 2 characters.
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">Country</label>
+        <div class="col-sm-9">
+          <input type="text" name="country" placeholder="Enter country" class="form-control" required minlength="2"
+            [(ngModel)]="site.country" #country="ngModel">
+          <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+            <div *ngIf="country.errors.required">
+              country is required.
+            </div>
+            <div *ngIf="country.errors.minlength">
+              country must be at least 2 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">Area</label>
+        <div class="col-sm-9">
+          <input type="text" name="area" placeholder="Enter area" class="form-control" required minlength="2"
+            [(ngModel)]="site.area" #area="ngModel">
+          <div *ngIf="area.invalid && (area.dirty || area.touched)" class="alert alert-danger">
+            <div *ngIf="area.errors.required">
+              area is required.
+            </div>
+            <div *ngIf="area.errors.minlength">
+              area must be at least 2 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">Town</label>
+        <div class="col-sm-9">
+          <input type="text" name="town" placeholder="Enter town" class="form-control" required minlength="2"
+            [(ngModel)]="site.town" #town="ngModel">
+          <div *ngIf="town.invalid && (town.dirty || town.touched)" class="alert alert-danger">
+            <div *ngIf="town.errors.required">
+              town is required.
+            </div>
+            <div *ngIf="town.errors.minlength">
+              town must be at least 2 characters.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="create_site" class="form-group row">
+        <label class="col-sm-3 col-form-label">City</label>
+        <div class="col-sm-9">
+          <input type="text" name="city" placeholder="Enter city" class="form-control" required minlength="2"
+            [(ngModel)]="site.city" #city="ngModel">
+          <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+            <div *ngIf="city.errors.required">
+              city is required.
+            </div>
+            <div *ngIf="city.errors.minlength">
+              city must be at least 2 characters.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+<div class="text-center">
+
+        <button 
+        class="btn btn-gradient-primary mr-2"  style="background-color: #ffd966ff !important; color: black;border-radius: .5rem;" type="submit">Update</button>
+        
+        <a class="btn btn-gradient-primary mr-2" style="margin-left: 1rem; background-color: #e06666ff !important;color: black;border-radius: .5rem;" (click)="goBack()">Cancel</a>
+
+</div>
+    </form>
+    </div>
+</div>

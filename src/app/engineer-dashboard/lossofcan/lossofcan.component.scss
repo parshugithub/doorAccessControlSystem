@@ -1,0 +1,22 @@
+
+.engineer_param{
+   display: grid;
+       grid-template-columns: 0.4fr 0.5fr 1fr 0.5fr;
+   }
+   
+   
+   .engineer_param_content{
+      display: grid;
+       grid-template-columns: 0.4fr 0.5fr 1fr 0.5fr;
+   
+   }
+   .realay{
+      display: flex;
+      justify-content: space-evenly;
+   }
+   
+   .realay_inner{
+      display: flex;
+       align-items: center;
+       gap: 1rem;
+   }

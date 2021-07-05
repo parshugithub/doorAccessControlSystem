@@ -1,0 +1,296 @@
+<div class=" grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+          <h3> Update Person</h3>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td style="border:none">
+                        <table class="cstm-table">
+                            <tbody>
+                                <tr>
+                                    <td style="border:none; vertical-align:initial">
+                                        <p>Persons:</p>
+                                        <select id="person_members" [(ngModel)]="selectionModel" size="10"
+                                            (change)="onChangeperson($event.target.value)"
+                                            style="width: 160px; height: 414px;" class="form-control">
+                                            <option *ngFor="let person of personarray;let i=index"
+                                                [value]="person.personid" selected style="padding:5px 2px">
+                                                {{person.firstName}} {{person.lastName}} </option>
+
+                                        </select>
+                                    </td>    
+                                    <td style="border:none; vertical-align:initial">
+                                        <p> Person Groups:</p>
+                                        <table id="persongroup">
+                                            <tbody>
+
+
+                                                <tr *ngFor="let persongroups of numberOfPersonGroups;let i=index">
+
+                                                    <td style="border:none; padding: 0.3rem;">
+                                                        <select id="persongroup{{i}}" name="persongroup"
+                                                            style="width: 120px;height: 45px;" class="browser-default custom-select"
+                                                            (change)="getPersongroupToMap($event.target.value,i)">
+                                                            <option style="padding:5px 2px" [value]="0">
+                                                            </option>
+
+                                                            <option *ngFor="let persongroup of persongroup" style="padding:5px 2px"
+                                                                [value]="persongroup.persongroupid">
+                                                                {{persongroup.personGroupName}}
+                                                            </option>
+
+                                                        </select>
+                                                    </td>
+                                                    <!-- <td style="border:none">
+                                                        <span tagindex="4" data-toggle="modal" title="Program to site"
+                                                            (click)="programTosite(i)" style="color: #428bca;"><i
+                                                                class="material-icons file_upload">&#xe2c6;</i></span>
+                                                    </td>
+                                                    <td style="border:none">
+                                                        <span tagindex="4" data-toggle="modal"
+                                                            title="Show tag site from database"
+                                                            (click)="retrieveToSite()" style="color: #428bca;"><i
+                                                                class="material-icons file_download">&#xe2c4;</i></span>
+                                                    </td> -->
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                    <td style="border:none; vertical-align:initial">
+                                        <p>Door Groups:</p>
+                                        <div
+                                            style="border:solid 1px #eeeeee; width:160px; height:410px; overflow-y:scroll">
+                                            <table id="staff_sites" class="table-condensed">
+                                                <tbody>
+                                                    <tr *ngFor="let doorGroup of doorGroups;let j=index;">
+                                                        <td style="width: 150px" >
+                                                          <input type="checkbox" style="border:none; padding-left:5px"
+                                                                #site id="selectdoorgroup" id="doorgroupval{{doorGroup.doorgroupid}}"
+                                                                value={{doorGroup.doorGroupName}} class="doorGroupCheckBox"
+                                                                [checked]="checkedDoorGroup(doorGroup.doorgroupid)"  (change)="getDoorGroup($event.target.checked, doorGroup.doorgroupid,j)">&nbsp;
+                                                            <label 
+                                                                style="border:none;">{{doorGroup.doorGroupName}}</label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td style="border:none; vertical-align:initial">
+                                        <p>Doors:</p>
+                                        <div class="person_total_doors" style="display: grid; grid-template-columns: repeat(8, 1fr);">
+                                            <div id="person_doors" *ngFor="let door of doors;let k=index;">
+                                                <input type="button" value={{door}} class="door"
+                                                     id="door{{k}}"
+                                                    (click)="changeColor(door,k)" class="door" />
+
+                                            </div>
+                                        </div>
+                                    </td>    
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+            <div class="main_update" style="float: right;
+            margin-right: 52px;" >
+                <button (click)="update_personWithallInformation()" class="btn btn-primary" style="  background-color: #ffd966ff ; border: none;color: #000;border-radius: .5rem; margin-right: 10px;">Update Person</button>
+                <button (click)="backToPersons()" class="btn btn-primary" style="background-color: #e06666ff;border: none;
+                border-radius: .5rem;color: #000; ">Return</button>
+
+            </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <ng-template ngbTabContent style="    padding: unset !important;">
+            <div style="margin:auto; padding: unset i !important;">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td style="border:none">
+                     
+
+                      <table class="cstm-table">
+                        <tbody>
+                         
+                          <tr>
+                            <td style="border:none; vertical-align:initial;padding: unset;">
+                              <p style="    margin-right: 26px;
+                              ">Staff Groups:</p>
+                              <select id="staff_group_members" [(ngModel)]="selectionModel" size="10"
+                                (change)="onChangeStaffGroup($event.target.value)" style="overflow: scroll; width: 144px;margin-right: 10px;height: 414px;"
+                                class="form-control">
+                                <option *ngFor="let staffmember of staffGroupArray;let i=index"
+                                  [value]="staffmember.groupid" selected style="padding:5px 2px">
+                                  {{staffmember.staffGroupName}} </option>
+                              </select>
+                            </td>
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p> Staff:</p>
+                              <table id="staff">
+                                <tbody>
+
+
+                                  <tr *ngFor="let staffs of numberOfStaffs;let i=index">
+
+                                    <td style="border:none;padding: 0.3rem;">
+                                      <select id="staff_members{{i}}" name="staff" style="width: 120px;height: 45px;"
+                                        class="browser-default custom-select"
+                                        (change)="getStaffToMap($event.target.value,i)">
+                                        <option style="padding:5px 2px" [value]="0"> </option>
+
+                                        <option *ngFor="let staff of staff" style="padding:5px 2px"
+                                          [value]="staff.staffid">
+                                          {{staff.firstname}} {{staff.lastname}}
+                                        </option>
+
+                                      </select>
+                                    </td>
+                                  </tr>
+
+                                </tbody>
+                              </table>
+                            </td>
+                           
+
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p>Tags:</p>
+                              <table id="staff_tags">
+                                <tbody >
+                                  <tr>
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_1" class="form-control" value="0"
+                                        (keypress)="numbersOnly($event)" (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffffff;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_2" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ff0000;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style="padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_3" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#00ff00;">
+                                    </td>
+                                  </tr>
+                                  <tr > 
+                                    <td style=" padding: 0.3em; border:none">
+                                      <input type="text" id="tag_4" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#0000ff;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_5" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffff00;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_6" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#ffa500;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_7" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#808080;">
+                                    </td>
+                                  </tr>
+                                  <tr >
+                                    <td style=" padding: 0.3rem; border:none">
+                                      <input type="text" id="tag_8" class="form-control" value="0"
+                                        (keyup)="checkTag($event)" maxlength="8"
+                                        style="padding:0 5px; height: 45px; width: 110px;color:#000000; background-color:#000000; color: white;">
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                           
+                            <td style="border:none; padding: unset; vertical-align:initial">
+                              <p>Sites:</p>
+                              <div style="border:solid 1px #eeeeee; width:134px;margin-right: 26px;height:414px; overflow-y:scroll">
+                                <table id="staff_sites" class="table-condensed">
+                                  <tbody>
+                                    <tr *ngFor="let site of site;let j=index">
+                                      <td style="width: 134px;"><input type="checkbox" style="border:none; padding-left:5px" #site
+                                          id="selectsite" id="siteval{{site.siteid}}" value={{site.siteid}}
+                                          class="siteCheckBox" (change)="getSitesForStaffGroup(j)">&nbsp;
+                                        <label id="site{{j}}" style="border:none">{{site.siteName}}</label>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </td>
+                            
+                            <td style="border: none; padding: unset; vertical-align: initial">
+                              <p>Doors:</p>
+
+
+                              <div class="staff_total_doors">
+                                <div id="staff_doors" *ngFor="let door of doors;let k=index;">
+
+
+                                  <input type="button" value={{door}} style="width: 37px; height: 22px; margin: 2px; background-color: lightgreen;"
+                                    id="door{{k}}" (click)="changeColor(door,k)" class="door" />
+
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table style="float: right;margin-top: 21px;">
+                      <tbody>
+                          <tr>
+                            <td style="border:none" id="staff_group_create">
+
+
+                              <button class="btn btn-primary" style="margin-right: 10px;"
+                                (click)="update_staff_group()">Update StaffGroup</button>
+                              <button class="btn btn-danger" style="margin-right: 20px;"
+                                (click)="remove_staff_group_modal()">Delete StaffGroup</button>
+                              <button class="btn btn-danger" onclick="program_staff_group_modal()">Program StaffGroup</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </ng-template> -->
+      </div>
+    </div>
+  </div>

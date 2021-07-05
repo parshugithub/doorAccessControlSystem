@@ -1,0 +1,282 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import './assets/scss/variables';
+@import "~compass-mixins/lib/compass";
+@import "~compass-mixins/lib/animate";
+@import "~bootstrap/scss/bootstrap";
+@import "./assets/scss/fonts";
+@import "./assets/scss/functions";
+
+/* === Icon fonts === */
+@import "~@mdi/font/scss/materialdesignicons";
+
+
+/* === Template mixins === */
+@import "./assets/scss/mixins/animation";
+@import "./assets/scss/mixins/badges";
+@import "./assets/scss/mixins/buttons";
+@import "./assets/scss/mixins/misc";
+@import "./assets/scss/mixins/color-functions";
+@import "./assets/scss/mixins/cards";
+@import "./assets/scss/mixins/blockqoute";
+@import "./assets/scss/mixins/popovers";
+@import "./assets/scss/mixins/tooltips";
+
+/* === Core Styles === */
+@import "./assets/scss/background";
+@import "./assets/scss/typography";
+@import "./assets/scss/reset";
+@import "./assets/scss/responsive";
+@import "./assets/scss/misc";
+@import "./assets/scss/utilities";
+@import "./assets/scss/demo";
+@import "./assets/scss/spinner";
+
+/* === Components === */
+@import "./assets/scss/components/forms";
+@import "./assets/scss/components/checkbox-radio";
+@import "./assets/scss/components/icons";
+@import "./assets/scss/components/tables";
+@import "./assets/scss/components/accordions";
+@import "./assets/scss/components/buttons";
+@import "./assets/scss/components/breadcrumbs";
+@import "./assets/scss/components/badges";
+@import "./assets/scss/components/cards";
+@import "./assets/scss/components/preview";
+@import "./assets/scss/components/tooltips";
+@import "./assets/scss/components/popovers";
+@import "./assets/scss/components/lists";
+@import "./assets/scss/components/bootstrap-progress";
+@import "./assets/scss/components/bootstrap-alerts";
+@import "./assets/scss/components/tabs";
+@import "./assets/scss/components/dropdowns"; 
+@import "./assets/scss/components/date-picker"; 
+@import "./assets/scss/components/pagination";
+@import "./assets/scss/components/portfolio";
+@import "./assets/scss/components/todo-list";
+
+@import "./assets/scss/components/landing-screens/auth";
+
+/* === Layout === */
+@import "./assets/scss/layout";
+
+@import '~ngx-toastr/toastr.css';
+
+
+.table thead th {
+  
+    font-weight: revert;
+}
+
+.modal-content{
+    
+    background-color: #ededed !important;
+}
+
+.modal-header{
+    justify-content: center !important;
+    p{
+        margin-left: 11rem;
+    }
+}
+
+.modal-footer {
+justify-content: center;
+}
+
+.create_first{
+    td{
+font-weight: bold  !important;
+
+    }
+}
+
+small.text-danger{
+    font-size:90%;
+}
+
+input{
+    height: 2rem;
+}
+
+.card{
+    background-color: #ededed !important;    
+}
+
+
+label.col-sm-3.col-form-label{
+    font-weight: bold;
+}
+
+.create_first_inner{
+    display: flex;
+    flex-direction: column;
+}
+// a.nav-link.active{
+//     background-color: #b66dff !important;
+//     border-color: #b66dff !important;
+// }
+
+.nav-pills .nav-link {
+  
+    font-weight: bold !important;
+}
+
+.nav-pills .nav-link:active {
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+a.nav-link{
+    color: black;
+}
+
+#create_person{
+    .create_lable{
+        font-weight: bold;
+    }
+}
+
+.content-wrapper {
+    background-color: #efefefff;
+    
+}
+
+
+.btn-outline-primary {
+    /* color: #b66dff; */
+    background-color: #eef4fc !important;
+}
+
+thead {
+    background-color: #2262c6ff !important;
+    text-align: center;
+    color: #ffff;
+  }
+  tbody{
+      text-align: center;
+  }
+
+  .form-control{
+    border-radius: 0.4rem;
+    border: 1px solid;
+    background-color: #eef4fc;
+  }
+
+  .custom-select{
+    // background: #80858b  !important;
+    border-radius: 0.4rem;
+    border: 1px solid;
+
+  }
+
+  .form-group label {
+   
+    text-align: end;
+}
+
+.btn-gradient-primary {
+    background: #6a99e1ff !important;
+    
+    color: #ffff;
+    border-radius: 0.4rem;
+}
+
+// .btn-gradient-primary {
+//     background: linear-gradient(to right, #da8cff, #9a55ff) !important;
+//     color: #ffff;
+//     border-radius: 0.4rem;
+// }
+
+
+.all_submit{
+    display: flex;
+    justify-content: center;
+    margin-left: 10rem;
+
+}
+
+.pills-success .nav-pills .nav-link.active {
+    background: #2262c6ff;
+    color: #ffffff;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #ddd;
+  }
+  
+  input#search_event{
+    border-radius: 0.4rem !important;
+    border: 1px solid !important;
+    background-color: #eef4fc  !important;
+  }
+
+
+  h4.card-title {
+    text-align: center;
+    margin-left: 10rem;
+}
+
+.card-title {
+    margin-bottom: 1.75rem;
+}
+
+.form-group label {
+    text-align: start;
+}
+
+label.col-sm-2.col-form-label {
+    font-weight: bold;
+}
+.pills-success .nav-pills .nav-link {
+    color: #212529;
+}
+
+.modal-body{
+input{
+    border-radius: 0.4rem !important;
+    border: 1px solid !important;
+    background-color: #eef4fc !important;
+}
+
+}
+
+.no_data{
+    background: #f2edf3;
+    color: #000;
+}
+
+
+.card {
+    background-color: #efefefff !important;
+
+}
+
+
+.engineer_param{
+    display: grid;
+        grid-template-columns: 0.4fr 0.5fr 1fr 0.5fr;
+    }
+    
+    
+    .engineer_param_content{
+       display: grid;
+        grid-template-columns: 0.4fr 0.5fr 1fr 0.5fr;
+    
+    }
+    .realay{
+       display: flex;
+       justify-content: space-evenly;
+    }
+    
+    .realay_inner{
+       display: flex;
+        align-items: center;
+        gap: 1rem;
+    }

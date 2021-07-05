@@ -1,0 +1,212 @@
+
+<div >
+  <div class="card" style="border-radius: 30px;">
+    <div class="view_site">
+      <div><h4 class="card-title" style="margin-left:0">Site Information</h4></div>
+      <div class="view_site_inner">
+       <div><h4 class="card-title" style="margin-left:0">Actions</h4></div>
+      <div style="display: flex;"><div> 
+            <div ngbDropdown>
+          <button class="btn btn-gradient-primary btn-rounded btn-icon" type="button" id="dropdownMenuIconButton1" ngbDropdownToggle>
+          <i class="mdi mdi-view-list"></i>
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="notificationDropdown">
+            <a (click)="goToMqtt()" title="MQTT" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-success">
+                  <i class="mdi mdi-cloud-sync"></i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">MQTT</h6>
+                
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="goToSiteOpenDoor()" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-warning">
+                  <i class="mdi mdi-open-in-new
+                  "></i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">Open Door</h6>
+              
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="goToDoorDescription()" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-info">
+                  <i class="mdi mdi-file-document
+                  "></i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">Door Description</h6>
+               
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="goToSite()" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-info">
+
+                  <i class="material-icons settings">&#xe8b8;</i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">Move To Site</h6>
+               
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a (click)="goToPersons()"class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-info">
+                  <i class="mdi mdi-account-circle"></i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">Person</h6>
+               
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a  (click)="goToVoice()" class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-info">
+                  <i class="mdi mdi-phone
+                  "></i>
+                </div>
+              </div>
+              <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                <h6 class="preview-subject font-weight-normal mb-1">Voice Operator</h6>
+               
+              </div>
+            </a>
+          </div>
+          </div>
+      </div>
+      <div style="margin-left:1rem;"><button (click)="update()" type="button" class="btn btn-gradient-primary btn-rounded btn-icon">
+        <i class="mdi mdi-pencil"></i>
+      </button></div>
+      <div> <button type="button" (click)="deleteSiteCalling()" class="btn btn-gradient-primary btn-rounded btn-icon">
+        <i class="mdi mdi-delete"></i>
+      </button></div>
+      </div>
+      </div>
+      
+    </div>
+    <div class="card-body">
+     
+      <div class="table-responsive pt-3">
+        <table class="table  table-bordered">
+          <thead class="thead">
+            <tr>
+          <th>Site Name </th>
+          <th >DeviceId</th>
+          <th>Site Reference</th>
+          <th>Site Contact Name</th>
+          <th>Site Contact Phone</th>
+          <th>City</th>
+          <th>Connectivity</th>
+          <th>DES</th>
+          <th>Gate Way</th>
+          <th>Remote Event Log</th>
+
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- <tr>
+              <td>Jacob</td>
+              <td>Photoshop</td>
+              <td class="text-danger"> 28.76% <i class="mdi mdi-arrow-down"></i></td>
+              <td><label class="badge badge-danger">Pending</label></td>
+            </tr> -->
+            <tr *ngFor="let site of siteArray; let i = index"> 
+              <td class="site_content">{{site.siteName}}</td>
+              <td class="site_content">{{site.deviceId}}</td>
+              <td class="site_content">{{site.siteReference}}</td>
+              <td class="site_content">{{site.customerName}}</td>
+              <td class="site_content">{{site.customerPhone}}</td>
+              <td class="site_content">{{site.city}}</td>
+              <td class="site_content">
+                 <img src="{{site.imageUrl}}" alt="">{{site.connectivity}}</td>
+                 
+<!--             
+              <td>
+                
+                <a  (click)="goToMqtt(site.siteid,site.deviceId,site.siteName)" title="MQTT">
+                  <i class="material-icons sync_alt">&#xea18;</i></a>
+    
+                <a (click)="goToSiteOpenDoor(site.siteid)" title="Open Door">
+                  <i  class="material-icons open_in_new"></i></a>
+               
+                  <a (click)="goToDoorDescription(site.siteid)" title="Door description">
+                  <i class="material-icons description">&#xe873;</i>
+                </a>
+                <a  (click)="goToSite(site.siteid)" title="Move To Site"><i class="material-icons settings">&#xe8b8;</i>
+                </a>
+                
+                <a (click)="goToPersons(site.siteid)"  title="Persons">
+                  <i class="material-icons account_circle">&#xe853;</i>
+                </a>
+                <a (click)="goToVoice(site.siteid)">
+                  <i class="material-icons add_call" title="Voice Operators">&#xe0e8;</i>
+                </a>
+              </td> -->
+              <!-- <td>
+                <a href="#">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </a>
+              </td> -->
+              <td>
+    
+                <a href="#">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a>
+              </td>
+              <td>
+                <button type="button" (click)="goToSiteGateWay(site.siteid,site.deviceId,site.siteName)" title="Gate Way" class="btn btn-gradient-primary btn-rounded btn-icon">
+                  <i class="material-icons all_inbox">&#xe97f;</i>
+                </button>
+                <!-- <a (click)="goToSiteGateWay(site.siteid,site.deviceId,site.siteName)" title="Gate Way">
+                <i class="material-icons all_inbox">&#xe97f;</i></a> -->
+              </td>
+              <td style="display: flex;">
+
+                <button type="button" (click)="goToEventLogFilter(site.siteid)" title="Event Log Filtered By Site"class="btn btn-gradient-primary btn-rounded btn-icon">
+                  <i class="material-icons forward_to_inbox">&#xf187;</i>
+                  </button>
+
+                <!-- <a (click)="goToEventLogFilter(site.siteid)" title="Event Log Filtered By Site">
+                  <i class="material-icons forward_to_inbox">&#xf187;</i>
+                </a> -->
+                <button type="button" (click)="goToRemoteEventLog(site.siteid)" title="Remote Event Log For this site" class="btn btn-gradient-primary btn-rounded btn-icon">
+                  <i class="material-icons menu_book">&#xea19;</i>
+
+                  </button>
+                <!-- <a (click)="goToRemoteEventLog(site.siteid)" title="Remote Event Log For this site">
+                  <i class="material-icons menu_book">&#xea19;</i>
+                </a> -->
+    
+              </td>
+              <!-- <td class="sitemanage">
+          
+                <span> <a  (click)="update(site.siteName)" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a></span>
+                <span><a (click)="deleteSiteCalling(site.siteName)" style="cursor: pointer;" class="delete" data-toggle="modal"><i
+                  class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></span>
+    
+    
+               </td> -->
+            </tr>
+         
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

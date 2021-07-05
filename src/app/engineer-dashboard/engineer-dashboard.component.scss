@@ -1,0 +1,181 @@
+.sidenavbaruser{
+    padding: 5px 0px 7px 13px;
+    text-decoration: none;
+    font-size: 21px !important;
+    color: #ffff;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.white-bg{
+    display: flex;
+    height: 100vh;
+}
+#main{
+    max-height: 100%;
+  overflow-y: auto;
+  margin-left: 3rem;
+  width: 100%;
+}
+
+.header{
+    
+    display: grid;
+    grid-template-columns: 74% 0%;
+    align-items: baseline;
+
+}
+
+#header_drop{
+    background-color: #ffffff !important;
+    margin-left: unset;
+    border:none;
+    margin-top: 7px;
+    padding: 0rem 0;
+    cursor: pointer;
+
+    
+
+}
+#header_drop_item{
+    font-size: 17px;
+}
+
+.bg-light{
+    background-color:#ffffff !important;
+    border-color: #080808;
+}
+.navbar-light .navbar-nav .nav-link{
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    margin-right: 8rem;
+}
+i.material-icons.account_circle {
+    font-size: 2rem;
+}
+.material-icons{
+    font-size: 21px;
+    vertical-align: bottom;
+    margin-right: 13px;
+    color: #7496fd !important;
+}
+.navbar-light .navbar-brand{
+    color: #fff;
+}
+
+.dropdown-menu.show{
+    background-color: #ffffff !important;
+    margin-left: 36px;
+    border:none;
+    padding: 0rem 0;
+}
+.dropdown-item{
+    color: rgb(0, 0, 0);
+}
+
+.dropdown-item:focus, .dropdown-item:hover{
+    background-color: unset;
+}
+
+#set_headding{
+    background-color: #0094ff;
+    display: flex;
+    justify-content: center;
+}
+#userSettings{
+    color: #fff;
+}
+#changePassword{
+    color: #fff;
+}
+
+li.nav-item.dropdown.show{
+    cursor: pointer;
+}
+/* 
+*{
+    margin:0px;padding:0px;
+} */
+.sidenav {
+    min-height: 60rem;
+        width: 0;
+    position: absolute;
+    z-index: 1;
+    /* top: 0;    */
+    left: 0;
+    background-color:#002584;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 20px 32px;
+    text-decoration: none;
+    font-size: 16px !important;
+    color: #ffff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #aa0000;
+  }
+  
+  .sidenav .closebtn {
+    top: 0;
+    font-size: 36px !important;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+  .open_now{
+    position: relative;
+    margin-left: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+  
+
+::-webkit-scrollbar {
+    width: 5px;
+    height:7px;
+ 
+   }
+   .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+    gap: 3rem;
+   }
+   .card-header{
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: unset;
+    padding: 1rem;
+    margin-bottom: unset;
+    background-color: unset;
+    align-items: baseline;
+    gap:8rem;
+
+}
+
+.actionbtn{
+    display: flex;
+    justify-content: center;
+.btn.btn-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0;}
+}
+
+.py-1{
+    text-align: center;
+}
+.users_content{
+    text-align: center;
+}

@@ -1,0 +1,67 @@
+.staffmanage{
+    display: flex;
+    
+.btn.btn-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0;}
+}
+.card-header{
+    border-bottom: unset;
+
+}
+
+
+.staff_total_doors{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.2rem;
+}
+
+.staff_group_create{
+    label{
+        font-size: 15px;
+        margin-right: 20px;    }
+
+    input{
+    width: 200px; 
+    margin-right: 20px;
+    padding-left: 5px;  }
+
+    button{
+        width: 134px;
+        padding: 9px;   }
+
+}
+
+.staff_create{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_staff{
+    font-weight: bold;
+}
+
+.ul{
+   .li{
+        background-color: #b66dff !important;
+    border-color: #b66dff !important;
+}
+   
+}
+// input {
+//     border-radius: 0.4rem !important;
+//     border: 1px solid !important;
+//  background-color: unset !important
+// }
+
+#staff_group_members{
+    color: unset;
+}
+
+.cstm-table{
+    p{
+        font-weight: bold;
+    }
+}

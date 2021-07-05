@@ -1,0 +1,220 @@
+<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <a class="navbar-brand brand-logo" routerLink="/"><img src="http://213.171.211.57/doorentrysystem/assets/images/logo.jpg" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" routerLink="/"><img src="http://213.171.211.57/doorentrysystem/assets/images/logo-mini.png" alt="logo" /></a>
+  </div>
+  <div class="navbar-menu-wrapper d-flex align-items-stretch"   *ngIf="_service.loggedIn()">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="toggleSidebar()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+  
+    <ul class="navbar-nav navbar-nav-right" >
+      <li class="nav-item nav-profile dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
+          <div class="nav-profile-img">
+            <i class="mdi mdi-account-circle" style="-webkit-font-smoothing: unset; font-size:xx-large"></i>  
+            <span class="availability-status online"></span>
+          </div>
+         
+          <div class="nav-profile-text">
+             <p class="mb-1 text-black"> {{customer.firstname}}</p> 
+          </div>
+        </a>
+        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
+          <div *ngIf="engineerAdminLogged">
+
+          <a class="dropdown-item" data-toggle="modal" data-target="#userSettings">
+            <i class="mdi mdi-account mr-2 text-success"></i>
+            User Setting
+          </a>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div *ngIf="engineerAdminLogged">
+
+          <a class="dropdown-item" data-toggle="modal" data-target="#changePassword">
+            <i class="mdi mdi-key mr-2 text-primary"></i>
+            Change Password
+          </a>
+          </div>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="onLogout()">
+            <i class="mdi mdi-logout mr-2 text-success"></i>
+            Signout
+          </a>
+
+
+
+          
+        </div>
+      </li>
+      
+      <div *ngIf="engineerAdminLogged">
+
+      <li class="nav-item nav-logout d-none d-lg-block">
+        <a class="nav-link" routerLink="/notifications">
+          <i class="mdi mdi-bell-outline"></i> Notifications
+        </a>
+      </li>
+</div>
+      <!-- <li class="nav-item nav-logout d-none d-lg-block">
+        <a class="nav-link" routerLink="/background-task">
+          <i class="mdi mdi-calendar-multiple-check"></i>  Background Task
+        </a>
+      </li> -->
+     
+      
+    </ul>
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+  </div>
+
+
+
+
+  
+
+</nav>
+<div class="container">
+  <div class="modal fade" id="changePassword">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header" id="set_headding">
+          <h4 class="modal-title">Change Password
+          </h4>
+        </div>
+        <div class="modal-body" id="set_body" style="background-color: white;">
+          <table class="table" style="margin:0">
+            <tbody>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">OldPassword</p>
+                </td>
+                <td style="border:none"><input type="password" #passwordOld="ngModel" id="old_password"
+                    class="form-control" [(ngModel)]="updateCustomer.oldPassword" required>
+                  <div *ngIf="passwordOld.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">NewPassword</p>
+                </td>
+                <td style="border:none"><input type="password" #passwordNew="ngModel" id="new_password"
+                    class="form-control" [(ngModel)]="updateCustomer.newPassword" required>
+                  <div *ngIf="passwordNew.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">ConfirmPassword</p>
+                </td>
+                <td style="border:none"><input type="password" #passwordConfirm="ngModel" id="confirm_password"
+                    class="form-control" [(ngModel)]="updateCustomer.confirmPassword" required>
+                  <div *ngIf="passwordConfirm.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-footer" id="set_footer">
+          <p id="user_settings_status" style="color:#ff0000"></p>
+          <button type="button" class="btn btn-gradient-primary"  [disabled]="passwordOld.invalid"
+            [disabled]="passwordNew.invalid" [disabled]="passwordConfirm.invalid" data-dismiss="modal" 
+            style="background-color: #ffd966ff !important; color: black;border: none;"
+            (click)="change_password()">Update</button>
+          <button type="button" class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;" data-dismiss="modal" >Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="container">
+  <div class="modal fade" id="userSettings">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header" id="set_headding">
+          <h4 class="modal-title">User Settings</h4>
+        </div>
+        <div class="modal-body" id="set_body">
+          <table class="table" style="margin:0">
+            <tbody>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">First Name</p>
+                </td>
+                <td style="border:none">
+
+
+                  <input #model="ngModel" name="title" type="text" id="user_settings_firstname" class="form-control"
+                    [(ngModel)]="customer.firstname" required>
+
+                  <div *ngIf="model.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">Last Name</p>
+                </td>
+                <td style="border:none"><input #model1="ngModel" name="title" type="text" id="user_settings_lastname"
+                    class="form-control" [(ngModel)]="customer.lastname" required>
+                  <div *ngIf="model1.invalid" style="color: red">Required</div>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">Address</p>
+                </td>
+                <td style="border:none"><input #model2="ngModel" type="text" id="user_settings_address"
+                    class="form-control" [(ngModel)]="customer.address" required>
+                  <div *ngIf="model2.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">Email</p>
+                </td>
+                <td style="border:none"><input #model3="ngModel" type="text" id="user_settings_email"
+                    class="form-control" [(ngModel)]="customer.emailId" required>
+                  <div *ngIf="model3.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="border:none">
+                  <p style="margin-top:5px">Contact Number</p>
+                </td>
+                <td style="border:none"><input #model4="ngModel" type="text" id="user_settings_contactnumber"
+                    class="form-control" [(ngModel)]="customer.mobileNo" required>
+                  <div *ngIf="model4.invalid" style="color: red">Required</div>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer"  id="set_footer">
+          <p id="user_settings_status" style="color:#ff0000"></p>
+          <button type="button" class="btn btn-gradient-primary" [disabled]="model.invalid" [disabled]="model1.invalid"
+            [disabled]="model2.invalid" [disabled]="model3.invalid" [disabled]="model4.invalid" 
+            data-dismiss="modal" style="background-color: #ffd966ff !important; color: black;border: none;" (click)="user_settings()">Update</button>
+          <button type="button" class="btn btn-gradient-primary" style="background-color: #e06666ff !important; color: black;border: none;" data-dismiss="modal" >Cancel</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

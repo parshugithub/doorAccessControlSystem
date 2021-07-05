@@ -1,0 +1,43 @@
+
+
+#new_user{
+    .btn.btn-gradient-primary, .btn.btn-primary{
+        padding: 14px 20px;
+       border-radius: .5rem;
+    }
+}
+
+#createPersonClass{
+
+        text-align: start;
+        margin-left: 210px;
+        margin-bottom: 33px;
+      }
+
+.search-hero{
+    display: flex;
+    
+}
+
+.searchBtn
+{
+    height: 39px;
+}
+
+table, #users_search{
+    width:96%
+}
+
+.personBtns{
+    display: grid;
+    grid-template-columns:   25% 25% 25% 25%;
+    gap:2%;
+    width: 90%;
+}
+.personClassBtns, .personGroupBtns{
+    display: grid;
+    grid-template-columns: 34% 30% 30%;
+    gap: 1rem;
+    margin-left: 0rem;
+}
+

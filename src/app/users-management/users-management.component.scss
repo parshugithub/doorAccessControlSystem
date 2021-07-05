@@ -1,0 +1,26 @@
+.card-header{
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: unset;
+    padding: 1rem;
+    margin-bottom: unset;
+    background-color: unset;
+    align-items: baseline;
+    gap:8rem;
+
+}
+
+.actionbtn{
+    display: flex;
+.btn.btn-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0;}
+}
+
+.py-1{
+    text-align: center;
+}
+.users_content{
+    text-align: center;
+}
